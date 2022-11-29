@@ -1,0 +1,2967 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>临床预测模型</title>
+
+    <meta name="author" content="杨 弘" />
+  
+   <meta name="description" content="了解临床预测模型相关概念与构建流程" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="临床预测模型" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="了解临床预测模型相关概念与构建流程" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="临床预测模型" />
+  
+  <meta name="twitter:description" content="了解临床预测模型相关概念与构建流程" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.4.1/transition.js"></script>
+    <script src="libs/bs3compat-0.4.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.4.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+  <style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+      <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<!--bookdown:title:start-->
+<!--bookdown:title:end-->
+
+<!--bookdown:toc:start-->
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">临床预测模型</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<!--bookdown:toc:end-->
+<!--bookdown:body:start-->
+<div id="关于课程" class="section level1 unnumbered">
+<h1 class="unnumbered">关于课程</h1>
+<div id="课程目标" class="section level2 unnumbered">
+<h2 class="unnumbered"><strong>课程目标</strong></h2>
+<ul>
+<li><p>了解临床预测模型相关概念与构建流程</p></li>
+<li><p>了解Python与R语言基本使用与案例实操</p></li>
+<li><p>了解MIMIC与NHANES公共数据库</p></li>
+</ul>
+</div>
+<div id="课程大纲" class="section level2 unnumbered">
+<h2 class="unnumbered"><strong>课程大纲</strong></h2>
+<div id="案例教学" class="section level3 unnumbered">
+<h3 class="unnumbered"><strong>案例教学</strong></h3>
+<ol style="list-style-type: decimal">
+<li><strong>临床预测模型概述</strong>
+<ul>
+<li><p>应用场景</p></li>
+<li><p>模型构建流程</p></li>
+<li><p>模型报告</p></li>
+<li><p>传统统计与机器学习</p></li>
+</ul></li>
+<li><strong>案例介绍</strong>
+<ul>
+<li><p>案例背景</p></li>
+<li><p>数据描述</p></li>
+<li><p>分析思路</p></li>
+<li><p>代码预览</p></li>
+</ul></li>
+</ol>
+</div>
+<div id="实操教学" class="section level3 unnumbered">
+<h3 class="unnumbered"><strong>实操教学</strong></h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>Anaconda安装与包的安装</strong></p>
+<ul>
+<li><p>如何打开.ipynb文件</p></li>
+<li><p>Anaconda Prompt 基本命令</p></li>
+<li><p>使用<strong>conda</strong>或<strong>pip</strong>安装包</p></li>
+</ul></li>
+<li><p><strong>Python入门基</strong>础</p>
+<ul>
+<li><p>数据读取</p></li>
+<li><p>模型构建等基础语法</p></li>
+<li><p>案例实操：代码与对应结果详细解释</p>
+<ul>
+<li><p>数据描述</p></li>
+<li><p>数据预处理</p></li>
+<li><p>模型构建</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>R安装与入门</strong></p>
+<ul>
+<li><p>数据读取</p></li>
+<li><p>模型构建等基础语法</p></li>
+<li><p>案例实操：代码与对应结果详细解释</p></li>
+</ul></li>
+<li><p><strong>NHANES</strong>数据库简介、数据提取</p></li>
+<li><p><strong>MIMIC IV 数据库</strong>简介、申请、安装、提取</p></li>
+</ol>
+</div>
+</div>
+<div id="上课要求" class="section level2 unnumbered">
+<h2 class="unnumbered"><strong>上课要求</strong></h2>
+<ul>
+<li><p>自带电脑（课程以windows系统为例）</p></li>
+<li><p>软件安装、代码运行实操</p></li>
+</ul>
+</div>
+<div id="如何提问" class="section level2 unnumbered">
+<h2 class="unnumbered"><strong>如何提问</strong></h2>
+<ul>
+<li><p>鼓励先自己动手查询（<a href="www.baidu.com">baidu</a>、<a href="https://cn.bing.com/">biying</a>、<a href="https://github.com/">github</a>、<a href="https://www.csdn.net/">CSDN</a>）</p></li>
+<li><p>想获得快速帮助，请描述以下内容（<strong>问题截全图</strong>）</p>
+<ul>
+<li><p>想解决的问题是什么？</p></li>
+<li><p>代码是什么？</p></li>
+<li><p>报错信息是什么？</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="课程用到的软件" class="section level2 unnumbered">
+<h2 class="unnumbered"><strong>课程用到的软件</strong></h2>
+<blockquote>
+<p>Anaconda</p>
+<p>R、Rstudio</p>
+<p>Postgresql、Navicat、7z</p>
+</blockquote>
+</div>
+<div id="需要安装的包" class="section level2 unnumbered">
+<h2 class="unnumbered"><strong>需要安装的包</strong></h2>
+<ul>
+<li>Python</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pip install scikit<span class="op">-</span>learn</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pip install pandas_profiling</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pip install matplotlib</span></code></pre></div>
+<p><strong>或者缺少什么包安装什么包</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>conda install 包名</span></code></pre></div>
+<ul>
+<li>R</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_packages <span class="ot">&lt;-</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;dlookr&quot;</span>, <span class="st">&quot;plotROC&quot;</span>, <span class="st">&quot;pROC&quot;</span>, <span class="st">&quot;e1071&quot;</span>, <span class="st">&quot;caret&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;rms&quot;</span>, <span class="st">&quot;regplot&quot;</span>,<span class="st">&quot;nhanesA&quot;</span>, <span class="st">&quot;haven&quot;</span>,<span class="st">&quot;glmnet&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(my_packages, <span class="at">dependencies =</span> T)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> my_packages)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>或者缺少什么包安装什么包</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;包名&quot;</span>)</span></code></pre></div>
+<!--chapter:end:index.Rmd-->
+</div>
+</div>
+<div id="案例教学-1" class="section level1 unnumbered">
+<h1 class="unnumbered">案例教学</h1>
+</div>
+<div id="临床预测模型" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> 临床预测模型</h1>
+<p>当今医学从经验医学发展到循证医学，再到精准医学，临床数据的应用也随着大数据时代的来临越来越受到重视。</p>
+<p><img src="images/0101.png" width="100%" /></p>
+<p><strong>循证医学缺点：</strong></p>
+<p>①降低了疾病深层机制和特殊人群特点的影响权重，将导致普遍性与特殊性之间的巨大偏差；</p>
+<p>②高质量的循证研究费时费力(各种RCT)。</p>
+<p><strong>精准医学</strong>克服循证医学一些系统性的劣势。</p>
+<p>临床预测模型就是在精准医学研究思维模式的基础上应运而生，成为当下最炙手可热的临床领域之一。</p>
+<p><img src="images/0102.png" width="100%" /></p>
+<blockquote>
+<p>在PubMed以”Clinical Prediction Model” 搜索，自1964年发表的第一篇文章以来，到2015年论文发表数量以极快的趋势增长，其火热程度可见一斑。</p>
+</blockquote>
+<div id="临床预测模型应用场景" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> 临床预测模型应用场景</h2>
+<div id="什么是临床预测模型" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> 什么是临床预测模型？</h3>
+<ul>
+<li><p><strong>预测模型</strong></p>
+<ul>
+<li><p>数学方程（数理）</p></li>
+<li><p>回归模型（统计）</p></li>
+<li><p>算法（计算机）</p></li>
+<li><p>规则（普通）</p></li>
+</ul></li>
+<li><p><strong><em>临床</em>预测模型</strong></p>
+<ul>
+<li><p>应用与临床</p></li>
+<li><p>针对个体患者</p></li>
+<li><p>结局预测</p>
+<ul>
+<li><p>医学事件：死亡、再住院、复发等</p></li>
+<li><p>结局值：住院天数、住院费用</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>临床预测模型(Clinical Prediction Models)</strong></p>
+<p>是指利用多因素模型估算患有某病的概率或者将来某结局发生的概率。</p></li>
+</ul>
+</div>
+<div id="应用场景" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> 应用场景</h3>
+<p>临床预测模型的应用场景主要是临床，针对个体患者，进行结局预测，例如预测医学事件：某种疾病的发生率、复发率、伤残率、并发症的发生以及死亡率等，也可以用于预测结局值：住院天数、住院费用等。</p>
+<ul>
+<li><p><strong>临床领域的应用</strong></p>
+<ul>
+<li><p>预测急性心肌梗死患者30天的死亡率</p></li>
+<li><p>新型抗癌药物在某种癌症患者中的有效率</p></li>
+<li><p>新冠肺炎患者转为危重症的发生概率</p></li>
+<li><p>判断咳嗽患者发生哮喘的概率</p></li>
+</ul></li>
+<li><p><strong>应用价值</strong></p>
+<ul>
+<li><p><strong>量化</strong>对患者预测的结果</p></li>
+<li><p>更<strong>直观</strong>地展示疾病的危险性和治疗方案一定程度上缓和了医患之间<strong>信息不对称</strong></p></li>
+</ul></li>
+<li><p><strong>公共卫生领域（三级预防体系中发挥作用）</strong></p>
+<ul>
+<li><p>根据特定人群的健康状态，<strong>量化</strong>未来患病的概率</p></li>
+<li><p>构建高灵敏度和特异度的<strong>诊断模型</strong></p></li>
+<li><p>利用<strong>预后模型</strong>对疾病的复发、死亡、伤残以及出现并发症的概率进行预测</p></li>
+</ul></li>
+<li><p>实现价值</p>
+<ul>
+<li><p><strong>为健康教育和行为干预提供直观参考</strong></p></li>
+<li><p>将无创痛、经济性、便利性的指标用于疾病筛查，实现<strong>“早发现、早诊断、早治疗”</strong>的二级预防</p></li>
+<li><p><strong>指导个体化治疗和康复方案的制定</strong>，防止病情恶化，预防并发症和伤残，提高患者生存质量</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="为什么做临床预测模型" class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> 为什么做临床预测模型？</h3>
+<p><strong>临床医生可能常常面临这样的困惑：</strong></p>
+<p>①患者询问医生，体检发现血脂高，未来十年得冠心病的可能性是多少？需不需要吃药？</p>
+<p>②慢乙肝免疫耐受期患者抗不抗病毒？现在治疗和延迟治疗哪个更好？哪个花钱多？</p>
+<p>③如果能提前预测患者的病情，比如提前预测肝癌患者是否有微血管浸润，可能有助于外科医生在标准切除和扩大切除这两个完全不同的切除方式之间作出选择，患者结局或许不同。</p>
+<p>临床预测模型就可以解答这些困惑。</p>
+<p><strong>临床预测模型具有两方面的意义：</strong></p>
+<p>一方面是<strong>临床价值</strong>，借助临床预测模型，医生可以更精准地做出临床决策，帮助患者实现更有利的价值选择，卫生管理部门可以更合理地配置医疗资源；</p>
+<p>另一方面是<strong>对医生发展的影响</strong>，临床预测模型目前已成为SCI期刊发表论文的热门，更是SCI高分期刊的宠儿，通过收集数据，构建临床预测模型，能够快速地发表学术论文，提升职称，完成医生的高级进阶。</p>
+</div>
+</div>
+<div id="临床预测模型怎么构建" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> 临床预测模型怎么构建</h2>
+<div id="完整构建流程" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> 完整构建流程</h3>
+<p><img src="images/0103.png" width="100%" /></p>
+</div>
+<div id="确定研究问题和预测模型类型" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> 确定研究问题和预测模型类型</h3>
+<p>最常见的两种类型</p>
+<ul>
+<li><p>诊断模型：</p>
+<p>主要是基于研究对象的临床特征，预测当前患有某种疾病的概率，多见于<strong>横断面研究</strong>;</p></li>
+<li><p>预后模型：</p>
+<p>是研究对象在患某种疾病时，预测其未来疾病的复发、死亡、伤残等转归情况的概率，多见于纵向研究，如<strong>队列研究</strong>等。</p></li>
+</ul>
+<p><img src="images/0104.png" width="100%" /></p>
+<p><strong>预测模型的类型取决于感兴趣的结局</strong></p>
+<ul>
+<li><p>结局类型：</p>
+<ul>
+<li><p>分类变量？ -&gt; 二分类？多分类？</p></li>
+<li><p>连续变量？</p></li>
+<li><p>有无考虑”生存时间”？</p></li>
+</ul></li>
+</ul>
+<p>不同结局类型确定选用的模型 ——&gt; <strong>数据决定模型</strong></p>
+</div>
+<div id="数据的预处理" class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> 数据的预处理</h3>
+<ul>
+<li><p>数据的收集：现有的试验、队列研究、登记注册或管理的数据集</p>
+<p>数据集中样本量越大、患者信息越多，构建的预测模型就越准确</p>
+<blockquote>
+<p>注意：数据预处理前做好数据”<strong>整洁</strong>” 避免”<strong>脏</strong>”数据！</p>
+</blockquote></li>
+</ul>
+<p><img src="images/0105.png" width="100%" /></p>
+<blockquote>
+<p><strong>“整洁”数据：</strong></p>
+<ul>
+<li><p>一<strong>行</strong>是一个样本所有信息</p></li>
+<li><p>一<strong>列</strong>是一个variable</p></li>
+<li><p>中间无乱码、不规范表达</p></li>
+</ul>
+</blockquote>
+<p><img src="images/0106.png" width="100%" /></p>
+<blockquote>
+<p><strong>“脏”数据：</strong></p>
+<ul>
+<li><p>变量名不规范</p></li>
+<li><p>数值中英文混杂</p></li>
+<li><p>标点符号</p></li>
+</ul>
+</blockquote>
+<ul>
+<li><p>数据预处理：</p>
+<ul>
+<li><p>离群值、异常值</p></li>
+<li><p>缺失值：删除？填补？</p></li>
+<li><p>协变量的类型</p>
+<ul>
+<li><p>连续变量</p></li>
+<li><p>分类、有序多分类、无序多分类</p></li>
+</ul></li>
+<li><p>协变量的编码与转换</p>
+<ul>
+<li><p>one-hot encoding</p></li>
+<li><p>Leave-one-out</p></li>
+<li><p>对数转化等（<a href="https://www.zhihu.com/question/22012482">参考知乎讨论</a>）</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><img src="images/0107%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86.png" width="100%" /></p>
+</div>
+<div id="变量筛选" class="section level3" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> 变量筛选</h3>
+<p><img src="images/0108%E5%8F%98%E9%87%8F%E7%AD%9B%E9%80%89.png" width="100%" /></p>
+</div>
+<div id="模型的选择" class="section level3" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> 模型的选择</h3>
+<p><strong>传统模型梳理</strong></p>
+<p><img src="images/0110%E4%BC%A0%E7%BB%9F%E4%B8%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%A2%B3%E7%90%86.png" width="100%" /></p>
+<p><strong>机器学习类型</strong></p>
+<p><img src="images/0111%E7%BA%AF%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E6%A2%B3%E7%90%86.png" width="100%" /></p>
+</div>
+<div id="模型的构建" class="section level3" number="1.2.6">
+<h3><span class="header-section-number">1.2.6</span> 模型的构建</h3>
+<p><img src="images/0112%E6%A8%A1%E5%9E%8B%E6%9E%84%E5%BB%BA.png" width="100%" /></p>
+</div>
+<div id="模型的评价" class="section level3" number="1.2.7">
+<h3><span class="header-section-number">1.2.7</span> 模型的评价</h3>
+<ul>
+<li><p><strong>常用概率解释</strong></p>
+<ul>
+<li><p>假阳率：模型预测为正例实际负例的样本</p>
+<p>False Positive Rate = 实负测正 / 实负 = FP / (FP + TN)</p></li>
+<li><p>假阴率：模型预测为负例实际为正例的样本</p>
+<p>False Negative Rate = 实正测负 / 实正 = FN / (TP + FN)</p></li>
+<li><p>真阳率：模型预测为正例实际为正例的样本</p>
+<p>True Positive Rate = 实正测正 / 实正 = TP / (TP + FN)</p></li>
+<li><p>真阴率：模型预测为负例实际为负例的样本</p>
+<p>True Negative Rate = 实负测负 / 实负 = TN / (FP + TN)</p></li>
+</ul></li>
+<li><p>分类结果混淆矩</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="center">真值/预测值</th>
+<th align="center">预测的正类</th>
+<th align="center">预测的负类</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">真实的正类</td>
+<td align="center">TP（真正率）</td>
+<td align="center">FN（假负率）</td>
+</tr>
+<tr class="even">
+<td align="center">真实的负类</td>
+<td align="center">FP（假正率）</td>
+<td align="center">TN（真负率）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>常用指标</p>
+<ul>
+<li><p>准确率（Accuracy）</p>
+<p>正例和负例中分别被正确预测的样本数量占总样本数量的比例</p></li>
+<li><p>AUC</p>
+<p>表示ROC曲线下的面积，即ROC曲线与x轴、（1，0）-（1，1）围绕的面积，评估的是随机给定一个正例和一个负例，模型对正例的预测概率大于模型对于负例预测概率的概率。</p></li>
+<li><p>召回率（Recall）</p>
+<p>以实际样本为基础，实际样本为正例，被模型预测正确的正例占总体实际样本正例的比例。</p></li>
+<li><p>精确度（Pecision）</p>
+<p>以预测结果为基础，被模型预测为正例的样本中是正确的比例。预测为正例的结果分两种，要么实际是正例TP，要么实际是负例FP。</p></li>
+<li><p>F1 score</p>
+<p>精确度和召回率是一对矛盾的度量，一般来说，精确度高时，召回率值往往偏低；而精确度值低时，召回率值往往偏高。当分类置信度高时，精确度偏高；分类置信度低时，召回率偏高。为了能够综合考虑这两个指标，F1 score被提出。</p></li>
+<li><p>……</p></li>
+</ul></li>
+<li><p><a href="https://en.wikipedia.org/wiki/F-score"><strong>Diagnostic testing</strong></a></p></li>
+</ul>
+<p><img src="images/0122%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87.png" width="100%" /></p>
+</div>
+<div id="模型的展示" class="section level3" number="1.2.8">
+<h3><span class="header-section-number">1.2.8</span> 模型的展示</h3>
+<ul>
+<li><p>应用程序网页</p></li>
+<li><p>Nomogram</p></li>
+<li><p>评分系统</p></li>
+<li><p>彩色打分卡</p></li>
+</ul>
+<blockquote>
+<p><strong>应用程序网页</strong></p>
+</blockquote>
+<p><img src="images/0113.png" width="100%" /></p>
+<p><img src="images/0114.png" width="100%" /></p>
+<blockquote>
+<p><strong>Nomogram</strong></p>
+</blockquote>
+<p><img src="images/0115.png" width="100%" /></p>
+<blockquote>
+<p><strong>评分系统</strong></p>
+</blockquote>
+<p><img src="images/0116.png" width="100%" /></p>
+<blockquote>
+<p><strong>彩色打分卡</strong></p>
+</blockquote>
+<p><img src="images/0117.png" width="100%" /></p>
+<table style="width:85%;">
+<colgroup>
+<col width="26%" />
+<col width="29%" />
+<col width="29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center">优 势</th>
+<th align="center">劣 势</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>应用程序网页</strong></td>
+<td align="center"><p>结果快速精确</p>
+<p>可嵌入常规诊疗系统</p></td>
+<td align="center">开发和使用成本较高</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Nomogram</strong></td>
+<td align="center"><p>无需电子设备</p>
+<p>只需简单加法</p></td>
+<td align="center">肉眼比对不精确</td>
+</tr>
+<tr class="odd">
+<td align="center">评分系统</td>
+<td align="center">很少使用</td>
+<td align="center"><p>连续变量需切割</p>
+<p>结果不精确</p></td>
+</tr>
+<tr class="even">
+<td align="center">彩色打分卡</td>
+<td align="center">很少使用</td>
+<td align="center"><p>连续变量需切割</p>
+<p>结果不精确</p>
+<p>预测因子不能太多</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="模型报告" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 模型报告</h2>
+<p>只有对预测模型各方面的信息进行全面和明确的报告，才能充分评估预测模型的偏倚风险和潜在有用性。</p>
+<p>个体预后或诊断多变量预测模型透明报告<strong>Transparent Reporting of a multivariable prediction model for Individual Prognosis Or Diagnosis (<a href="https://www.equator-network.org/reporting-guidelines/tripod-statement/">TRIPOD</a>)</strong>为开发、验证或更新预测模型的研究报告提出了一套建议。</p>
+<div id="临床预测模型报告规范tripod" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> 临床预测模型报告规范（TRIPOD）</h3>
+<p><img src="images/0118TRIPOD.png" width="100%" /></p>
+<p><strong>TRIPOD条目解读</strong></p>
+<p><img src="images/012101.png" width="100%" /><img src="images/012102.png" width="100%" /><img src="images/012103.png" width="100%" /><img src="images/012104.png" width="100%" /></p>
+</div>
+<div id="临床预测模型指南" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> 临床预测模型指南</h3>
+<p><img src="images/0119%E6%8C%87%E5%8D%97.png" width="100%" /></p>
+</div>
+<div id="研究设计和方法学评价probast" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> 研究设计和方法学评价：PROBAST</h3>
+<p><img src="images/0120.png" width="100%" /></p>
+<ul>
+<li><a href="https://www.mubucm.com/doc/3mH9_G3rgIg"><strong>机器学习构建流程总结</strong></a></li>
+</ul>
+</div>
+</div>
+<div id="机器学习-vs-传统统计" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> <a href="https://www.datasciencecentral.com/machine-learning-vs-traditional-statistics-different-philosophi-1/">机器学习 VS 传统统计</a></h2>
+<p><img src="images/0123.png" width="100%" /></p>
+<p><img src="images/0124.png" width="100%" /></p>
+<p><img src="images/0125.png" width="100%" /></p>
+<p><img src="images/0126.png" width="100%" /></p>
+<p><img src="images/0127.png" width="100%" /></p>
+<!--chapter:end:01-clinical_prediction_model.Rmd-->
+</div>
+</div>
+<div id="案例介绍" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> 案例介绍</h1>
+<div id="案例背景" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> 案例背景</h2>
+<div id="数据来源" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> 数据来源</h3>
+<p>案例选自<a href="http://archive.ics.uci.edu/ml/datasets/Heart+Disease"><strong>UCI</strong></a>机器学习库中的 Heart Disease Data Set数据集。</p>
+<p>该数据库包含76个属性，但是所有已发布的实验都引用了其中<strong>14个属性的子集</strong>。特别是，克利夫兰数据库是迄今为止ML研究人员使用的唯一数据库。</p>
+<p>数据来源：<a href="https://archive.ics.uci.edu/ml/datasets/Heart+Diseasehttps://archive.ics.uci.edu/ml/datasets/Heart+Disease">https://archive.ics.uci.edu/ml/datasets/Heart+Disease</a></p>
+</div>
+<div id="疾病背景" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> 疾病背景</h3>
+<ul>
+<li><strong>冠心病（Coronary Heart Disease,CHD）</strong></li>
+</ul>
+<p><img src="images/0201.jpg" width="100%" /></p>
+<p>心血管疾病是全球第一大死亡原因，每年夺去约1790万人的生命，占全球死亡人数的31%。5例心血管疾病中有4例死于心脏病和中风，其中1 / 3的死亡发生在70岁以下的过早死亡中。</p>
+<p><strong>患有心血管疾病或心血管风险高的人</strong>(由于存在高血压、糖尿病、高脂血症或已经确定的疾病等一种或多种风险因素)需要<strong>早期检测和管理</strong>，其中机器学习模型可以提供很大的帮助。</p>
+<ul>
+<li><p><strong>目前把冠心病分类两大类：</strong></p>
+<p>① 急性冠脉综合征：</p>
+<p>不稳定型心绞痛（UA）；非ST段抬高性心肌梗死（NSTEMI）；ST段抬高性心肌梗死（STEMI）</p>
+<p>② 慢性冠脉综合征：</p>
+<p>慢性稳定型心绞痛；冠脉正常的心绞痛（如X综合征）；无症状性心肌缺血；缺血性心力衰竭；</p></li>
+<li><p><strong>冠心病有”5+3”危险因素：</strong></p>
+<p>① 五种可防可控的危险因素：</p>
+<p>高血压；血脂异常；糖尿病以及糖耐量的异常；吸烟；肥胖</p>
+<p>② 三种不可防不可控的危险因素：</p>
+<p>性别；年龄；家族史</p></li>
+<li><p><strong>目前，冠心病的诊断流程极其繁琐：</strong></p>
+<p>① 怀疑冠心病的患者最开始可能会安排这3项检查：常规心电图、超声心动图和血液的心肌标志物检查；</p>
+<p>② 上述检查后如果没有查出明显病变，但是患者仍有冠心病相关症状的话，医生可能会安排进行运动负荷试验或动态心电图检查；</p>
+<p>③ 进行完基础检查后如果怀疑患者冠心病的可能性极大，医生可能会建议进行CTA或心肌血流灌注检查；</p>
+<p>④ 也有些医生会直接建议患者进行心脏冠状动脉造影检查，因为冠状动脉造影检查是诊断冠心病最准确的办法；</p></li>
+</ul>
+<p><strong>在本项研究中，研究者负责分析导致患者的冠心病的因素，并探索各个变量的影响程度。他们希望能够通过有效的机器学习算法构建模型，用于预测患者是否有冠心病。</strong></p>
+</div>
+<div id="研究目的" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> <strong>研究目的</strong></h3>
+<ul>
+<li><p>如何快速准确判断患者是否有冠心病？</p></li>
+<li><p>影响冠心病的危险因素有哪些？</p></li>
+</ul>
+</div>
+</div>
+<div id="数据描述" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> 数据描述</h2>
+<ul>
+<li>数据展示（选取前10行）</li>
+</ul>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+<col width="4%" />
+<col width="10%" />
+<col width="6%" />
+<col width="5%" />
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="9%" />
+<col width="7%" />
+<col width="4%" />
+<col width="6%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">age</th>
+<th align="center">sex</th>
+<th align="center">cp</th>
+<th align="center">trestbps</th>
+<th align="center">chol</th>
+<th align="center">fbs</th>
+<th align="center">restecg</th>
+<th align="center">thalach</th>
+<th align="center">exang</th>
+<th align="center">oldpeak</th>
+<th align="center">slope</th>
+<th align="center">ca</th>
+<th align="center">thal</th>
+<th align="center">target</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">63</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">145</td>
+<td align="center">233</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">0</td>
+<td align="center">2.3</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">53</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">140</td>
+<td align="center">203</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">155</td>
+<td align="center">1</td>
+<td align="center">3.1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">41</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">130</td>
+<td align="center">204</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">172</td>
+<td align="center">0</td>
+<td align="center">1.4</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">56</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">120</td>
+<td align="center">236</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">178</td>
+<td align="center">0</td>
+<td align="center">0.8</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">60</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">130</td>
+<td align="center">206</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">132</td>
+<td align="center">1</td>
+<td align="center">2.4</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">57</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">140</td>
+<td align="center">192</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">148</td>
+<td align="center">0</td>
+<td align="center">0.4</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">56</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">140</td>
+<td align="center">294</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">153</td>
+<td align="center">0</td>
+<td align="center">1.3</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">44</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">120</td>
+<td align="center">263</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">173</td>
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">52</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">172</td>
+<td align="center">199</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">162</td>
+<td align="center">0</td>
+<td align="center">0.5</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">57</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">150</td>
+<td align="center">168</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">174</td>
+<td align="center">0</td>
+<td align="center">1.6</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>数据集变量信息</li>
+</ul>
+<pre><code>## Rows: 303
+## Columns: 14
+## $ age      &lt;dbl&gt; 63, 53, 41, 56, 60, 57, 56, 44, 52, …
+## $ sex      &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, …
+## $ cp       &lt;dbl&gt; 3, 0, 1, 1, 0, 0, 1, 1, 2, 2, 0, 2, …
+## $ trestbps &lt;dbl&gt; 145, 140, 130, 120, 130, 140, 140, 1…
+## $ chol     &lt;dbl&gt; 233, 203, 204, 236, 206, 192, 294, 2…
+## $ fbs      &lt;dbl&gt; 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, …
+## $ restecg  &lt;dbl&gt; 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, …
+## $ thalach  &lt;dbl&gt; 150, 155, 172, 178, 132, 148, 153, 1…
+## $ exang    &lt;dbl&gt; 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, …
+## $ oldpeak  &lt;dbl&gt; 2.3, 3.1, 1.4, 0.8, 2.4, 0.4, 1.3, 0…
+## $ slope    &lt;dbl&gt; 0, 0, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, …
+## $ ca       &lt;dbl&gt; 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, …
+## $ thal     &lt;dbl&gt; 1, 3, 2, 2, 3, 1, 2, 3, 3, 2, 2, 2, …
+## $ target   &lt;dbl&gt; 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, …</code></pre>
+<blockquote>
+<p>303个受试者（行：Sample）;</p>
+<p>14列变量属性(列：Feature)；</p>
+<p>变量属性包括：年龄、性别、胸痛经历、静息血压、胆固醇、空腹血糖、静息心电图、最大心率、运动引起的 ST 压低、峰值运动ST段的斜率、运动诱发的心绞痛、主要供血血管的数量、地中海贫血、<strong>心脏病</strong></p>
+</blockquote>
+<p><img src="images/0202.png" width="100%" /></p>
+<blockquote>
+<p><strong>这些变量包括以下几类：</strong></p>
+<p><strong>① 不可改变的危险因素：</strong>年龄、性别、家族史（收集了地中海贫血）</p>
+<p><strong>② 可改变的危险因素：</strong>静息血压、胆固醇、空腹血糖</p>
+<p><strong>③ 临床检查：</strong>心电图相关、运动触发相关、冠脉检查相关</p>
+</blockquote>
+</div>
+<div id="分析思路" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> 分析思路</h2>
+<p><img src="images/0103.png" width="100%" /></p>
+<ul>
+<li><p>诊断模型：主要是基于研究对象的临床特征，预测当前患有某种疾病的概率，多见于横断面研究;</p></li>
+<li><p>结局类型：分类变量 -&gt; 二分类</p></li>
+<li><p>数据预处理：</p>
+<ul>
+<li><p>“整洁”数据：一行是一个样本所有信息、一列是一个variable、中间无乱码、不规范表达</p></li>
+<li><p>离群值，异常值、缺失值、协变量的类型等</p></li>
+</ul></li>
+<li><p>模型的选择：Logistic、随机森林、支持向量机</p></li>
+<li><p>其他具体信息，建模中探索</p></li>
+</ul>
+</div>
+<div id="算法简介" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> 算法简介</h2>
+<div id="logistic" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Logistic</h3>
+<p><img src="images/0203logistic1.png" width="100%" /><img src="images/0203logistic2.png" width="100%" /></p>
+</div>
+<div id="随机森林" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> 随机森林</h3>
+<p><img src="images/0203rf1.png" width="100%" /><img src="images/0203rf2.png" width="100%" /><img src="images/0203rf3.png" width="100%" /></p>
+</div>
+<div id="支持向量机" class="section level3" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> 支持向量机</h3>
+<p><img src="images/0203svm1.png" width="100%" /><img src="images/0203svm2.png" width="100%" /></p>
+</div>
+</div>
+<div id="代码预览" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> 代码预览</h2>
+<!--chapter:end:02-example.Rmd-->
+</div>
+</div>
+<div id="实操教学-1" class="section level1 unnumbered">
+<h1 class="unnumbered">实操教学</h1>
+</div>
+<div id="r-实操" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> R 实操</h1>
+<div id="机器学习模型构建" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> <strong>机器学习模型构建</strong></h2>
+<div id="加载需要的r包" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> <strong>加载需要的r包</strong></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rm(list = ls())</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># 数据整理</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dlookr) <span class="co"># 自动化EDA</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotROC) <span class="co"># 绘制ROC</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC) <span class="co"># 计算AUC</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071) <span class="co"># 支持向量机</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret) <span class="co"># 机器学习包</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms) <span class="co"># 计算校准曲线\绘制nomo</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glmnet) <span class="co"># lasso</span></span></code></pre></div>
+</div>
+<div id="加载数据" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> <strong>加载数据</strong></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/CardiovascularDataset.csv&quot;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dlookr 是一个自动输出一份数据诊断报告包，可以自行探索</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># eda_report(data) # 输出诊断报告</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># eda_report(data, target = 1) # 添加按照target的分组信息</span></span></code></pre></div>
+<ul>
+<li>查看数据情况</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看前10行树</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data,<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 14
+##     age   sex    cp trest…¹  chol   fbs restecg thalach
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1    63     1     3     145   233     1       0     150
+## 2    53     1     0     140   203     1       0     155
+## 3    41     0     1     130   204     0       0     172
+## 4    56     1     1     120   236     0       1     178
+## 5    60     1     0     130   206     0       0     132
+## 6    57     1     0     140   192     0       1     148
+## # … with 4 more rows, 6 more variables: exang &lt;dbl&gt;,
+## #   oldpeak &lt;dbl&gt;, slope &lt;dbl&gt;, ca &lt;dbl&gt;, thal &lt;dbl&gt;,
+## #   target &lt;dbl&gt;, and abbreviated variable name
+## #   ¹​trestbps</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看数据变量属性</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code></pre></div>
+<pre><code>## spc_tbl_ [303 × 14] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ age     : num [1:303] 63 53 41 56 60 57 56 44 52 57 ...
+##  $ sex     : num [1:303] 1 1 0 1 1 1 0 1 1 1 ...
+##  $ cp      : num [1:303] 3 0 1 1 0 0 1 1 2 2 ...
+##  $ trestbps: num [1:303] 145 140 130 120 130 140 140 120 172 150 ...
+##  $ chol    : num [1:303] 233 203 204 236 206 192 294 263 199 168 ...
+##  $ fbs     : num [1:303] 1 1 0 0 0 0 0 0 1 0 ...
+##  $ restecg : num [1:303] 0 0 0 1 0 1 0 1 1 1 ...
+##  $ thalach : num [1:303] 150 155 172 178 132 148 153 173 162 174 ...
+##  $ exang   : num [1:303] 0 1 0 0 1 0 0 0 0 0 ...
+##  $ oldpeak : num [1:303] 2.3 3.1 1.4 0.8 2.4 0.4 1.3 0 0.5 1.6 ...
+##  $ slope   : num [1:303] 0 0 2 2 1 1 1 2 2 2 ...
+##  $ ca      : num [1:303] 0 0 0 0 2 0 0 0 0 0 ...
+##  $ thal    : num [1:303] 1 3 2 2 3 1 2 3 3 2 ...
+##  $ target  : num [1:303] 1 0 1 1 0 1 1 1 1 1 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   age = col_double(),
+##   ..   sex = col_double(),
+##   ..   cp = col_double(),
+##   ..   trestbps = col_double(),
+##   ..   chol = col_double(),
+##   ..   fbs = col_double(),
+##   ..   restecg = col_double(),
+##   ..   thalach = col_double(),
+##   ..   exang = col_double(),
+##   ..   oldpeak = col_double(),
+##   ..   slope = col_double(),
+##   ..   ca = col_double(),
+##   ..   thal = col_double(),
+##   ..   target = col_double()
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
+</div>
+<div id="划分数据集" class="section level3" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> 划分数据集</h3>
+<p>使用caret包来生成并比较不同的模型与性能。</p>
+<p>使用sample()函数，将数据集按照8:2随机拆分为训练集（264例）和测试集（61例）</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1002</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>trainset <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(data), <span class="fl">0.8</span><span class="sc">*</span><span class="fu">nrow</span>(data))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>testset <span class="ot">&lt;-</span> data[<span class="sc">-</span>trainset,]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>trainset <span class="ot">&lt;-</span> data[trainset, ]</span></code></pre></div>
+<ul>
+<li>为方便后续建模，将target转为factor</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>trainset<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(trainset<span class="sc">$</span>target <span class="sc">==</span> <span class="dv">1</span>, <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>testset<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(testset<span class="sc">$</span>target <span class="sc">==</span> <span class="dv">1</span>, <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>trainset<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(trainset<span class="sc">$</span>target)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>testset<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(testset<span class="sc">$</span>target)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(trainset<span class="sc">$</span>target)</span></code></pre></div>
+<pre><code>##  Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 2 1 2 2 1 1 1 1 1 ...</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># str(testset)</span></span></code></pre></div>
+</div>
+<div id="lasso变量筛选" class="section level3" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> lasso变量筛选</h3>
+<p>在统计学习中存在一个重要理论：<strong>方差权衡</strong>。一般常理认为模型建立得越复杂，分析和预测效果应该越好。而方差权衡恰恰指出了其中的弊端。复杂的模型一般对已知数据（training sample）的拟合（fitting）大过于简单模型，但是<strong>复杂模型很容易对数据出现过度拟合（over-fitting）</strong>。因为所有实际数据都会有各种形式的误差，过度拟合相当于把误差也当做有用的信息进行学习。<strong>所以在未知数据（test sample）上的分析和预测效果会大大下降。</strong></p>
+<p>下图说明了方差权衡的结果。模型复杂度在<strong>最低的时候（比如线性回归）预测的偏差比较大，但是方差很小</strong>。随着模型复杂度的增大，对已知数据的预测误差会一直下降（因为拟合度增大），而对未知数据却出现拐点，一旦过于复杂，预测方差会变大，模型变得非常不稳定。</p>
+<p><img src="images/%E6%96%B9%E5%B7%AE%E6%9D%83%E8%A1%A1-%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E%E6%8B%9F%E5%90%88%E4%B8%8D%E8%B6%B3.jpg" style="width:100.0%" /></p>
+<p>因此在很多实际生活应用中，线性模型因为其预测方差小，参数估计稳定可靠，仍然起着相当大的作用。正如上面的方差权衡所述，<strong>建立线性模型中一个重要的问题就是变量选择（或者叫模型选择），指的是选择建立线性模型所用到的独立变量的选择。</strong>在实际问题例如疾病风险控制中，独立变量一般会有200 ~ 300个之多。如果使用所有的变量，很可能会出现模型的过度拟合。所以对<strong>变量的选择显得尤为重要</strong>。</p>
+<p>传统的变量选择是采用逐步回归法（stepwise selection），其中又分为向前（forward）和向后（backward）的逐步回归。向前逐步是从0个变量开始逐步加入变量，而向后逐步是从所有变量的集合开始逐次去掉变量。加入或去掉变量一般按照标准的统计信息量来决定。<strong>这种传统的变量选择的弊端是模型的方差一般会比较高，而且灵活性较差</strong>。</p>
+<p>近年来回归分析中的一个重大突破是引入了正则化回归（regularized regression）的概念, 而最受关注和广泛应用的<strong>正则化回归</strong>是1996年由现任斯坦福教授的Robert Tibshirani提出的<strong>LASSO回归</strong>。<strong>LASSO回归最突出的优势在于通过对所有变量系数进行回归惩罚（penalized regression）, 使得相对不重要的独立变量系数变为0，从而排除在建模之外。</strong></p>
+<p>LASSO方法不同于传统的逐步回归的最大之处是<strong>它可以对所有独立变量同时进行处理，而不是逐步处理</strong>。这一改进使得建模的<strong>稳定性大大增加</strong>。除此以外，LASSO还具有<strong>计算速度快</strong>，模型容易解释等很多优点。而模型发明者Tibshirani教授也因此获得当年的有统计学诺贝尔奖之称的考普斯总统奖（COPSS award）。</p>
+<div id="训练集中变量筛选" class="section level4" number="3.1.4.1">
+<h4><span class="header-section-number">3.1.4.1</span> 训练集中变量筛选</h4>
+<ol style="list-style-type: decimal">
+<li>首先告诉软件，哪些是你的分类变量。分类变量转为因子</li>
+</ol>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data1 <span class="ot">&lt;-</span> trainset</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>data1[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span><span class="sc">:</span><span class="dv">13</span>)] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data1[, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span><span class="sc">:</span><span class="dv">13</span>)], factor)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data1)</span></code></pre></div>
+<pre><code>## tibble [242 × 14] (S3: tbl_df/tbl/data.frame)
+##  $ age     : num [1:242] 57 41 43 37 66 46 60 57 61 44 ...
+##  $ sex     : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 2 2 2 1 2 2 2 2 2 ...
+##  $ cp      : Factor w/ 4 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 1 3 1 3 3 3 1 1 4 1 ...
+##  $ trestbps: num [1:242] 165 130 120 130 146 150 145 110 134 110 ...
+##  $ chol    : num [1:242] 289 214 177 250 278 231 282 335 234 197 ...
+##  $ fbs     : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 1 1 1 1 1 1 1 1 1 ...
+##  $ restecg : Factor w/ 3 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;: 1 1 1 2 1 2 1 2 2 1 ...
+##  $ thalach : num [1:242] 124 168 120 187 152 147 142 143 145 177 ...
+##  $ exang   : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 2 1 1 1 2 2 1 1 ...
+##  $ oldpeak : num [1:242] 1 2 2.5 3.5 0 3.6 2.8 3 2.6 0 ...
+##  $ slope   : Factor w/ 3 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;: 2 2 2 1 2 2 2 2 2 3 ...
+##  $ ca      : Factor w/ 5 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,..: 4 1 1 1 2 1 3 2 3 2 ...
+##  $ thal    : Factor w/ 4 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 4 3 4 3 3 3 4 4 3 3 ...
+##  $ target  : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 1 2 1 2 2 1 1 1 1 1 ...</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>因子的处理,分类变量处理 onehot encodeing（<strong>自由选择</strong>）</li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 为了做lasso把y定义为numeric</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>data1<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data1<span class="sc">$</span>target)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 分类变量转为factor</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>x.factors <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(data1<span class="sc">$</span>target <span class="sc">~</span> data1<span class="sc">$</span>sex <span class="sc">+</span> data1<span class="sc">$</span>cp<span class="sc">+</span>data1<span class="sc">$</span>fbs<span class="sc">+</span>data1<span class="sc">$</span>restecg<span class="sc">+</span>data1<span class="sc">$</span>exang<span class="sc">+</span>data1<span class="sc">$</span>slope<span class="sc">+</span>data1<span class="sc">$</span>ca<span class="sc">+</span>data1<span class="sc">$</span>thal)[,<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#生成自变量和因变量矩阵</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(x.factors,data1[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">10</span>)]))</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#定义y</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span>data1<span class="sc">$</span>target</span></code></pre></div>
+<ul>
+<li>进行拟合，默认为L1也就是Lasso</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">glmnet</span>(x,y,<span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#解释偏差百分比以及相应的λ值</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit1)</span></code></pre></div>
+<pre><code>## 
+## Call:  glmnet(x = x, y = y, family = &quot;binomial&quot;) 
+## 
+##    Df %Dev Lambda
+## 1   0  0.0 0.2410
+## 2   1  2.9 0.2200
+## 3   1  5.3 0.2000
+## 4   3  8.3 0.1830
+## 5   4 11.5 0.1660
+## 6   4 14.5 0.1520
+## 7   5 17.1 0.1380
+## 8   5 19.4 0.1260
+## 9   7 21.5 0.1150
+## 10  7 23.5 0.1050
+## 11  8 25.6 0.0952
+## 12 10 28.0 0.0868
+## 13 11 30.3 0.0791
+## 14 11 32.3 0.0720
+## 15 12 34.2 0.0656
+## 16 12 36.1 0.0598
+## 17 12 37.7 0.0545
+## 18 12 39.2 0.0496
+## 19 12 40.5 0.0452
+## 20 14 41.6 0.0412
+## 21 14 42.8 0.0376
+## 22 14 43.8 0.0342
+## 23 14 44.7 0.0312
+## 24 14 45.6 0.0284
+## 25 14 46.4 0.0259
+## 26 14 47.1 0.0236
+## 27 15 47.7 0.0215
+## 28 16 48.3 0.0196
+## 29 16 48.8 0.0178
+## 30 16 49.3 0.0163
+## 31 16 49.7 0.0148
+## 32 17 50.0 0.0135
+## 33 17 50.4 0.0123
+## 34 18 50.7 0.0112
+## 35 18 51.0 0.0102
+## 36 19 51.2 0.0093
+## 37 19 51.5 0.0085
+## 38 19 51.8 0.0077
+## 39 20 52.0 0.0070
+## 40 20 52.2 0.0064
+## 41 20 52.4 0.0058
+## 42 20 52.5 0.0053
+## 43 20 52.6 0.0049
+## 44 20 52.8 0.0044
+## 45 21 52.9 0.0040
+## 46 21 52.9 0.0037
+## 47 21 53.0 0.0033
+## 48 21 53.1 0.0031
+## 49 21 53.1 0.0028
+## 50 21 53.2 0.0025
+## 51 21 53.2 0.0023
+## 52 21 53.2 0.0021
+## 53 21 53.2 0.0019
+## 54 21 53.3 0.0017
+## 55 21 53.3 0.0016
+## 56 21 53.3 0.0014
+## 57 21 53.3 0.0013
+## 58 21 53.3 0.0012
+## 59 21 53.3 0.0011
+## 60 21 53.3 0.0010
+## 61 21 53.4 0.0009
+## 62 21 53.4 0.0008
+## 63 21 53.4 0.0008
+## 64 21 53.4 0.0007
+## 65 21 53.4 0.0006
+## 66 21 53.4 0.0006
+## 67 21 53.4 0.0005
+## 68 21 53.4 0.0005
+## 69 21 53.4 0.0004
+## 70 21 53.4 0.0004
+## 71 21 53.4 0.0004
+## 72 21 53.4 0.0003</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#解释偏差不再随着λ值的增加而减小，因此而停止</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#画出收缩曲线图</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit1,<span class="at">label =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="03-r_example_files/figure-html/unnamed-chunk-13-1.png" width="576" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit1,<span class="at">label =</span> <span class="cn">TRUE</span>,<span class="at">xvar =</span> <span class="st">&quot;lambda&quot;</span>)<span class="co">#系数值如何随着λ的变化而变化</span></span></code></pre></div>
+<p><img src="03-r_example_files/figure-html/unnamed-chunk-13-2.png" width="576" /></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit1,<span class="at">label =</span> <span class="cn">TRUE</span>,<span class="at">xvar =</span> <span class="st">&quot;dev&quot;</span>)<span class="co">#偏差与系数之间的关系图</span></span></code></pre></div>
+<p><img src="03-r_example_files/figure-html/unnamed-chunk-13-3.png" width="576" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#指定lamda给出相应参数</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>lasso.coef <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit1, <span class="at">type =</span> <span class="st">&quot;coefficients&quot;</span>,<span class="at">s =</span> <span class="fl">0.040</span> )</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>lasso.coef</span></code></pre></div>
+<pre><code>## 23 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                        s1
+## (Intercept)    -0.5051894
+## data1.sex1     -0.4472455
+## data1.cp1       .        
+## data1.cp2       0.6233575
+## data1.cp3       .        
+## data1.fbs1      .        
+## data1.restecg1  0.0148096
+## data1.restecg2  .        
+## data1.exang1   -0.6849315
+## data1.slope1   -0.2724767
+## data1.slope2    0.1970313
+## data1.ca1      -0.9084992
+## data1.ca2      -0.9740841
+## data1.ca3      -0.6171345
+## data1.ca4       .        
+## data1.thal1     .        
+## data1.thal2     0.1821188
+## data1.thal3    -0.7726354
+## age             .        
+## trestbps       -0.0004619
+## chol            .        
+## thalach         0.0129917
+## oldpeak        -0.2474481</code></pre>
+<p>glmnet包在使用cv.glmnet()估计λ值时，默认使用10折交叉验证。在K折交叉验证中，数据被划分成k个相同的子集（折），#每次使用k-1个子集拟合模型，然后使用剩下的那个子集做测试集，最后将k次拟合的结果综合起来（一般取平均数），确定最后的参数。</p>
+<p>在这个方法中，每个子集只有一次用作测试集。在glmnet包中使用K折交叉验证非常容易，结果包括每次拟合的λ值和响应的MSE。默认设置为α=1。</p>
+<ul>
+<li>进行交叉验证，选择最优的惩罚系数lambada</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">317</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>cv.fit <span class="ot">&lt;-</span> <span class="fu">cv.glmnet</span>(x,y,<span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#cv.fit &lt;- cv.glmnet(x,y,family=&quot;binomial&quot;,type.measure = &quot;auc&quot;)#AUC和λ的关系</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#cv.fit &lt;- cv.glmnet(x,y,family=&quot;binomial&quot;)#不要反复运行</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.fit)</span></code></pre></div>
+<p><img src="03-r_example_files/figure-html/unnamed-chunk-15-1.png" width="576" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#显示一个标准误的系数</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(cv.fit, <span class="at">s =</span> <span class="st">&quot;lambda.1se&quot;</span>)</span></code></pre></div>
+<pre><code>## 23 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                       s1
+## (Intercept)    -0.570950
+## data1.sex1     -0.429630
+## data1.cp1       .       
+## data1.cp2       0.610299
+## data1.cp3       .       
+## data1.fbs1      .       
+## data1.restecg1  0.007149
+## data1.restecg2  .       
+## data1.exang1   -0.678984
+## data1.slope1   -0.261868
+## data1.slope2    0.194103
+## data1.ca1      -0.883563
+## data1.ca2      -0.944469
+## data1.ca3      -0.586744
+## data1.ca4       .       
+## data1.thal1     .       
+## data1.thal2     0.200315
+## data1.thal3    -0.752414
+## age             .       
+## trestbps       -0.000139
+## chol            .       
+## thalach         0.012869
+## oldpeak        -0.245773</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#选择交叉验证误差最小的lambda</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>cv.fit<span class="sc">$</span>lambda.min</span></code></pre></div>
+<pre><code>## [1] 0.0123</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>cv.fit<span class="sc">$</span>lambda<span class="fl">.1</span>se</span></code></pre></div>
+<pre><code>## [1] 0.04122</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(cv.fit, <span class="at">s =</span> <span class="st">&quot;lambda.min&quot;</span>)</span></code></pre></div>
+<pre><code>## 23 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                       s1
+## (Intercept)     1.718543
+## data1.sex1     -1.058682
+## data1.cp1       0.171712
+## data1.cp2       1.200687
+## data1.cp3       0.727069
+## data1.fbs1      .       
+## data1.restecg1  0.204794
+## data1.restecg2  .       
+## data1.exang1   -0.776428
+## data1.slope1   -0.609627
+## data1.slope2    0.276892
+## data1.ca1      -1.635310
+## data1.ca2      -1.885126
+## data1.ca3      -1.390527
+## data1.ca4       0.131830
+## data1.thal1     .       
+## data1.thal2     .       
+## data1.thal3    -1.084248
+## age             .       
+## trestbps       -0.011442
+## chol           -0.001332
+## thalach         0.015735
+## oldpeak        -0.324021</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#画出收缩系数图，及最小的lambda曲线</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cv.fit<span class="sc">$</span>glmnet.fit,<span class="at">xvar=</span><span class="st">&quot;lambda&quot;</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">log</span>(<span class="fu">c</span>(cv.fit<span class="sc">$</span>lambda.min,cv.fit<span class="sc">$</span>lambda<span class="fl">.1</span>se)),<span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="03-r_example_files/figure-html/unnamed-chunk-18-1.png" width="576" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#系数不为0的结果为Lasso筛选后的值</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(cv.fit,<span class="at">type=</span><span class="st">&#39;coefficient&#39;</span>,<span class="at">s=</span>cv.fit<span class="sc">$</span>lambda.min)</span></code></pre></div>
+<pre><code>## 23 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                       s1
+## (Intercept)     1.718543
+## data1.sex1     -1.058682
+## data1.cp1       0.171712
+## data1.cp2       1.200687
+## data1.cp3       0.727069
+## data1.fbs1      .       
+## data1.restecg1  0.204794
+## data1.restecg2  .       
+## data1.exang1   -0.776428
+## data1.slope1   -0.609627
+## data1.slope2    0.276892
+## data1.ca1      -1.635310
+## data1.ca2      -1.885126
+## data1.ca3      -1.390527
+## data1.ca4       0.131830
+## data1.thal1     .       
+## data1.thal2     .       
+## data1.thal3    -1.084248
+## age             .       
+## trestbps       -0.011442
+## chol           -0.001332
+## thalach         0.015735
+## oldpeak        -0.324021</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(cv.fit,<span class="at">type=</span><span class="st">&#39;coefficient&#39;</span>,<span class="at">s=</span>cv.fit<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span></code></pre></div>
+<pre><code>## 23 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                       s1
+## (Intercept)    -0.570950
+## data1.sex1     -0.429630
+## data1.cp1       .       
+## data1.cp2       0.610299
+## data1.cp3       .       
+## data1.fbs1      .       
+## data1.restecg1  0.007149
+## data1.restecg2  .       
+## data1.exang1   -0.678984
+## data1.slope1   -0.261868
+## data1.slope2    0.194103
+## data1.ca1      -0.883563
+## data1.ca2      -0.944469
+## data1.ca3      -0.586744
+## data1.ca4       .       
+## data1.thal1     .       
+## data1.thal2     0.200315
+## data1.thal3    -0.752414
+## age             .       
+## trestbps       -0.000139
+## chol            .       
+## thalach         0.012869
+## oldpeak        -0.245773</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(cv.fit,<span class="at">type=</span><span class="st">&#39;coefficient&#39;</span>,<span class="at">s=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<pre><code>## 23 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                       s1
+## (Intercept)    -1.129256
+## data1.sex1      .       
+## data1.cp1       .       
+## data1.cp2       0.135400
+## data1.cp3       .       
+## data1.fbs1      .       
+## data1.restecg1  .       
+## data1.restecg2  .       
+## data1.exang1   -0.454297
+## data1.slope1    .       
+## data1.slope2    0.052755
+## data1.ca1      -0.036494
+## data1.ca2       .       
+## data1.ca3       .       
+## data1.ca4       .       
+## data1.thal1     .       
+## data1.thal2     0.614504
+## data1.thal3    -0.220414
+## age             .       
+## trestbps        .       
+## chol            .       
+## thalach         0.008586
+## oldpeak        -0.146561</code></pre>
+</div>
+<div id="测试集验证集中-验证" class="section level4" number="3.1.4.2">
+<h4><span class="header-section-number">3.1.4.2</span> 测试集\验证集中 验证</h4>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co">#导入验证集</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> testset</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(test)</span></code></pre></div>
+<pre><code>## tibble [61 × 14] (S3: tbl_df/tbl/data.frame)
+##  $ age     : num [1:61] 63 56 44 64 58 58 57 61 60 54 ...
+##  $ sex     : num [1:61] 1 0 1 1 0 1 0 0 1 1 ...
+##  $ cp      : num [1:61] 3 1 1 3 2 2 0 0 0 0 ...
+##  $ trestbps: num [1:61] 145 140 120 110 120 132 120 130 130 124 ...
+##  $ chol    : num [1:61] 233 294 263 211 340 224 354 330 253 266 ...
+##  $ fbs     : num [1:61] 1 0 0 0 0 0 0 0 0 0 ...
+##  $ restecg : num [1:61] 0 0 1 0 1 0 1 0 1 0 ...
+##  $ thalach : num [1:61] 150 153 173 144 172 173 163 169 144 109 ...
+##  $ exang   : num [1:61] 0 0 0 1 0 0 1 0 1 1 ...
+##  $ oldpeak : num [1:61] 2.3 1.3 0 1.8 0 3.2 0.6 0 1.4 2.2 ...
+##  $ slope   : num [1:61] 0 1 2 1 2 2 2 2 2 1 ...
+##  $ ca      : num [1:61] 0 0 0 0 0 2 0 0 1 1 ...
+##  $ thal    : num [1:61] 1 2 3 2 2 3 2 2 3 3 ...
+##  $ target  : Factor w/ 2 levels &quot;no&quot;,&quot;yes&quot;: 2 2 2 2 2 1 2 1 1 1 ...</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(test<span class="sc">$</span>target)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co">#制作x矩阵</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>test[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span><span class="sc">:</span><span class="dv">13</span>)] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(test[, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span><span class="sc">:</span><span class="dv">13</span>)], factor)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>x.factors_test <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(test<span class="sc">$</span>target <span class="sc">~</span> test<span class="sc">$</span>sex <span class="sc">+</span> test<span class="sc">$</span>cp<span class="sc">+</span>test<span class="sc">$</span>fbs<span class="sc">+</span>test<span class="sc">$</span>restecg<span class="sc">+</span>test<span class="sc">$</span>exang<span class="sc">+</span>test<span class="sc">$</span>slope<span class="sc">+</span>test<span class="sc">$</span>ca<span class="sc">+</span>test<span class="sc">$</span>thal)[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>newx<span class="ot">=</span><span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(x.factors_test,test[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">10</span>)]))</span></code></pre></div>
+<ul>
+<li>利用lasso在测试集中保存预测值，验证集当中的预测值</li>
+</ul>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>test.y <span class="ot">&lt;-</span> <span class="fu">predict</span>(cv.fit, <span class="at">newx =</span> newx, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>, <span class="at">s=</span>cv.fit<span class="sc">$</span>lambda<span class="fl">.1</span>se)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#在R当中做calibration plot</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(test,test.y)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co"># write.csv(test,file=&quot;test0.csv&quot;)</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># str(test)</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="do">##########val.prob#####</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="fu">val.prob</span>(test<span class="sc">$</span>s1,test<span class="sc">$</span>target)</span></code></pre></div>
+<p><img src="03-r_example_files/figure-html/unnamed-chunk-21-1.png" width="576" /></p>
+<pre><code>##        Dxy    C (ROC)         R2          D   D:Chi-sq 
+##  9.143e-01  9.571e-01  6.671e-01  6.701e-01  4.187e+01 
+##        D:p          U   U:Chi-sq        U:p          Q 
+##         NA -3.602e-01 -1.997e+01  1.000e+00  1.030e+00 
+##      Brier  Intercept      Slope       Emax        E90 
+##  1.134e+00 -6.258e-02  2.432e+00  1.180e+00  1.168e+00 
+##       Eavg        S:z        S:p 
+##  1.016e+00 -6.885e+00  5.791e-12</code></pre>
+</div>
+</div>
+<div id="训练集建立模型" class="section level3" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> 训练集建立模型</h3>
+<ul>
+<li>训练Logistic</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>fitControl <span class="ot">=</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;none&quot;</span>, <span class="at">classProbs =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10101</span>) <span class="co"># 设置种子数，复现结果</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>LR_model <span class="ot">&lt;-</span> <span class="fu">train</span>(target<span class="sc">~</span>. ,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> trainset,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">&quot;glm&quot;</span>,</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> fitControl,</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>)</span></code></pre></div>
+<ul>
+<li>训练随机森林</li>
+</ul>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10101</span>) <span class="co"># 设置种子数，复现结果</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>RF_model <span class="ot">&lt;-</span> <span class="fu">train</span>(target<span class="sc">~</span>. ,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> trainset,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">&quot;parRF&quot;</span>,</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> fitControl,</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>)</span></code></pre></div>
+<ul>
+<li>训练SVM</li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10101</span>) <span class="co"># 设置种子数，复现结果</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>SVM_model <span class="ot">&lt;-</span> <span class="fu">train</span>(target<span class="sc">~</span>. ,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> trainset,</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">&quot;svmRadial&quot;</span>,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> fitControl,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metric =</span> <span class="st">&quot;ROC&quot;</span>)</span></code></pre></div>
+</div>
+<div id="测试集评价模型" class="section level3" number="3.1.6">
+<h3><span class="header-section-number">3.1.6</span> 测试集评价模型</h3>
+<ul>
+<li>获得模型测试集风险概率</li>
+</ul>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>LR_pro <span class="ot">&lt;-</span> <span class="fu">predict</span> (LR_model, <span class="at">newdata =</span>testset, <span class="at">type=</span> <span class="st">&quot;prob&quot;</span>) </span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>RF_pro <span class="ot">&lt;-</span> <span class="fu">predict</span> (RF_model, <span class="at">newdata =</span>testset, <span class="at">type=</span> <span class="st">&quot;prob&quot;</span>) </span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>SVM_pro <span class="ot">&lt;-</span>  <span class="fu">predict</span> (SVM_model, <span class="at">newdata =</span>testset, <span class="at">type=</span> <span class="st">&quot;prob&quot;</span>)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>testset<span class="sc">$</span>LR <span class="ot">&lt;-</span> LR_pro<span class="sc">$</span>yes</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>testset<span class="sc">$</span>RF <span class="ot">&lt;-</span> RF_pro<span class="sc">$</span>yes</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>testset<span class="sc">$</span>SVM <span class="ot">&lt;-</span> SVM_pro<span class="sc">$</span>yes</span></code></pre></div>
+<ul>
+<li>使用plotROC包和ggplot2绘制ROC曲线</li>
+</ul>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>ROC <span class="ot">&lt;-</span> <span class="fu">melt_roc</span>(testset, <span class="st">&quot;target&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;LR&quot;</span>, <span class="st">&quot;RF&quot;</span>, <span class="st">&quot;SVM&quot;</span>))</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>ROC_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ROC, <span class="fu">aes</span>(<span class="at">d =</span> D.target, <span class="at">m =</span> M, <span class="at">color =</span> name)) <span class="sc">+</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_roc</span>(<span class="at">n.cuts =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;三种模型测试集ROC曲线&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))<span class="sc">+</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>()</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co"># theme(text = element_text(size = 50)) 设置所有字体大小</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>ROC_plot</span></code></pre></div>
+<p><img src="03-r_example_files/figure-html/unnamed-chunk-27-1.png" width="576" /></p>
+<ul>
+<li>pROC包的roc()和auc()函数，计算AUC</li>
+</ul>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>roc_LR <span class="ot">&lt;-</span> <span class="fu">roc</span>(testset<span class="sc">$</span>target, testset<span class="sc">$</span>LR)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>auc_LR <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_LR)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>auc_LR   <span class="co"># Area under the curve: 0.956</span></span></code></pre></div>
+<pre><code>## Area under the curve: 0.956</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>roc_RF <span class="ot">&lt;-</span> <span class="fu">roc</span>(testset<span class="sc">$</span>target, testset<span class="sc">$</span>RF)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>auc_RF <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_RF)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>auc_RF   <span class="co"># Area under the curve: 0.935</span></span></code></pre></div>
+<pre><code>## Area under the curve: 0.935</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>roc_SVM <span class="ot">&lt;-</span> <span class="fu">roc</span>(testset<span class="sc">$</span>target, testset<span class="sc">$</span>SVM)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>auc_SVM <span class="ot">&lt;-</span> <span class="fu">auc</span>(roc_SVM)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>auc_SVM  <span class="co"># Area under the curve: 0.969</span></span></code></pre></div>
+<pre><code>## Area under the curve: 0.969</code></pre>
+</div>
+<div id="logistic-dca曲线" class="section level3" number="3.1.7">
+<h3><span class="header-section-number">3.1.7</span> Logistic DCA曲线</h3>
+<div>
+<blockquote>
+<p>DCA曲线横坐标是判断恶性/良性的风险阈值（0~1），纵坐标为不同阈值对应的临床净获益（net benifit）。主要比较了根据四种模型划分恶性/良性患者（针对性干预），相比于把所有患者都看作恶性实施干预（ALL曲线）和所有患者都不干预（None曲线），是否有临床净获益。</p>
+<p>006年首次介绍了DCA曲线，并提供了使用R语言绘制DCA曲线的dca()函代码下载链接：<a href="https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis" class="uri">https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis</a></p>
+</blockquote>
+</div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>testset<span class="sc">$</span>target <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(testset<span class="sc">$</span>target <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write_csv(testset, file = &quot;data/testset.csv&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;dca/dca.r&quot;</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>testset1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/testset.csv&quot;</span>)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>DCA <span class="ot">&lt;-</span> <span class="fu">dca</span>(<span class="at">data =</span> testset1, <span class="at">outcome =</span> <span class="st">&quot;target&quot;</span>,</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">predictors =</span> <span class="fu">c</span>(<span class="st">&quot;LR&quot;</span>))</span></code></pre></div>
+<p><img src="03-r_example_files/figure-html/unnamed-chunk-30-1.png" width="576" /></p>
+<p>能够看到，当风险阈值范围在0~1 时，模型的临床净获益均高于ALL曲线和None曲线，能够取得临床净获益的阈值范围还是比较大的，但应该注意的是，随着阈值增大，模型的临床净获益也在减小。</p>
+</div>
+<div id="logistic的nomogram绘制" class="section level3" number="3.1.8">
+<h3><span class="header-section-number">3.1.8</span> Logistic的Nomogram绘制</h3>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 解决&quot;variable 变量名 does not have limits defined by datadist&quot;</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> <span class="fu">datadist</span>(testset)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">datadist=</span><span class="st">&quot;dd&quot;</span>)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 设置变量标签</span></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>testset<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(testset<span class="sc">$</span>sex,<span class="at">levels=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>,<span class="st">&quot;Male&quot;</span>))</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 构建LR模型</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">lrm</span>(target<span class="sc">~</span> age<span class="sc">+</span>sex<span class="sc">+</span>chol<span class="sc">+</span>oldpeak, <span class="at">data=</span> testset, <span class="at">x =</span> T, <span class="at">y =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制Nomogram</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>nom <span class="ot">&lt;-</span> <span class="fu">nomogram</span>(f1,</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">fun=</span><span class="cf">function</span>(x)<span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>x)),</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>                <span class="co">#也可fun=plogis,fun.at概率坐标范围</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">fun.at=</span><span class="fu">c</span>(.<span class="dv">001</span>,.<span class="dv">01</span>,.<span class="dv">05</span>,<span class="fu">seq</span>(.<span class="dv">1</span>,.<span class="dv">9</span>,<span class="at">by=</span>.<span class="dv">1</span>),.<span class="dv">95</span>,.<span class="dv">99</span>,.<span class="dv">999</span>),</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">funlabel=</span><span class="st">&quot;Risk of target&quot;</span>,</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">conf.int=</span>F,</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">abbrev=</span>F,</span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">minlength=</span><span class="dv">1</span>,</span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>                <span class="co">#lp线性预测值</span></span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">lp=</span>F)</span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nom)</span></code></pre></div>
+<p><img src="03-r_example_files/figure-html/unnamed-chunk-32-1.png" width="576" /></p>
+<ul>
+<li>另外一种</li>
+</ul>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(regplot)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">regplot</span>(f1)</span></code></pre></div>
+<pre><code>## [1] &quot;note: points tables not constructed unless points=TRUE &quot;</code></pre>
+<p><img src="images/0301.png" width="100%" /></p>
+<!--chapter:end:03-r_example.Rmd-->
+</div>
+</div>
+</div>
+<div id="python-安装与入门" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Python 安装与入门</h1>
+<div id="anaconda-的安装" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Anaconda 的安装</h2>
+<div id="anaconda简介" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Anaconda简介</h3>
+<p>Anaconda，是一个开源的Python发行版本，其包含了conda、Python以及一大堆安装好的工具包及依赖项，比如numpy、pandas、matplotlib等。</p>
+<p>conda是一个开源的包、环境管理器，可以用于在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换。不同的Python项目常常会对应不同的Python版本和依赖包版本，使用conda就可以方便的对不同的环境进行管理。</p>
+<p>Anaconda还附带了数据分析常用的<strong>Jupyter Notebook</strong>，之前被称为 IPython notebook，是一个交互式笔记本。Jupyter Notebook 的本质是一个 Web应用程序，可以将代码、图像和文档全部组合到一个web文档中，便于创建和共享程序文档，支持实时代码，数学方程，可视化和markdown，在数据清理和转换，数据分析，统计建模，机器学习等方面应用广泛。</p>
+</div>
+<div id="anaconda-下载" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Anaconda 下载</h3>
+<ul>
+<li><p>官网：<a href="https://www.anaconda.com/" class="uri">https://www.anaconda.com/</a></p></li>
+<li><p>百度云：</p>
+<p>链接：<a href="https://pan.baidu.com/s/1lr5ks5FiTgCrS-jrXdNZQQ?pwd=ab5q" class="uri">https://pan.baidu.com/s/1lr5ks5FiTgCrS-jrXdNZQQ?pwd=ab5q</a></p>
+<p>提取码：ab5q</p></li>
+</ul>
+</div>
+<div id="安装步骤" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> 安装步骤</h3>
+<ul>
+<li>双击安装包进行安装，点击下一步。</li>
+</ul>
+<p><img src="images/0401.png" width="100%" /></p>
+<p><img src="images/0402.png" width="100%" /></p>
+<p><img src="images/0403.png" width="100%" /></p>
+<ul>
+<li>选择安装位置，一定要记住。</li>
+</ul>
+<p>出现下面的界面，选择安装路径，尽量不要装入系统盘，系统盘的空间资源很宝贵。建议安装到<strong>其他盘</strong>，注意安装路径<strong>不要包含汉字并且尽量不要包含空格</strong>。选择后安装路径之后，点击 next。</p>
+<p>比如，我安装位置为：G:\develop\anaconda</p>
+<p><img src="images/0404.png" width="100%" /></p>
+<ul>
+<li>这一步是选择是否勾选环境变量，这里暂时先不勾选，后面再配置好了。之后点击install进行安装即可。</li>
+</ul>
+<p><img src="images/paste-56613E09.png" style="width:100.0%" /></p>
+<ul>
+<li>安装进行中，等待安装完成。 <img src="images/paste-F31B00B9.png" style="width:100.0%" /></li>
+</ul>
+<!-- -->
+<ul>
+<li>一会儿之后就会安装完成，根据如下提示进行勾选和不勾选即可，点击finish，表示安装完成。 <img src="images/paste-5EE87A3E.png" style="width:100.0%" /></li>
+</ul>
+<!-- -->
+<ul>
+<li>安装完成后手动添加环境变量</li>
+</ul>
+<p><strong>第一步：此电脑&gt;右键&gt;属性&gt;高级系统设置</strong></p>
+<p><img src="images/paste-183CEFCF.png" style="width:100.0%" /></p>
+<p><strong>第二步：点击环境变量</strong></p>
+<p><img src="images/paste-89F61225.png" style="width:100.0%" /></p>
+<p><strong>第三步：选择系统变量中的path&gt;编辑</strong></p>
+<p><img src="images/paste-B0E59370.png" style="width:100.0%" /></p>
+<p><strong>第四步：新建环境变量</strong></p>
+<p><img src="images/paste-39DF9402.png" style="width:100.0%" /></p>
+<p><strong>第五步：输入本地的anaconda的相关目录，注意这个目录是你自己的安装目录。</strong></p>
+<p>下面是我的anaconda相关目录：</p>
+<p>G:\develop\anaconda</p>
+<p>G:\develop\anaconda\Library\mingw-w64\bin</p>
+<p>G:\develop\anaconda\Library\usr\bin</p>
+<p>G:\develop\anaconda\Library\bin</p>
+<p>G:\develop\anaconda\Scripts</p>
+<p>要把以上目录修改成自己的anaconda安装目录。比如你的anaconda安装在E盘下，那么就写成E:\anaconda，E:\anaconda\Library\mingw-w64\bin 等等。</p>
+<p><img src="images/paste-0CE15498.png" style="width:100.0%" /></p>
+<p><strong>第六步：依次点击确定关闭所有的windows窗口，重启cmd</strong></p>
+<blockquote>
+<p>win+R</p>
+<p>输入：cmd</p>
+</blockquote>
+<p><strong>第七步：输入conda --version验证（注意空格，注意两个横线）</strong></p>
+<p>如果如下图所示，就代表配置成功了。conda后面的数字可以不一样，这个是conda的版本信息</p>
+<p><img src="images/paste-D98C02F3.png" style="width:100.0%" /></p>
+</div>
+<div id="conda基本命令" class="section level3" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> conda基本命令</h3>
+<ul>
+<li>添加镜像</li>
+</ul>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 为了装包速度快点，添加国内镜像</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> show_channel_urls yes</span></code></pre></div>
+<ul>
+<li>基本命令</li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list    <span class="co">#查看当前环境所安装的包</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install numpy <span class="co"># 安装包</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install python=2.7    <span class="co">#安装指定版本包或软件</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> uninstall numpy  <span class="co"># 卸载包</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> list    <span class="co">#查看当前环境所安装的包</span></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy <span class="co"># 安装包</span></span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 可以在使用pip的时候加参数-i https://pypi.tuna.tsinghua.edu.cn/simple </span></span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 例如：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple gevent，这样就会从清华这边的镜像去安装gevent库。</span></span></code></pre></div>
+</div>
+<div id="打开jupyter-notebook" class="section level3" number="4.1.5">
+<h3><span class="header-section-number">4.1.5</span> 打开jupyter notebook</h3>
+<ul>
+<li>将带有.ipynb 文件夹放到桌面</li>
+</ul>
+<p><img src="images/paste-C3298670.png" style="width:100.0%" /></p>
+<ul>
+<li>打开 anaconda prompt</li>
+</ul>
+<p><img src="images/paste-660D1490.png" style="width:100.0%" /></p>
+<ul>
+<li>输入： cd desktop 按回车键</li>
+</ul>
+<p><img src="images/paste-601F6B02.png" style="width:100.0%" /></p>
+<ul>
+<li>接着输入：jupyter notebook 按回车键</li>
+</ul>
+<p><img src="images/paste-EA0A9E85.png" style="width:100.0%" /></p>
+<ul>
+<li>稍等一会，打开自带浏览器，找到python这个文件，打开</li>
+</ul>
+<p><img src="images/paste-76C826E1.png" style="width:100.0%" /></p>
+<ul>
+<li>点python-example.ipynb文件就可以了</li>
+</ul>
+</div>
+</div>
+<div id="python-入门" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> python 入门</h2>
+<p>推荐教程：<a href="https://www.cainiaojc.com/python/python-tutorial.html" class="uri">https://www.cainiaojc.com/python/python-tutorial.html</a></p>
+<p>简单介绍：</p>
+<p>文档链接: <a href="https://www.mubucm.com/doc/5y3mswgOYWg" class="uri">https://www.mubucm.com/doc/5y3mswgOYWg</a></p>
+<p>文档链接: <a href="https://www.mubucm.com/doc/3U7gD8xHiWg" class="uri">https://www.mubucm.com/doc/3U7gD8xHiWg</a></p>
+<!--chapter:end:04-python_install_basis.Rmd-->
+</div>
+</div>
+<div id="r安装与入门" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> R安装与入门</h1>
+<div id="r与rstudio的安装" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> r与Rstudio的安装</h2>
+<div id="r简介" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> R简介</h3>
+<p>R（语言）是一套完整的数据处理、计算和制图软件系统。其功能包括：数据存储和处理系统，数组运算工具，完整连贯的统计分析工具，优秀的统计制图功能。R软件具有简便而强大的编程语言工具。</p>
+<p>官方的 R 软件环境是GNU 软件包中的开源自由软件环境，可在GNU 通用公共许可证下获得。它主要用C、Fortran和 R 本身（部分自托管）编写，为各种操作系统提供了预编译的可执行文件。</p>
+<p>R有一个命令行界面。还提供多个第三方图形用户界面，例如集成开发环境RStudio。 RStudio是一个功能强大、节省成本的反删除和数据恢复软件，且具有强大、简洁、易操作的编程软件。RStudio是辅助R进行编辑的语言工具，而它自身不附带R程序。所以必须先安装R软件，再安装RStudio软件，而编程操作都在RStudio中完成。</p>
+</div>
+<div id="r下载" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> R下载</h3>
+<ul>
+<li><p>官网：</p>
+<p>R官网：<a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a></p>
+<p>Rstudio官网：<a href="https://www.rstudio.com/products/rstudio/" class="uri">https://www.rstudio.com/products/rstudio/</a></p></li>
+<li><p>百度云：</p>
+<p>链接：<a href="https://pan.baidu.com/s/1lr5ks5FiTgCrS-jrXdNZQQ?pwd=ab5q" class="uri">https://pan.baidu.com/s/1lr5ks5FiTgCrS-jrXdNZQQ?pwd=ab5q</a></p>
+<p>提取码：ab5q</p></li>
+</ul>
+</div>
+<div id="r的安装" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> R的安装</h3>
+<p><img src="images/paste-F5B502C4.png" style="width:100.0%" /></p>
+<ul>
+<li>选择【R-4.2.1】，右击选择【以管理员身份运行】,选择【中文（简体）】</li>
+</ul>
+<p><img src="images/paste-50717280.png" style="width:100.0%" /></p>
+<ul>
+<li>打开后会显示安装向导，点击【下一步】开始安装。</li>
+</ul>
+<p><img src="images/paste-766D2B7D.png" style="width:100.0%" /></p>
+<ul>
+<li>选择安装位置，默认的是C盘，安装路径必须是非中文路径。建议选择其他位置</li>
+</ul>
+<p><img src="images/paste-8475E7A2.png" style="width:100.0%" /></p>
+<ul>
+<li>以下全部为默认，点击【下一步】，直到完成安装。</li>
+</ul>
+<p><img src="images/paste-49CD35A1.png" style="width:100.0%" /></p>
+</div>
+<div id="安装rstudio" class="section level3" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> 安装Rstudio</h3>
+<ul>
+<li><p>双击安装程序</p></li>
+<li><p>欢迎界面，点击【下一步】</p></li>
+</ul>
+<p><img src="images/paste-8B4E7321.png" style="width:100.0%" /></p>
+<ul>
+<li>选择安装位置：选择与R-4.2.1一样的安装路径。</li>
+</ul>
+<p><img src="images/paste-ABBBB863.png" style="width:100.0%" /></p>
+<ul>
+<li>一路默认安装，直至完成</li>
+</ul>
+<p><img src="images/paste-151F1C13.png" style="width:100.0%" /></p>
+<ul>
+<li>双击Rstudio图标打开</li>
+</ul>
+<p><img src="images/paste-FDDDADB5.png" /></p>
+<ul>
+<li>Rstudio 初始界面</li>
+</ul>
+<p><img src="images/paste-319C5AAF.png" style="width:100.0%" /></p>
+</div>
+</div>
+<div id="r入门" class="section level2 unnumbered">
+<h2 class="unnumbered">R入门</h2>
+<p>推荐教程：李东风 <a href="https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html">R语言教程</a></p>
+<!--chapter:end:05-R_install_basis.Rmd-->
+<hr />
+</div>
+</div>
+<div id="r入门-1" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> R入门</h1>
+<div id="基础拾遗" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> 基础拾遗</h2>
+<div id="rstudio-设置" class="section level3" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Rstudio 设置</h3>
+<ul>
+<li>初识Rstudio</li>
+</ul>
+<p>Rstudio 默认由四个窗口组成，分别为：代码编辑窗口，环境变量窗口，控制台，以及绘图帮助窗口。窗口可以通过拖动分割柱移动。</p>
+<p><img src="images/paste-46EC392B.png" style="width:100.0%" /></p>
+<ul>
+<li>个性化</li>
+</ul>
+<p>Tools -&gt; Global Options -&gt; Appearance -&gt; 设定喜欢的编辑界面</p>
+<ul>
+<li>packages 下载镜像设置</li>
+</ul>
+<p>Tools -&gt; Global Options -&gt; Packages -&gt; primary CRAN repository -&gt;changes(选择距离你最近的镜像)</p>
+<p><img src="images/paste-41D896CE.png" style="width:100.0%" /></p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 下载 R 包：</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)  注意打上英文的引号哦！ Ctrl<span class="sc">+</span>enter 运行！！</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载 R 包：</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># 注意并不需要引号哦！</span></span></code></pre></div>
+<p><strong>注意！ R 包安装成功后，要及时注释安装语句，避免重复安装。</strong></p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)</span></span></code></pre></div>
+<p><strong>注释： R 语言中，在代码前面加 “#” 号表示该行后面的内容为解释性语句，默认不运行。快捷键:Ctrl+shift+C</strong></p>
+</div>
+<div id="创建一个-r-脚本" class="section level3" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> 创建一个 R 脚本</h3>
+<p>快捷键 Ctrl+shift+N, 或点击右上角绿色加号 -&gt; R Script。</p>
+<p>R 脚本（后缀名.R）是我们在上面编写程序以实现特定功能的文档。</p>
+<ul>
+<li>写脚本的注意事项:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>脚本不应太长，一个脚本实现一个任务；</li>
+<li>养成注释的好习惯 (ctrl+shift+c)；</li>
+</ol>
+<ul>
+<li><p>保存脚本：</p></li>
+<li><p>打开脚本：</p>
+<p>如果出现中文为乱码，则点击 File -&gt; Reopen with Encoding -&gt; 选择其他中文编码。常见的中文编码类型有； UTF-8， GBK 等。</p></li>
+</ul>
+</div>
+<div id="演示" class="section level3" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> 演示：</h3>
+<ul>
+<li>设定工作路径:</li>
+</ul>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set working directory</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;D:</span><span class="sc">\\</span><span class="st">数据&quot;</span>) <span class="co"># 注意：斜杠与反斜杠，双反斜杠的不同</span></span></code></pre></div>
+<ul>
+<li>加载 R 包：</li>
+</ul>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<ul>
+<li>读取数据:</li>
+</ul>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/CardiovascularDataset.csv&quot;</span>,<span class="at">header =</span> T) </span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="co"># header=True 表示有表头</span></span></code></pre></div>
+<p>这个语句里面， read.csv 表示在当前工作路径下，读取一个名为 data.csv 的文档； header=T 表示表头为真， T 为 TRUE 的缩写。然后，通过赋值符号”&lt;-“将读取的数据存储在变量 mydata 这里</p>
+<ul>
+<li>查看数据:</li>
+</ul>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mydata) <span class="co">#col 为 colnumn 的前三个字母</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看数据结构</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mydata)<span class="co"># str 为 structure 的前三个字母</span></span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    303 obs. of  14 variables:
+##  $ age     : int  63 53 41 56 60 57 56 44 52 57 ...
+##  $ sex     : int  1 1 0 1 1 1 0 1 1 1 ...
+##  $ cp      : int  3 0 1 1 0 0 1 1 2 2 ...
+##  $ trestbps: int  145 140 130 120 130 140 140 120 172 150 ...
+##  $ chol    : int  233 203 204 236 206 192 294 263 199 168 ...
+##  $ fbs     : int  1 1 0 0 0 0 0 0 1 0 ...
+##  $ restecg : int  0 0 0 1 0 1 0 1 1 1 ...
+##  $ thalach : int  150 155 172 178 132 148 153 173 162 174 ...
+##  $ exang   : int  0 1 0 0 1 0 0 0 0 0 ...
+##  $ oldpeak : num  2.3 3.1 1.4 0.8 2.4 0.4 1.3 0 0.5 1.6 ...
+##  $ slope   : int  0 0 2 2 1 1 1 2 2 2 ...
+##  $ ca      : int  0 0 0 0 2 0 0 0 0 0 ...
+##  $ thal    : int  1 3 2 2 3 1 2 3 3 2 ...
+##  $ target  : int  1 0 1 1 0 1 1 1 1 1 ...</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看分类变量的取值（唯一值）</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(mydata<span class="sc">$</span>sex) <span class="co"># 美元符号 $ 表示索引，按变量名索引。</span></span></code></pre></div>
+<pre><code>## [1] 1 0</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(mydata<span class="sc">$</span>target)</span></code></pre></div>
+</div>
+<div id="一些快捷键" class="section level3" number="6.1.4">
+<h3><span class="header-section-number">6.1.4</span> 一些快捷键</h3>
+<ol style="list-style-type: decimal">
+<li><p>窗口可以通过拖动分割柱移动，也可以使用快捷键控制。比如：<strong>Ctrl+shift+1</strong>(2\3\4)</p></li>
+<li><p>创建一个R脚本 ——<strong>Ctrl+shift+N</strong></p></li>
+<li><p>快速注释——<strong>Ctrl+shift+C</strong></p></li>
+<li><p>善于利用小标题实现功能分区（<strong>ctrl+shift+r</strong>）</p></li>
+<li><p><strong>ctrl+alt+r</strong> ——快速插入代码框</p></li>
+<li><p>注释（Ctrl+shift+c）； # ；</p></li>
+<li><p>赋值（Alt+-）： =, &lt;- ;</p></li>
+<li><p>函数的标志： ();</p></li>
+<li><p>变量索引： $;</p></li>
+<li><p>管道操作符： %&gt;%， |&gt;：读作 “然后” ;</p></li>
+<li><p>比较或判断： &gt;, &lt; , &gt;=, &lt;=, ==, != ；</p></li>
+<li><p>逻辑运算： &amp;(与), |(或), !(非) ;</p></li>
+<li><p>算数运算： +， -， *， /, ^, %%(取余), %/%(整除)。</p></li>
+</ol>
+</div>
+</div>
+<div id="数据基本操作" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> 数据基本操作</h2>
+<div id="读取数据" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> 读取数据</h3>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/CardiovascularDataset.csv&quot;</span>) <span class="co"># 读取数据</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr::kable(mydata, align = &quot;c&quot;)</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mydata) <span class="co"># 查看表头</span></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mydata) <span class="co"># 查看数据结构</span></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(mydata<span class="sc">$</span>cause) <span class="co"># 查看分类变量的取值（唯一值）</span></span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 其他查看数据的函数</span></span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(mydata)</span></span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a><span class="co"># head(mydata)</span></span>
+<span id="cb84-10"><a href="#cb84-10" aria-hidden="true" tabindex="-1"></a><span class="co"># tail(mydata)</span></span></code></pre></div>
+</div>
+<div id="选择数据" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> 选择数据</h3>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>mydata2 <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="co"># 管道操作符： %&gt;% 或者 |&gt; ，读作然后</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(sex<span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(target<span class="sc">==</span><span class="dv">1</span>)</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>mydata2</span></code></pre></div>
+<pre><code>##    age sex cp trestbps chol fbs restecg thalach exang
+## 1   63   1  3      145  233   1       0     150     0
+## 2   56   1  1      120  236   0       1     178     0
+## 3   57   1  0      140  192   0       1     148     0
+## 4   44   1  1      120  263   0       1     173     0
+## 5   52   1  2      172  199   1       1     162     0
+## 6   57   1  2      150  168   0       1     174     0
+## 7   54   1  0      140  239   0       1     160     0
+## 8   49   1  1      130  266   0       1     171     0
+## 9   64   1  3      110  211   0       0     144     1
+## 10  37   1  2      130  250   0       1     187     0
+## 11  47   1  0      112  204   0       1     143     0
+## 12  42   1  1      120  295   0       1     162     0
+## 13  41   1  1      110  235   0       1     153     0
+## 14  62   1  1      128  208   1       0     140     0
+## 15  57   1  0      110  201   0       1     126     1
+## 16  64   1  0      128  263   0       1     105     1
+## 17  43   1  0      115  303   0       1     181     0
+## 18  70   1  1      156  245   0       0     143     0
+## 19  48   1  2      124  255   1       1     175     0
+## 20  57   1  0      132  207   0       1     168     1
+## 21  52   1  2      138  223   0       1     169     0
+## 22  53   1  0      142  226   0       0     111     1
+## 23  52   1  0      108  233   1       1     147     0
+## 24  43   1  2      130  315   0       1     162     0
+## 25  53   1  2      130  246   1       0     173     0
+## 26  42   1  3      148  244   0       0     178     0
+## 27  59   1  3      178  270   0       0     145     0
+## 28  42   1  2      120  240   1       1     194     0
+## 29  50   1  2      129  196   0       1     163     0
+## 30  69   1  3      160  234   1       0     131     0
+## 31  57   1  2      150  126   1       1     173     0
+## 32  43   1  0      110  211   0       1     161     0
+## 33  55   1  1      130  262   0       1     155     0
+## 34  41   1  2      130  214   0       0     168     0
+## 35  56   1  3      120  193   0       0     162     0
+## 36  59   1  0      138  271   0       0     182     0
+## 37  44   1  2      120  226   0       1     169     0
+## 38  42   1  2      130  180   0       1     150     0
+## 39  66   1  0      160  228   0       0     138     0
+## 40  64   1  3      170  227   0       0     155     0
+## 41  47   1  2      130  253   0       1     179     0
+## 42  35   1  1      122  192   0       1     174     0
+## 43  58   1  1      125  220   0       1     144     0
+## 44  56   1  1      130  221   0       0     163     0
+## 45  56   1  1      120  240   0       1     169     0
+## 46  41   1  1      120  157   0       1     182     0
+## 47  38   1  2      138  175   0       1     173     0
+## 48  38   1  2      138  175   0       1     173     0
+## 49  43   1  0      150  247   0       1     171     0
+## 50  59   1  0      135  234   0       1     161     0
+## 51  44   1  2      130  233   0       1     179     1
+## 52  42   1  0      140  226   0       1     178     0
+## 53  61   1  2      150  243   1       1     137     1
+## 54  40   1  3      140  199   0       1     178     1
+## 55  59   1  2      150  212   1       1     157     0
+## 56  51   1  2      110  175   0       1     123     0
+## 57  53   1  2      130  197   1       0     152     0
+## 58  65   1  0      120  177   0       1     140     0
+## 59  44   1  1      130  219   0       0     188     0
+## 60  54   1  2      125  273   0       0     152     0
+## 61  51   1  3      125  213   0       0     125     1
+## 62  54   1  2      150  232   0       0     165     0
+## 63  48   1  1      130  245   0       0     180     0
+## 64  45   1  0      104  208   0       0     148     1
+## 65  39   1  2      140  321   0       0     182     0
+## 66  52   1  1      120  325   0       1     172     0
+## 67  44   1  2      140  235   0       0     180     0
+## 68  47   1  2      138  257   0       0     156     0
+## 69  66   1  0      120  302   0       0     151     0
+## 70  62   1  2      130  231   0       1     146     0
+## 71  52   1  1      134  201   0       1     158     0
+## 72  48   1  0      122  222   0       0     186     0
+## 73  45   1  0      115  260   0       0     185     0
+## 74  34   1  3      118  182   0       0     174     0
+## 75  54   1  1      108  309   0       1     156     0
+## 76  52   1  3      118  186   0       0     190     0
+## 77  41   1  1      135  203   0       1     132     0
+## 78  58   1  2      140  211   1       0     165     0
+## 79  51   1  2      100  222   0       1     143     1
+## 80  44   1  1      120  220   0       1     170     0
+## 81  54   1  2      120  258   0       0     147     0
+## 82  51   1  2       94  227   0       1     154     1
+## 83  29   1  1      130  204   0       0     202     0
+## 84  51   1  0      140  261   0       0     186     1
+## 85  51   1  2      125  245   1       0     166     0
+## 86  59   1  1      140  221   0       1     164     1
+## 87  52   1  1      128  205   1       1     184     0
+## 88  58   1  2      105  240   0       0     154     1
+## 89  41   1  2      112  250   0       1     179     0
+## 90  45   1  1      128  308   0       0     170     0
+## 91  52   1  3      152  298   1       1     178     0
+## 92  68   1  2      118  277   0       1     151     0
+## 93  46   1  1      101  197   1       1     156     0
+##    oldpeak slope ca thal target
+## 1      2.3     0  0    1      1
+## 2      0.8     2  0    2      1
+## 3      0.4     1  0    1      1
+## 4      0.0     2  0    3      1
+## 5      0.5     2  0    3      1
+## 6      1.6     2  0    2      1
+## 7      1.2     2  0    2      1
+## 8      0.6     2  0    2      1
+## 9      1.8     1  0    2      1
+## 10     3.5     0  0    2      1
+## 11     0.1     2  0    2      1
+## 12     0.0     2  0    2      1
+## 13     0.0     2  0    2      1
+## 14     0.0     2  0    2      1
+## 15     1.5     1  0    1      1
+## 16     0.2     1  1    3      1
+## 17     1.2     1  0    2      1
+## 18     0.0     2  0    2      1
+## 19     0.0     2  2    2      1
+## 20     0.0     2  0    3      1
+## 21     0.0     2  4    2      1
+## 22     0.0     2  0    3      1
+## 23     0.1     2  3    3      1
+## 24     1.9     2  1    2      1
+## 25     0.0     2  3    2      1
+## 26     0.8     2  2    2      1
+## 27     4.2     0  0    3      1
+## 28     0.8     0  0    3      1
+## 29     0.0     2  0    2      1
+## 30     0.1     1  1    2      1
+## 31     0.2     2  1    3      1
+## 32     0.0     2  0    3      1
+## 33     0.0     2  0    2      1
+## 34     2.0     1  0    2      1
+## 35     1.9     1  0    3      1
+## 36     0.0     2  0    2      1
+## 37     0.0     2  0    2      1
+## 38     0.0     2  0    2      1
+## 39     2.3     2  0    1      1
+## 40     0.6     1  0    3      1
+## 41     0.0     2  0    2      1
+## 42     0.0     2  0    2      1
+## 43     0.4     1  4    3      1
+## 44     0.0     2  0    3      1
+## 45     0.0     0  0    2      1
+## 46     0.0     2  0    2      1
+## 47     0.0     2  4    2      1
+## 48     0.0     2  4    2      1
+## 49     1.5     2  0    2      1
+## 50     0.5     1  0    3      1
+## 51     0.4     2  0    2      1
+## 52     0.0     2  0    2      1
+## 53     1.0     1  0    2      1
+## 54     1.4     2  0    3      1
+## 55     1.6     2  0    2      1
+## 56     0.6     2  0    2      1
+## 57     1.2     0  0    2      1
+## 58     0.4     2  0    3      1
+## 59     0.0     2  0    2      1
+## 60     0.5     0  1    2      1
+## 61     1.4     2  1    2      1
+## 62     1.6     2  0    3      1
+## 63     0.2     1  0    2      1
+## 64     3.0     1  0    2      1
+## 65     0.0     2  0    2      1
+## 66     0.2     2  0    2      1
+## 67     0.0     2  0    2      1
+## 68     0.0     2  0    2      1
+## 69     0.4     1  0    2      1
+## 70     1.8     1  3    3      1
+## 71     0.8     2  1    2      1
+## 72     0.0     2  0    2      1
+## 73     0.0     2  0    2      1
+## 74     0.0     2  0    2      1
+## 75     0.0     2  0    3      1
+## 76     0.0     1  0    1      1
+## 77     0.0     1  0    1      1
+## 78     0.0     2  0    2      1
+## 79     1.2     1  0    2      1
+## 80     0.0     2  0    2      1
+## 81     0.4     1  0    3      1
+## 82     0.0     2  1    3      1
+## 83     0.0     2  0    2      1
+## 84     0.0     2  0    2      1
+## 85     2.4     1  0    2      1
+## 86     0.0     2  0    2      1
+## 87     0.0     2  0    2      1
+## 88     0.6     1  0    3      1
+## 89     0.0     2  0    2      1
+## 90     0.0     2  0    2      1
+## 91     1.2     1  0    3      1
+## 92     1.0     2  1    3      1
+## 93     0.0     2  0    3      1</code></pre>
+<p>这里面出现了管道操作符号” |&gt; “, 这个符号读作：然后。所以这个语句的意思是：首先，选中 mydata，然后，选择 cause 为”HIV/AIDS” 的行，然后，选择年份为 2019 年的行，最后，将选择好的数据赋值给 mydata2。</p>
+<p>特别注意： = 是赋值符， == 为判断符。</p>
+</div>
+<div id="保存数据" class="section level3" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> 保存数据</h3>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(mydata2, <span class="co"># 将 mydata2 这个数据</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;data/sex1_target.csv&quot;</span>) <span class="co"># 保存为 HIV.csv 文件</span></span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(mydata2, <span class="at">file =</span> <span class="st">&quot;mydata2.Rdata&quot;</span>)</span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;mydata2.Rdata&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="数据类型与数据结构" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> 数据类型与数据结构</h2>
+<div id="常见的数据类型" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> 常见的数据类型</h3>
+<p>R 语言常见数据类型有：数值类型（numeric），字符串（character），逻辑（logical），其他： POSIXct,POSIXt 等。</p>
+<ul>
+<li>数值类型： 1， 2， 3， 4.5,3.8;</li>
+</ul>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fl">4.5</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<ul>
+<li>字符串类型：“字符”， “123”， “ASIR”， “HIV”</li>
+</ul>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;123&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="st">&quot;ASIR&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<ul>
+<li>逻辑： TRUE， FALSE, T, F;</li>
+</ul>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(T)</span></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+</div>
+<div id="特殊数据类型-naninf-na-null" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> 特殊数据类型： NaN,Inf， NA， NULL</h3>
+<ul>
+<li><p>NaN:Not a number, 计算出错时候出现，比如 0/0,Inf/Inf</p></li>
+<li><p>Inf : 无穷</p></li>
+<li><p>NA：not availabel，缺失值。 NA 值具有传染性，任何数值与之发生关系均会变为 NA</p></li>
+<li><p>NULL：空值。空值与 NA 的区别：比如一个教室稀稀拉拉坐了十几个学生，那么没有学生的位置可以视为缺失，而空值表示连座位也没有。</p></li>
+</ul>
+</div>
+<div id="数据类型的转换" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> 数据类型的转换</h3>
+<ul>
+<li>numeric 与 logical 可以转化为 character，而 character 转化为 numeric 或者 logical 有可能出错，产生 NA 值。</li>
+</ul>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="dv">1990</span>)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="st">&quot;1990&quot;</span>)</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(b)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="st">&quot;ABC&quot;</span>)</span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning: 强制改变过程中产生了NA</span></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>c</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<ul>
+<li>logical 可以转化为数值 0/1, 而在进行逻辑判断的时候， 0/1 也会被认为是 F/T</li>
+</ul>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.logical</span>(<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="数据结构" class="section level3" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> 数据结构</h3>
+<ul>
+<li>标量</li>
+</ul>
+<p>单个元素组成的数据结构，比如”A”,123,TRUE 等。</p>
+<p>### 向量</p>
+<p>多个标量组成的一维的数据结构，比如 Vector。</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成向量</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1990</span><span class="sc">:</span><span class="dv">2019</span>)</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div>
+<pre><code>##  [1] 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999
+## [11] 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009
+## [21] 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019</code></pre>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>b</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5 6</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;A&quot;</span>,<span class="dv">3</span>) <span class="co">#repeat 前三个字母</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>c</span></code></pre></div>
+<pre><code>## [1] &quot;A&quot; &quot;A&quot; &quot;A&quot;</code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="dv">1</span>,<span class="at">to=</span><span class="dv">10</span>,<span class="at">by=</span><span class="dv">2</span>) <span class="co">#sequence 前三个字母</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>d</span></code></pre></div>
+<pre><code>## [1] 1 3 5 7 9</code></pre>
+<ul>
+<li><p>矩阵 (matrix)，数据框 (data.frame)， tipple</p></li>
+<li><p>列表 (list) 与数组 (array)</p></li>
+</ul>
+</div>
+</div>
+<div id="函数" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> 函数</h2>
+<div id="函数的结构" class="section level3" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> 函数的结构</h3>
+<p>R 语言函数一般由三个部分构成：函数体（body），参数（formals） , 环境（environment）。可以通过相应的函数查看函数的相应部分。以常见的 “粘贴” 函数 paste() 为例：</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># paste() 函数可以将两个向量对应的元素粘贴在一起。</span></span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>)</span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">paste</span>(a,b,<span class="at">sep =</span> <span class="st">&quot;:&quot;</span>,<span class="at">collapse =</span> <span class="cn">NULL</span>)</span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a>c</span></code></pre></div>
+<pre><code>## [1] &quot;A:1&quot; &quot;B:2&quot; &quot;C:3&quot;</code></pre>
+<p>我们分别使用 body， formals, environment 函数查看 paste() 函数的相应部分。</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看函数结构</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">body</span>(paste)</span></code></pre></div>
+<pre><code>## .Internal(paste(list(...), sep, collapse, recycle0))</code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看函数参数</span></span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">formals</span>(paste)</span></code></pre></div>
+<pre><code>## $...
+## 
+## 
+## $sep
+## [1] &quot; &quot;
+## 
+## $collapse
+## NULL
+## 
+## $recycle0
+## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看函数来自哪个包</span></span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(paste)</span></code></pre></div>
+<pre><code>## &lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div id="函数的功能" class="section level3" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> 函数的功能</h3>
+<p>函数就像一个加工厂，可以将 “原料” 通过一系列转变，然后输出相应的 “产品”</p>
+<p><img src="images/paste-6127D1C1.png" style="width:100.0%" /></p>
+<p>这里的输入，可以是某个值、向量、 data.frame，或者是其他类型的数据；</p>
+<p>输出，可以是数据，文档，图片等等。</p>
+</div>
+<div id="函数的分类" class="section level3" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> 函数的分类</h3>
+<p>R 语言的函数包括内置函数，外来函数（R 包），自编函数三大类。</p>
+<ul>
+<li>实用的内置函数</li>
+</ul>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看R语言自带数据集</span></span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>()</span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 描述性统计类</span></span>
+<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>()</span>
+<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>()</span>
+<span id="cb126-6"><a href="#cb126-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>()</span>
+<span id="cb126-7"><a href="#cb126-7" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>()</span>
+<span id="cb126-8"><a href="#cb126-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>()</span>
+<span id="cb126-9"><a href="#cb126-9" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>()</span>
+<span id="cb126-10"><a href="#cb126-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成随机数</span></span>
+<span id="cb126-11"><a href="#cb126-11" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> , <span class="at">min =</span> , <span class="at">max =</span> ) <span class="co"># uniform，生成 n 个服从均匀分布的小数</span></span>
+<span id="cb126-12"><a href="#cb126-12" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">runif</span>(<span class="at">n=</span>,<span class="at">min=</span>,<span class="at">max=</span>),<span class="co"># round() 函数空值小数点的位数</span></span>
+<span id="cb126-13"><a href="#cb126-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">0</span>)<span class="co"># 生成 n 个服从均匀分布的整数</span></span></code></pre></div>
+<ul>
+<li>实用的外来函数（tidyverse）</li>
+</ul>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 根据变量取值进行筛选</span></span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>()</span>
+<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 选择变量</span></span>
+<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>()</span>
+<span id="cb127-5"><a href="#cb127-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成变量</span></span>
+<span id="cb127-6"><a href="#cb127-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>()</span>
+<span id="cb127-7"><a href="#cb127-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 排序</span></span>
+<span id="cb127-8"><a href="#cb127-8" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>()</span>
+<span id="cb127-9"><a href="#cb127-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 分组统计</span></span>
+<span id="cb127-10"><a href="#cb127-10" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>() <span class="sc">|&gt;</span></span>
+<span id="cb127-11"><a href="#cb127-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>()</span></code></pre></div>
+<ul>
+<li>演示（使用R自带数据）</li>
+</ul>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载数据</span></span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;ToothGrowth&quot;</span>)</span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看表头</span></span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(ToothGrowth)</span></code></pre></div>
+<pre><code>## [1] &quot;len&quot;  &quot;supp&quot; &quot;dose&quot;</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看数据结构</span></span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ToothGrowth)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    60 obs. of  3 variables:
+##  $ len : num  4.2 11.5 7.3 5.8 6.4 10 11.2 11.2 5.2 7 ...
+##  $ supp: Factor w/ 2 levels &quot;OJ&quot;,&quot;VC&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ dose: num  0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看分组变量的取值</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(ToothGrowth<span class="sc">$</span>supp)</span></code></pre></div>
+<pre><code>## [1] VC OJ
+## Levels: OJ VC</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成变量（生成两个标签）</span></span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>ToothGrowth <span class="ot">&lt;-</span> ToothGrowth <span class="sc">|&gt;</span></span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(剂量<span class="ot">=</span><span class="fu">ifelse</span>(dose<span class="sc">==</span><span class="fl">0.5</span>,<span class="st">&quot;0.5mg&quot;</span>,</span>
+<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">ifelse</span>(dose<span class="sc">==</span><span class="fl">1.0</span>,<span class="st">&quot;1.0mg&quot;</span>,<span class="st">&quot;2.0mg&quot;</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb134-5"><a href="#cb134-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(补充喂养<span class="ot">=</span><span class="fu">ifelse</span>(supp<span class="sc">==</span><span class="st">&quot;VC&quot;</span>,<span class="st">&quot; 维 C&quot;</span>,<span class="st">&quot; 橙汁&quot;</span>))</span>
+<span id="cb134-6"><a href="#cb134-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-7"><a href="#cb134-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 分组统计</span></span>
+<span id="cb134-8"><a href="#cb134-8" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> ToothGrowth <span class="sc">|&gt;</span></span>
+<span id="cb134-9"><a href="#cb134-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(补充喂养, 剂量) <span class="sc">|&gt;</span></span>
+<span id="cb134-10"><a href="#cb134-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb134-11"><a href="#cb134-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">n=</span><span class="fu">n</span>(),</span>
+<span id="cb134-12"><a href="#cb134-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean=</span><span class="fu">mean</span>(len),</span>
+<span id="cb134-13"><a href="#cb134-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd=</span><span class="fu">sd</span>(len))</span></code></pre></div>
+<ul>
+<li>自编函数</li>
+</ul>
+</div>
+<div id="查看函数帮助" class="section level3" number="6.4.4">
+<h3><span class="header-section-number">6.4.4</span> 查看函数帮助</h3>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果知道具体的函数名字：</span></span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>? <span class="co"># 查看函数的帮助，比如 ?filter</span></span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>() <span class="co"># 同？</span></span>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a>?? <span class="co"># 查看 R 包的帮助，比如??dplyr</span></span>
+<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果不知道具体的函数名字</span></span>
+<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a><span class="fu">apropos</span>(<span class="st">&quot;norm&quot;</span>)<span class="co"># apropos: 就... 而言</span></span></code></pre></div>
+</div>
+</div>
+<div id="向量及其操作" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> 向量及其操作</h2>
+<p>向量为一系列标量的集合</p>
+<div id="创建向量" class="section level3" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> 创建向量</h3>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>()</span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>()</span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>()</span></code></pre></div>
+</div>
+<div id="向量的类型" class="section level3" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> 向量的类型</h3>
+<ul>
+<li>字符串，数值， logical 类型</li>
+</ul>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 字符串型：</span></span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;C&quot;</span>)</span>
+<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 数值类型</span></span>
+<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a><span class="co"># logical 类型</span></span>
+<span id="cb137-6"><a href="#cb137-6" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(T,T,F,F)</span></code></pre></div>
+<ul>
+<li>因子类型</li>
+</ul>
+<p>R 语言有一类非常重要的变量类型，名为因子（factor）。因子可以视为分类变量的特殊类型，它既有值，又对值进行了排序（levels）。</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 如何生成因子</span></span>
+<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>name1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a>name2 <span class="ot">&lt;-</span> <span class="fu">factor</span>(name1,</span>
+<span id="cb138-4"><a href="#cb138-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="co">#levels 必须与原始数据取值相同</span></span>
+<span id="cb138-5"><a href="#cb138-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>,<span class="st">&quot;Female&quot;</span>,<span class="st">&quot;Both&quot;</span>)) <span class="co">#labels 是为了</span></span>
+<span id="cb138-6"><a href="#cb138-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(name1)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(name2)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+</div>
+<div id="向量的运算" class="section level3" number="6.5.3">
+<h3><span class="header-section-number">6.5.3</span> 向量的运算</h3>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 简单统计</span></span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(a)</span></code></pre></div>
+<pre><code>## [1] 10.5</code></pre>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 算数运算</span></span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>a <span class="co"># 标量与向量</span></span>
+<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> b<span class="sc">+</span>a <span class="co"># 标量与向量</span></span></code></pre></div>
+</div>
+<div id="重要向量的循环补齐机制" class="section level3" number="6.5.4">
+<h3><span class="header-section-number">6.5.4</span> 重要：向量的循环补齐机制</h3>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>)</span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">paste</span>(a,b,<span class="at">sep =</span> <span class="st">&quot;:&quot;</span>)</span>
+<span id="cb145-4"><a href="#cb145-4" aria-hidden="true" tabindex="-1"></a>c</span></code></pre></div>
+<pre><code>## [1] &quot;A:1&quot; &quot;B:2&quot; &quot;C:3&quot; &quot;D:1&quot; &quot;E:2&quot;</code></pre>
+<p><img src="images/paste-8810BCB7.png" style="width:100.0%" /></p>
+</div>
+<div id="交并补" class="section level3" number="6.5.5">
+<h3><span class="header-section-number">6.5.5</span> 交、并、补</h3>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 向量的交、并、补集，找不同，找相同，找不同（背熟）</span></span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 取交集</span></span>
+<span id="cb147-4"><a href="#cb147-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span>
+<span id="cb147-5"><a href="#cb147-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb147-6"><a href="#cb147-6" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(a,b) </span></code></pre></div>
+<pre><code>## [1] 10 11 12 13 14 15</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 取并集</span></span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">union</span>(a,b)</span></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17
+## [18] 18 19 20</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 找不同</span></span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(a,b)</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(b,a)</span></code></pre></div>
+<pre><code>## [1] 16 17 18 19 20</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 去除重复</span></span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>aa <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;A&quot;</span>,<span class="dv">3</span>),<span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(aa)</span></code></pre></div>
+<pre><code>## [1] &quot;A&quot; &quot;4&quot; &quot;5&quot; &quot;6&quot;</code></pre>
+</div>
+<div id="向量的下标索引" class="section level3" number="6.5.6">
+<h3><span class="header-section-number">6.5.6</span> 向量的下标索引</h3>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 已经知道向量 x</span></span>
+<span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot; 张三&quot;</span>,<span class="st">&quot; 小明&quot;</span>,<span class="st">&quot; 王五&quot;</span>,<span class="st">&quot; 李思齐&quot;</span>)</span>
+<span id="cb157-3"><a href="#cb157-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 如何选择李思齐？</span></span>
+<span id="cb157-4"><a href="#cb157-4" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## [1] &quot; 李思齐&quot;</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 如何同时选择小明与李思齐？</span></span>
+<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]</span></code></pre></div>
+<pre><code>## [1] &quot; 小明&quot;   &quot; 李思齐&quot;</code></pre>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 如何不选择张三</span></span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>x[<span class="sc">-</span><span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] &quot; 小明&quot;   &quot; 王五&quot;   &quot; 李思齐&quot;</code></pre>
+</div>
+</div>
+<div id="数据框及其操作" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> 数据框及其操作</h2>
+<p>数据框是 R 语言最常用的二维表。</p>
+<div id="生成数据框" class="section level3" number="6.6.1">
+<h3><span class="header-section-number">6.6.1</span> 生成数据框</h3>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 通过 read.csv 函数等读取</span></span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 通过向量组合生成</span></span>
+<span id="cb164-2"><a href="#cb164-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">18</span>,<span class="dv">26</span>)</span>
+<span id="cb164-3"><a href="#cb164-3" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot; 赵&quot;</span>,<span class="st">&quot; 钱&quot;</span>,<span class="st">&quot; 孙&quot;</span>,<span class="st">&quot; 李&quot;</span>)</span>
+<span id="cb164-4"><a href="#cb164-4" aria-hidden="true" tabindex="-1"></a>score <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">99</span>,<span class="dv">65</span>,<span class="dv">77</span>,<span class="dv">88</span>)</span>
+<span id="cb164-5"><a href="#cb164-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age=</span>age,</span>
+<span id="cb164-6"><a href="#cb164-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">name=</span>name,</span>
+<span id="cb164-7"><a href="#cb164-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">score=</span>score)</span></code></pre></div>
+</div>
+<div id="数据框的下标索引" class="section level3" number="6.6.2">
+<h3><span class="header-section-number">6.6.2</span> 数据框的下标索引</h3>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 数据框下标索引中间有逗号，逗号前表示行，逗号后表示列 [row,col]</span></span>
+<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 选择 df 前两列</span></span>
+<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>df[,<span class="dv">2</span>] <span class="co"># 空着表示全选</span></span></code></pre></div>
+<pre><code>## [1] &quot; 赵&quot; &quot; 钱&quot; &quot; 孙&quot; &quot; 李&quot;</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">2</span>,] <span class="co"># 选择 df 前两行</span></span></code></pre></div>
+<pre><code>##   age name score
+## 2  30   钱    65</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">2</span>,<span class="dv">2</span>] <span class="co"># 选择 df 第二行第二列</span></span></code></pre></div>
+<pre><code>## [1] &quot; 钱&quot;</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>df[<span class="sc">-</span><span class="dv">3</span>,] <span class="co"># 不选择第三行</span></span></code></pre></div>
+<pre><code>##   age name score
+## 1  20   赵    99
+## 2  30   钱    65
+## 4  26   李    88</code></pre>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a>df[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>),<span class="dv">2</span>] <span class="co"># 选择 1， 3 行； 2 列</span></span></code></pre></div>
+<pre><code>## [1] &quot; 赵&quot; &quot; 孙&quot;</code></pre>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>name<span class="sc">==</span><span class="st">&quot; 李&quot;</span>,] <span class="co"># 选择姓李的数据</span></span></code></pre></div>
+<pre><code>##   age name score
+## 4  26   李    88</code></pre>
+</div>
+<div id="数据框如何生成新的列" class="section level3" number="6.6.3">
+<h3><span class="header-section-number">6.6.3</span> 数据框如何生成新的列</h3>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 比如生成身高数据</span></span>
+<span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">178</span>,<span class="dv">180</span>,<span class="dv">169</span>,<span class="dv">175</span>)</span>
+<span id="cb177-3"><a href="#cb177-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>height <span class="ot">&lt;-</span> height</span>
+<span id="cb177-4"><a href="#cb177-4" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<pre><code>##   age name score height
+## 1  20   赵    99    178
+## 2  30   钱    65    180
+## 3  18   孙    77    169
+## 4  26   李    88    175</code></pre>
+<!--chapter:end:06_R_basis.Rmd-->
+</div>
+</div>
+</div>
+<div id="nhanes数据库介绍" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> NHANES数据库介绍</h1>
+<div id="数据库简介" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> 数据库简介</h2>
+<p>National Health and Nutrition Examination Survey （NHANES数据库，网址：<a href="https://www.cdc.gov/nchs/nhanes/index.htm），收集了有关美国家庭人口健康和营养信息，是一项基于人群的横断面调查。">https://www.cdc.gov/nchs/nhanes/index.htm）</a>收集了有关美国家庭人口健康和营养信息，是一项基于人群的横断面调查。</p>
+<p>该数据库开始于80年代，生物样本包含了参与者的血清，血浆，尿液等，涉及多种测量指标。此外，还包含了大量的调查问卷数据，调查问卷涉及广泛，包括人口统计学、社会经济学、饮食和健康相关问题，体检部分包括生理测量、实验室检查等内容。</p>
+<ul>
+<li><strong>观看NHANES官方视频介绍</strong></li>
+</ul>
+<p>该数据库自20世纪末开始，每两年一个周期，更新数据，而且是免费对外开放的，研究者可以根据需要直接下载数据。</p>
+<p><img src="images/paste-9466CDA4.png" style="width:100.0%" /></p>
+<p>在网站首页，进入Publications and Products，我们可以进行交互式数据可视化展示，数据简报，电子病例等。比如，我们进入数据可视化页面的数据。这些数据代表了从1999-2000年到2017-2018年国家健康和营养检查调查 (NHANES) 的估计值。</p>
+<p><img src="images/paste-A96593D5.png" style="width:100.0%" /></p>
+<p>虽然NHANES数据库自带分析功能并以线图、bar图和表等展示数据，但是并不能满足我们发表论文的需求。因此，我们需要学会数据的下载和处理。当然，如何把数据库数据转化为论文，还要通过相关医学文献的阅读来实现。</p>
+<p>在NHANES数据库官网首页，点击左栏的NHANES Questionnaires, Datasets, and Related Documentation，进入调查表、数据集和相关文档。待下载的数据在Continuous NHANES选项里面。这些数据是按照年份进行上传和保存的。</p>
+<ul>
+<li><strong>Step 1.</strong> 点击1处或2处直接进入数据下载页面（如下图）</li>
+</ul>
+<p><img src="images/paste-F72308A4.png" style="width:100.0%" /></p>
+<ul>
+<li><strong>Step 2.</strong> 可以从下图中的1、2、3处下载数据。</li>
+</ul>
+<p><img src="images/paste-C8A64C0E.png" style="width:100.0%" /></p>
+<p>从1或3处可以按年份下载，每个年份包含Demographics Data”（人口数据）、“Dietary Data”（饮食数据）、“Examination Data”（检查数据）、“Laboratory Data”（化验数据）、“Questionnaire Data”（问卷数据）、“Limited Access Data”（限制访问数据）。</p>
+<p>比如，我们选取2017-2018年的数据进行下载。点击选择左栏选项中的NHANES 2017-2018或右侧Continuous NHANES里面的NHANES 2017-2018。然后页面自动跳转到2017-2018数据页面。数据内容包括四部分：①数据、文档和密码文件，包含人口统计资料、饮食数据、检查资料、实验室资料、问卷表和有限访问的数据；②详细资料，包括问卷工具、实验方法、程序手册以及小册子和知情同意文件；③使用数据，包括概述、发行说明、实验室数据概览、检查资料概览、问卷数据概览、调查途径和数据分析指南、回应率和人口统计，网站还提供了网络教程。④内容概览，主要是常见问题的汇总等。</p>
+<p><img src="images/paste-2D402A6A.png" style="width:100.0%" /></p>
+<p>点击要下载的数据文件，选择存储位置，点击下载。我们以Demographics Data为例。选择Data File下面的DEMO_J_ Data进行下载（Doc_File是对访问资料的介绍，无需下载）。文件类型是.XPT，下载时对网速有要求。下载后数据可用统计软件SPSS等打开，或者用R也可以。</p>
+<p><img src="images/paste-9E470B16.png" style="width:100.0%" /></p>
+<ul>
+<li>或者直接用nhanesA下载数据（速度可能比较慢）</li>
+</ul>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nhanesA)</span>
+<span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a>mydata1<span class="ot">&lt;-</span><span class="fu">nhanes</span>(<span class="st">&#39;DEMO_J&#39;</span>)</span></code></pre></div>
+</div>
+<div id="数据提取" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> 数据提取</h2>
+<p>数据下好后用R读取</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb180-2"><a href="#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb180-3"><a href="#cb180-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read_xpt</span>(<span class="st">&quot;data/demo_j.xpt&quot;</span>)</span>
+<span id="cb180-4"><a href="#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mydata,<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 46
+##    SEQN SDDSR…¹ RIDST…² RIAGE…³ RIDAG…⁴ RIDAG…⁵ RIDRE…⁶
+##   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 93703      10       2       2       2      NA       5
+## 2 93704      10       2       1       2      NA       3
+## 3 93705      10       2       2      66      NA       4
+## 4 93706      10       2       1      18      NA       5
+## 5 93707      10       2       1      13      NA       5
+## 6 93708      10       2       2      66      NA       5
+## # … with 4 more rows, 39 more variables:
+## #   RIDRETH3 &lt;dbl&gt;, RIDEXMON &lt;dbl&gt;, RIDEXAGM &lt;dbl&gt;,
+## #   DMQMILIZ &lt;dbl&gt;, DMQADFC &lt;dbl&gt;, DMDBORN4 &lt;dbl&gt;,
+## #   DMDCITZN &lt;dbl&gt;, DMDYRSUS &lt;dbl&gt;, DMDEDUC3 &lt;dbl&gt;,
+## #   DMDEDUC2 &lt;dbl&gt;, DMDMARTL &lt;dbl&gt;, RIDEXPRG &lt;dbl&gt;,
+## #   SIALANG &lt;dbl&gt;, SIAPROXY &lt;dbl&gt;, SIAINTRP &lt;dbl&gt;,
+## #   FIALANG &lt;dbl&gt;, FIAPROXY &lt;dbl&gt;, FIAINTRP &lt;dbl&gt;, …</code></pre>
+<ul>
+<li><a href="https://wwwn.cdc.gov/Nchs/Nhanes/2017-2018/DEMO_J.htm">对照变量说明提取需要得变量</a></li>
+</ul>
+<p><img src="images/paste-C7547CC6.png" style="width:100.0%" /></p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a>dat1<span class="ot">&lt;-</span> mydata <span class="sc">%&gt;%</span> <span class="fu">select</span>(SEQN, <span class="co"># 序列号</span></span>
+<span id="cb182-2"><a href="#cb182-2" aria-hidden="true" tabindex="-1"></a>                         RIAGENDR, <span class="co"># 性别</span></span>
+<span id="cb182-3"><a href="#cb182-3" aria-hidden="true" tabindex="-1"></a>                         RIDAGEYR, <span class="co"># 年龄</span></span>
+<span id="cb182-4"><a href="#cb182-4" aria-hidden="true" tabindex="-1"></a>                         RIDRETH3, <span class="co"># 种族</span></span>
+<span id="cb182-5"><a href="#cb182-5" aria-hidden="true" tabindex="-1"></a>                         DMDMARTL, <span class="co"># 婚姻状况</span></span>
+<span id="cb182-6"><a href="#cb182-6" aria-hidden="true" tabindex="-1"></a>                         WTINT2YR,WTMEC2YR, <span class="co"># 权重</span></span>
+<span id="cb182-7"><a href="#cb182-7" aria-hidden="true" tabindex="-1"></a>                         SDMVPSU, <span class="co"># psu</span></span>
+<span id="cb182-8"><a href="#cb182-8" aria-hidden="true" tabindex="-1"></a>                         SDMVSTRA) <span class="co"># strata</span></span></code></pre></div>
+<p>以上demo文件中只有人口统计学指标，提取其他信息还需要下载其他数据。假如我们想提取血糖，血糖应该在<a href="https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Laboratory&amp;CycleBeginYear=2017">化验室指标</a>那里，这次我们使用nhanesA包来下载。</p>
+<p><img src="images/paste-6AA51C32.png" style="width:100.0%" /></p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="co"># xuetang1 &lt;- nhanes(&#39;GLU_J&#39;) # 在线提取</span></span>
+<span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a>xuetang <span class="ot">&lt;-</span> <span class="fu">read_xpt</span>(<span class="st">&quot;data/glu_j.xpt&quot;</span>)</span>
+<span id="cb183-3"><a href="#cb183-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(xuetang[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ] ,<span class="at">align =</span> <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="center">SEQN</th>
+<th align="center">WTSAF2YR</th>
+<th align="center">LBXGLU</th>
+<th align="center">LBDGLUSI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">93708</td>
+<td align="center">25654</td>
+<td align="center">122</td>
+<td align="center">6.77</td>
+</tr>
+<tr class="even">
+<td align="center">93711</td>
+<td align="center">29226</td>
+<td align="center">107</td>
+<td align="center">5.94</td>
+</tr>
+<tr class="odd">
+<td align="center">93717</td>
+<td align="center">137151</td>
+<td align="center">91</td>
+<td align="center">5.05</td>
+</tr>
+<tr class="even">
+<td align="center">93718</td>
+<td align="center">58883</td>
+<td align="center">89</td>
+<td align="center">4.94</td>
+</tr>
+<tr class="odd">
+<td align="center">93719</td>
+<td align="center">0</td>
+<td align="center">86</td>
+<td align="center">4.77</td>
+</tr>
+<tr class="even">
+<td align="center">93721</td>
+<td align="center">17155</td>
+<td align="center">104</td>
+<td align="center">5.77</td>
+</tr>
+<tr class="odd">
+<td align="center">93722</td>
+<td align="center">294374</td>
+<td align="center">101</td>
+<td align="center">5.61</td>
+</tr>
+<tr class="even">
+<td align="center">93731</td>
+<td align="center">65813</td>
+<td align="center">98</td>
+<td align="center">5.44</td>
+</tr>
+<tr class="odd">
+<td align="center">93732</td>
+<td align="center">0</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93735</td>
+<td align="center">20279</td>
+<td align="center">83</td>
+<td align="center">4.61</td>
+</tr>
+</tbody>
+</table>
+<p>提取好指标后进行合并</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a>hdata<span class="ot">&lt;-</span> <span class="fu">full_join</span>(dat1, xuetang, <span class="at">by =</span> <span class="st">&#39;SEQN&#39;</span>, <span class="at">type =</span> <span class="st">&#39;full&#39;</span>)</span>
+<span id="cb184-2"><a href="#cb184-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(hdata[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ] ,<span class="at">align =</span> <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="6%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="8%" />
+<col width="8%" />
+<col width="7%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">SEQN</th>
+<th align="center">RIAGENDR</th>
+<th align="center">RIDAGEYR</th>
+<th align="center">RIDRETH3</th>
+<th align="center">DMDMARTL</th>
+<th align="center">WTINT2YR</th>
+<th align="center">WTMEC2YR</th>
+<th align="center">SDMVPSU</th>
+<th align="center">SDMVSTRA</th>
+<th align="center">WTSAF2YR</th>
+<th align="center">LBXGLU</th>
+<th align="center">LBDGLUSI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">93703</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">6</td>
+<td align="center">NA</td>
+<td align="center">9246</td>
+<td align="center">8540</td>
+<td align="center">2</td>
+<td align="center">145</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93704</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">NA</td>
+<td align="center">37339</td>
+<td align="center">42567</td>
+<td align="center">1</td>
+<td align="center">143</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">93705</td>
+<td align="center">2</td>
+<td align="center">66</td>
+<td align="center">4</td>
+<td align="center">3</td>
+<td align="center">8615</td>
+<td align="center">8338</td>
+<td align="center">2</td>
+<td align="center">145</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93706</td>
+<td align="center">1</td>
+<td align="center">18</td>
+<td align="center">6</td>
+<td align="center">NA</td>
+<td align="center">8549</td>
+<td align="center">8723</td>
+<td align="center">2</td>
+<td align="center">134</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">93707</td>
+<td align="center">1</td>
+<td align="center">13</td>
+<td align="center">7</td>
+<td align="center">NA</td>
+<td align="center">6769</td>
+<td align="center">7065</td>
+<td align="center">1</td>
+<td align="center">138</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93708</td>
+<td align="center">2</td>
+<td align="center">66</td>
+<td align="center">6</td>
+<td align="center">1</td>
+<td align="center">13329</td>
+<td align="center">14372</td>
+<td align="center">2</td>
+<td align="center">138</td>
+<td align="center">25654</td>
+<td align="center">122</td>
+<td align="center">6.77</td>
+</tr>
+<tr class="odd">
+<td align="center">93709</td>
+<td align="center">2</td>
+<td align="center">75</td>
+<td align="center">4</td>
+<td align="center">2</td>
+<td align="center">12043</td>
+<td align="center">12278</td>
+<td align="center">1</td>
+<td align="center">136</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93710</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">NA</td>
+<td align="center">16418</td>
+<td align="center">16848</td>
+<td align="center">1</td>
+<td align="center">134</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">93711</td>
+<td align="center">1</td>
+<td align="center">56</td>
+<td align="center">6</td>
+<td align="center">1</td>
+<td align="center">11178</td>
+<td align="center">12391</td>
+<td align="center">2</td>
+<td align="center">134</td>
+<td align="center">29226</td>
+<td align="center">107</td>
+<td align="center">5.94</td>
+</tr>
+<tr class="even">
+<td align="center">93712</td>
+<td align="center">1</td>
+<td align="center">18</td>
+<td align="center">1</td>
+<td align="center">NA</td>
+<td align="center">29040</td>
+<td align="center">30337</td>
+<td align="center">2</td>
+<td align="center">147</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<p>把它保存起来，今后的操作将在这个数据展开</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(hdata,<span class="at">file=</span> <span class="st">&quot;1.csv&quot;</span>,<span class="at">row.names =</span> F)</span></code></pre></div>
+</div>
+<div id="需要注意的点" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> 需要注意的点</h2>
+<div id="结局" class="section level3" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> 结局</h3>
+<ul>
+<li><a href="https://www.cdc.gov/nchs/data-linkage/mortality-public.htm">有死亡信息</a>，需要另外页面下载。</li>
+</ul>
+<p>进入死亡数据下载界面（Data Linkage——NDI Mortality Files——Public-Use Files）</p>
+<p><img src="images/paste-060CC920.png" style="width:100.0%" /></p>
+<p>Public-Use Linked Mortality Files点击FTP Site，进入死亡数据索引目录。阅读数据集说明文件及变量说明，可以对数据集内容有个基本的了解。</p>
+<p><img src="images/paste-8C65DCE3.png" style="width:100.0%" /></p>
+<p>选择需要年份的死亡数据下载；</p>
+<p><img src="images/paste-021D5180.png" style="width:100.0%" /></p>
+</div>
+<div id="数据分析" class="section level3" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> 数据分析</h3>
+<p>NHANES是<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/module2.aspx">复杂抽样</a>，所以需要用到”复杂抽样”的分析方法。</p>
+<p>并且要注意<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/module3.aspx">权重的合并</a>！</p>
+<blockquote>
+<ul>
+<li><p>NHANES样本分为四个阶段：</p>
+<p>（a）PSU（县、县内的区域组或相邻县的组合）；</p>
+<p>（b）PSU内的部分（普查区或区的组合）；</p>
+<p>（c）分段内的居住单元、家庭（DU）；</p>
+<p>（d）家庭中的个人。PSU是从美国所有县取样的。根据过采样标准，在DU级别进行筛选以识别被抽样的人（SP）。</p></li>
+<li><p>year:样本中年数的调整</p>
+<p>NHANES是每年都会进行的抽样，但由于样本量的限制，经常需要合并多年以增强统计效能。但是不同年份测量的变量不一致。比如要合并6年的数据，这可能导致有的变量2年一测，有的变量3年一测，有的变量6年一测。此时不可以直接提取进行计算。</p>
+<p>以4年的数据为例：由于4年样本设计，从原始抽样率计算的初始基本权重对应于4年样本。 这些初始基权值是基于抽样概率的， 为了产生与1年和2年样本的全国人口总数相一致的权重，需要调整因子。 例如，为了为2015-2016年NHANES和2017-2018年NHANES在公共使用文件中发布的数据创建两年样本权重，将4年基权重乘以2，以考虑2年的选择（设计中的年数除以样本中的年数，4除以2=2）。</p></li>
+</ul>
+</blockquote>
+<p>多看官网的各种分析提供的<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/module6.aspx">代码示例</a></p>
+</div>
+<div id="一些技巧" class="section level3" number="7.3.3">
+<h3><span class="header-section-number">7.3.3</span> 一些技巧</h3>
+<ul>
+<li>查看指定年份和指定类别的信息</li>
+</ul>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nhanesA)</span>
+<span id="cb186-2"><a href="#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nhanesTables</span>(<span class="st">&#39;EXAM&#39;</span>, <span class="dv">2017</span>)</span></code></pre></div>
+<p><img src="images/paste-3A10DDA1.png" style="width:100.0%" /></p>
+<ul>
+<li>查看详细信息</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>假设我们需要进一步查看BPX_J的内部信息</li>
+</ol>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nhanesTableVars</span>(<span class="at">data_group =</span> <span class="st">&#39;Exam&#39;</span>, <span class="at">nh_table =</span> <span class="st">&#39;BPX_J&#39;</span>, <span class="at">namesonly =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="images/paste-2D0C163C.png" style="width:100.0%" /></p>
+<p>可以看到，此表之中有27列。Seqn是受访者的序列号，可以用来连接各表。</p>
+<!--chapter:end:07-Nhanes.Rmd-->
+<hr />
+</div>
+</div>
+</div>
+<div id="mimic数据库介绍" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> MIMIC数据库介绍</h1>
+<div id="数据库简介-1" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> 数据库简介</h2>
+<div id="基本情况" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> 基本情况</h3>
+<p>MIMIC （官网：<a href="https://mimic.mit.edu/" class="uri">https://mimic.mit.edu/</a>）是一个重症医学数据库，全称是Medical Information Mart for Intensive Care。2003年，在NIH的资助下，来自贝斯以色列女执事医疗中心(Beth Israel Deaconess Medical Center)、麻省理工(MIT)、牛津大学和麻省总医院(MGH)的急诊科医生、重症科医生、计算机科学专家等共同建立的一个数据库。</p>
+<p><img src="images/paste-40465345.png" style="width:100.0%" /></p>
+<p><img src="images/paste-E3B50E01.png" style="width:100.0%" /></p>
+<p><img src="images/paste-E99A1AD1.png" style="width:100.0%" /></p>
+<p>在进行隐私数据脱敏后，提供了数十万患者在急诊和ICU治疗期间基本信息（年龄、性别、基础病史），住院期间完整的诊疗信息（治疗措施、药物，生命体征、实验室检查等）以及临床结局等信息。让临床医生无需经过痛苦的收集信息的过程就可以接触到数十万患者的海量临床信息，验证自己的临床思路，发表高质量文章。</p>
+<p><img src="images/paste-BD350EB4.png" style="width:100.0%" /></p>
+</div>
+<div id="版本介绍" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> 版本介绍</h3>
+<p>MIMIC从开发至今，共存在三个大版本：MIMIC-II，MIMIC-III，MIMIC-IV。</p>
+<ul>
+<li><p>MIMIC-II：MIMIC-II包含2001-2008年的数据。数据是主要从CareVue监视器收集的。MIMIC-II现在已不再公开，但如果想要提取数据，可以从MIMIC-III中获取数据，利用筛选数据库来源为CareVue来提取MIMIC-II的数据。</p></li>
+<li><p>MIMIC-III：MIMIC-III包含2001-2012年的数据。患者数据是从Metavision和CareVue两个地方采集的。MIMIC-III 数据库当前最新版本是v1.4。这个版本是在2016年9月2日发布，此次发布提高了数据库中的数据质量，为Metavision数据库中的病人提供了大量的补充数据。MIMIC-III v1.4从2016年至今，未再进一步的修正，这也是MIMIC-III 数据库的最终版本。</p></li>
+<li><p>MIMIC-IV：MIMIC-IV是对MIMIC-III的更新，MIMIC-IV包含2008年至2019年（含）的数据。最近推出的生物标志物将可用。MIMIC-IV来自两个院内数据库系统：一个是定制的医院范围的数字电子健康记录（EHR）、一个是重症监护室（ICU）特定的临床信息系统。目<em>前已更新到2.1版本（2022.11.16更新）</em>。<u>由于小版本刚更新不稳定，本次主要已<strong>2.0版本</strong>为基础进行介绍。</u></p></li>
+</ul>
+</div>
+<div id="mimic-iv创建流程" class="section level3" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> MIMIC-IV创建流程</h3>
+<ul>
+<li><p><strong>收购</strong></p>
+<p>从各自的医院数据库中提取了入住BIDMC急诊室或其中一个重症监护病房的患者的数据。创建了一个主患者列表，其中包含与2008年至2019年期间入住ICU或急诊室的患者相对应的所有医疗记录编号。所有源表都筛选为仅与主患者列表中的患者相关的行。</p></li>
+<li><p><strong>制备</strong></p>
+<p>从各自的医院数据库中提取了入住BIDMC急诊室或其中一个重症监护病房的患者的数据。创建了一个主患者列表，其中包含与2008年至2019年期间入住ICU或急诊室的患者相对应的所有医疗记录编号。所有源表都筛选为仅与主患者列表中的患者相关的行。</p></li>
+<li><p><strong>去识别化</strong></p>
+<p>HIPAA 规定的患者标识符已被删除。使用随机密码替换患者标识符，导致患者，住院和ICU住院的整数标识符去识别化。结构化数据是使用查找表格和允许列表过滤的。如有必要，应用了自由文本去识别化算法从自由文本中删除 PHI。<u><strong>最后，日期和时间使用以天为单位的偏移量随机移动到将来。为每个subject_id分配了一个日期班次。因此，单个患者的数据在内部是一致的。</strong></u>例如，如果数据库中两个度量值之间的时间在原始数据中为4 小时，则 MIMIC-IV 中计算的时间差也将为 4 小时。相反，不同的患者在时间上不具有可比性。也就是说，<u><strong>2130年入院的两名患者不一定在同一年入院</strong></u>。</p></li>
+</ul>
+</div>
+<div id="mimic-iv内容组成" class="section level3" number="8.1.4">
+<h3><span class="header-section-number">8.1.4</span> MIMIC-IV内容组成</h3>
+<p>MIMIC-IV主要分为三大模块，分别是<strong>core、hosp、icu</strong>。</p>
+<ul>
+<li><p><strong>core</strong> 模块存储使用MIMIC-IV进行任何数据分析所需的患者跟踪信息。内容包含三个表：<strong>入院表</strong>、<strong>患者表</strong>和<strong>转移表</strong>。这些表提供了患者的人口统计数据、每次住院的记录以及住院期间每个病房住宿的记录。</p>
+<p><img src="images/paste-093EC353.png" style="width:100.0%" /></p></li>
+<li><p><strong>hosp</strong> 模块包含从医院范围的EHR 派生的数据。这些测量结果主要记录在<strong>住院期间</strong>，尽管有些表格也包括来自医院外的数据（例如，在实验室活动中进行的门诊实验室检查）。信息包括<strong>实验室测量</strong>、<strong>微生物培养</strong>、提供者订单、药物管理、<strong>药物处方</strong>、医院账单信息和服务相关信息。</p>
+<p><img src="images/paste-A630AED5.png" style="width:100.0%" /></p></li>
+<li><p><strong>icu</strong> 模块包含来自BIDMC：MetaVision（iMDSoft）的临床信息系统的数据。MetaVision表被非规范化以创建一个星形架构，其中icustays和d_items表链接到一组数据表，所有数据表都以”事件”为后缀。icu模块中记录的数据包括<strong>静脉注射和液体输入</strong>（输入事件）、患者输出（输出事件）、程序（程序事件）、记录为日期或时间的信息（日期时间事件）以及<strong>其他图表信息（图表事件）</strong>。所有事件表都包含一个stay_id列，用于识别icustays中的相关ICU患者，以及一个允许识别d_items中记录的概念的 itemid 列。</p>
+<p><img src="images/paste-C2671B05.png" style="width:100.0%" /></p></li>
+<li><p>数据总览</p>
+<p><img src="images/paste-B2A0D0D1.png" style="width:100.0%" /></p></li>
+</ul>
+</div>
+</div>
+<div id="数据库申请" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> 数据库申请</h2>
+<div id="注册physionet账号" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> 注册Physionet账号</h3>
+<ul>
+<li><p>进入网址：<a href="www.physionet.org">www.physionet.org</a>，注册账号。</p>
+<p>建议使用机构/学校邮箱申请，注册后邮箱会收到激活账号链接，点击网址激活。</p></li>
+</ul>
+<p><img src="images/paste-6238DB23.png" style="width:100.0%" /></p>
+<ul>
+<li>登录后选设置</li>
+</ul>
+<p><img src="images/paste-7C7550A7.png" style="width:100.0%" /></p>
+<ul>
+<li>然后点Credentialing，apply for access</li>
+</ul>
+<p><img src="images/paste-C2041C4B.png" style="width:100.0%" /></p>
+<p>就会提示你为了获得认证，需要通过相关培训认证，培训认证，是在CITI这个网站提供的。</p>
+</div>
+<div id="注册citi账号" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> 注册CITI账号</h3>
+<p>①复制这句话：“Massachusetts Institute of Technology Affiliates”，表示是MIT附属单位，这样才能免费获取课程。</p>
+<p>②在Physionet网页上点击或者直接访问（<a href="https://about.citiprogram.org/，点Register">https://about.citiprogram.org</a>），注意要贴上之前复制的文字。</p>
+<p><img src="images/paste-AAE6E5B6.png" style="width:100.0%" /></p>
+<p><img src="images/paste-65F08B03.png" style="width:100.0%" /></p>
+<p><img src="images/paste-77C91118.png" style="width:100.0%" /></p>
+<p><img src="images/paste-A1713B55.png" style="width:100.0%" /></p>
+<p><img src="images/paste-F90E5003.png" style="width:100.0%" /></p>
+<p><img src="images/paste-8560DC5C.png" style="width:100.0%" /></p>
+<p><img src="images/paste-F3B27C5E.png" style="width:100.0%" /></p>
+<p><img src="images/paste-EB5AE949.png" style="width:100.0%" /></p>
+<ul>
+<li>注册完成，登录进去就可以看到课程。</li>
+</ul>
+<p><img src="images/paste-AD888F3F.png" style="width:100.0%" /></p>
+<p>两个都考</p>
+<p><img src="images/paste-A2D11D9F.png" style="width:100.0%" /></p>
+<p>第一门有两个模块，第二门有九个模块。</p>
+<p><strong>考试可反复参加，90%以上正确率才合格，完成考试后需下载报告。</strong></p>
+<blockquote>
+<p>部分试题答案：</p>
+<p>Which of the followingproposed studies would constitute human subjects research as defined under thefederal regulations?</p>
+<p>A researcher from a school of social workobtains access to students’ academic records (including identifiableinformation) to assess the effect of drug awareness programs on studentacademic achievement.</p>
+<p> </p>
+<p>Which of the followingactivities meets the federal definitions of research?</p>
+<p>Collection of elementary school test scoresto evaluate the effectiveness of an experimental program to teach reading</p>
+<p> </p>
+<p>Which of the followingconstitutes both a breach of a confidentiality (the research data have beendisclosed, counter to the agreement between researcher and subjects) and aviolation of subjects’ privacy (the right of the individuals to be protectedagainst intrusion into their personal lives or affairs)?</p>
+<p>A faculty member makes identifiable dataabout sexual behavior available to graduate students, although the subjectswere assured that the data would be de-identified.</p>
+<p> </p>
+<p>Which of the following isa measure researchers can use to protect the confidentiality of subject data?</p>
+<p>Keep sensitive and identifiable data inencrypted files on a password protected hard drive.</p>
+<p> </p>
+<p>When the primarypotential harm is the breach of individually identifiable data, to protectagainst such disclosure the researcher should.</p>
+<p>Encrypt the data and store it in passwordprotected files.</p>
+<p> </p>
+<p>Which of the followingstatements about individually identifiable research data is correct?</p>
+<p>Researchers may be required to releaseindividually identifiable information outside the research setting.</p>
+<p> </p>
+<p>Which of the followingresearch activities with children qualifies for exemption?</p>
+<p>A researcher observing children in aplayground to identify bullying behaviors.</p>
+<p> </p>
+<p>In accordance withfederal regulations, which of the following statements best describes whenresearch with children may be exempt?</p>
+<p>Only certain exemption categories can beused with research involving children.</p>
+<p> </p>
+<p>Which of the followingactivities constitutes engagement in research?</p>
+<p>Obtaining informed consent and conductingresearch interviews.</p>
+<p> </p>
+<p>If federally fundedresearch involves collaboration with an organization that is”engaged” in research in a foreign country, the foreign organizationcan rely on the US researcher’s institution’s IRB for its review.</p>
+<p><br />
+</p>
+<p> </p>
+<p>Which of the followingpractices is an example of how the principle of beneficence is applied to astudy involving human subjects?</p>
+<p>Ensuring that risks are reasonable inrelationship to anticipated benefits.</p>
+<p> </p>
+<p>A researcher fails toinform subjects about the risks and benefits of being in a focus group. Whichof the following describes the ethical principle violated by the researcher?</p>
+<p>Respect for persons</p>
+<p> </p>
+<p>When evaluating risks ofharm IRBs must determine that:</p>
+<p>isks are reasonable in relation toanticipated benefits.</p>
+<p> </p>
+<p>According to the criteriafor IRB approval, when considering equitable treatment of subjects, specialcare must be taken with which of the following populations?</p>
+<p>prisoners</p>
+<p> </p>
+<p>Which statement iscorrect about informed consent?</p>
+<p>It requires disclosure of any benefits tothe subject or to others that may reasonably be expected</p>
+<p> </p>
+<p>The informed consentdocument, regardless of the research topic, must always include the following:</p>
+<p>A statement describing the extent, if any,to which confidentiality of records identifying the subject will be maintained.</p>
+<p> </p>
+<p>A graduate student inCommunications intends to write her thesis, as part of a federally-fundedstudy, on the effect of print versus televised media on people’s daily lives.The researcher wishes to conduct the study in a local prison because of limitedresources for subject recruitment. The subjects will be asked for 15 minutes oftheir time. The questionnaire appears innocuous and the risks appear to beminimal. The IRB should:</p>
+<p>Not approve this project because theresearch question could be answered without the participation of prisoners.</p>
+<p> </p>
+<p>A researcher wishes toconduct a study on the relationship between paternal care giving (that is, thecare the prisoner subjects received as children from their fathers) andincarceration, using a short 15-minute survey. Which category applies to thisresearch?</p>
+<p>Study of the possible causes, effects, andprocesses of incarceration, and of criminal behavior, provided that the studypresents no more than minimal risk and no more than inconvenience to thesubjects (Category i)</p>
+<p>Comment</p>
+<p> </p>
+<p>Providing parentsinformation about a study, in lieu of active parental permission, is allowedwhen:</p>
+<p>An IRB has approved a waiver of therequirement for parental permission</p>
+<p> </p>
+<p>When research isconducted in educational settings with children, when is the assent ofpotential student subjects required?</p>
+<p>When the IRB has determined that studentsare capable of providing assent.</p>
+</blockquote>
+</div>
+<div id="上传成绩单及个人信息等待人工审核" class="section level3" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> 上传成绩单及个人信息，等待人工审核</h3>
+<p>考试通过后，回到Physionet，acount，credentialing那里，把所有的信息都填上，上传CITI的成绩单，提交申请，等待通过，注意Reference这里一定要认真填写，邮箱要正确。</p>
+<p><img src="images/paste-24B8ACF3.png" style="width:100.0%" /></p>
+<ul>
+<li>等待…..邮件通知通过注册。</li>
+</ul>
+</div>
+<div id="通过后签署同意书下载数据" class="section level3" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> 通过后签署同意书，下载数据</h3>
+<p>审核通过后，就可以在Physionet首页，Data这里点击进去，下载数据，你会看到，除了MIMIC以外，这里还有好多其他数据集。</p>
+<p><img src="images/paste-6707E051.png" style="width:100.0%" /></p>
+</div>
+</div>
+<div id="数据库下载与安装" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> 数据库下载与安装</h2>
+<div id="数据下载" class="section level3" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> 数据下载</h3>
+<p>通过注册后，进入<a href="https://physionet.org/content/mimiciv/2.0/" class="uri">https://physionet.org/content/mimiciv/2.0/</a> 签署知情同意</p>
+<p><img src="images/paste-1FFADDC2.png" style="width:100.0%" /></p>
+<p>正常是在Files有一个下载的链接：</p>
+<p><img src="images/paste-9F6B0387.png" style="width:50.0%" /></p>
+<p>但是由于版本更新，2.0目前无下载链接。</p>
+<p><img src="images/paste-82F3D8B9.png" style="width:100.0%" /></p>
+<p>所以使用我提供的数据进行演练（<strong>仅供内部练习使用，没有获得权限无法发表文章</strong>）</p>
+<p>百度云地址：（留好足够空间，建议80G以上）</p>
+<p><a href="https://pan.baidu.com/s/1FMYJh4IFuqMpH1f69OuJXw?pwd=ed5c" class="uri">https://pan.baidu.com/s/1FMYJh4IFuqMpH1f69OuJXw?pwd=ed5c</a></p>
+<p>提取码：ed5c</p>
+</div>
+<div id="数据安装" class="section level3" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> 数据安装</h3>
+<div id="官方教程的安装" class="section level4" number="8.3.2.1">
+<h4><span class="header-section-number">8.3.2.1</span> 官方教程的安装</h4>
+<blockquote>
+<p>安装比较难….流程都一样，但会出现各种莫名奇妙的问题，推荐几个安装教程，大家自己尝试下。</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzIyMTEyOTEzNg==&amp;mid=2247520947&amp;idx=1&amp;sn=68496f2fef007667a34a080b95bab421&amp;chksm=97c3a26ca0b42b7a784a8db0afba3c84d9966bd49ff7fb1b4347e632a66e55529ddf773fd1b9&amp;scene=21#wechat_redirect">MIMIC-IV数据库安装过程更简化（电脑小白保姆版）</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzIyMTEyOTEzNg==&amp;mid=2247505644&amp;idx=1&amp;sn=cc5192e325c63f2670147923a993fcf4&amp;scene=21#wechat_redirect">手把手教你MIMIC-IV数据库安装</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzIyMTEyOTEzNg==&amp;mid=2247511241&amp;idx=3&amp;sn=2689e66ec9850f567d81577f7dfd9054&amp;chksm=97c39c16a0b41500b05f77b2c036fbadb8482953c8fee958a79f6ed858ba368e1a67a3cafca5&amp;scene=21#wechat_redirect">前方有雷！MIMIC-IV数据库安装排雷指南</a></li>
+<li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI3OTkxNjEyNw==&amp;action=getalbum&amp;album_id=1844026174826446849&amp;scene=173&amp;from_msgid=2247485252&amp;from_itemidx=1&amp;count=3&amp;nolastread=1#wechat_redirect">智慧ICU</a></li>
+</ol>
+</blockquote>
+<ul>
+<li><p>我们再次进入mimic官网（<a href="https://mimic.physionet.org/gettingstarted/access/" class="uri">https://mimic.physionet.org/gettingstarted/access/</a>）</p></li>
+<li><p>点击getting started，拉到下面点击 Local database setup</p>
+<p><img src="images/paste-BE67FFF3.png" style="width:100.0%" /></p></li>
+<li><p><a href="https://mimic.mit.edu/docs/gettingstarted/local/install-mimic-locally-windows/">按照教程页面安装</a>PostgreSQL、7-zip，随后在命令框输入教程代码进行配置数据库即可。</p>
+<p><img src="images/paste-D4FC1A3C.png" style="width:100.0%" /></p></li>
+</ul>
+</div>
+<div id="navicat-的安装" class="section level4" number="8.3.2.2">
+<h4><span class="header-section-number">8.3.2.2</span> Navicat 的安装</h4>
+<p>按照官方教程安装完成后，下面再进行安装Navicat软件，<a href="http://www.navicat.com.cn/">官网</a>提供14天免费的试用功能。大家可以下载安装（提供的百度云链接里也有安装包）。</p>
+<p><img src="images/paste-2B525CDD.png" style="width:100.0%" /></p>
+<ul>
+<li>打开Navicat，点击连接-PostgreSQL，如下图；</li>
+</ul>
+<p><img src="images/paste-D4D4380B.png" style="width:100.0%" /></p>
+<ul>
+<li>进入如下界面，在连接名里随意输入名称，密码填之前设置的超级管理员postgres的密码；</li>
+</ul>
+<p><img src="images/paste-524F873D.png" style="width:100.0%" /></p>
+<ul>
+<li>点击确定，连接成功，这是可在左侧看到我们连接到的mimic iv数据库。</li>
+</ul>
+<p><img src="images/paste-BBB88F3D.png" style="width:100.0%" /></p>
+<ul>
+<li>观看&lt;科研杂录&gt;安装教程</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="数据提取-1" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> 数据提取</h2>
+<!--chapter:end:08-MIMIC.Rmd-->
+</div>
+</div>
+<!--bookdown:body:end-->
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+</body>
+
+</html>

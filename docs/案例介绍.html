@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>第 2 部分 案例介绍 | 临床预测模型</title>
+<meta name="author" content="杨 弘">
+<meta name="description" content="2.1 案例背景  2.1.1 数据来源 案例选自UCI机器学习库中的 Heart Disease Data Set数据集。 该数据库包含76个属性，但是所有已发布的实验都引用了其中14个属性的子集。特别是，克利夫兰数据库是迄今为止ML研究人员使用的唯一数据库。 数据来源：https://archive.ics.uci.edu/ml/datasets/Heart+Disease ...">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta property="og:title" content="第 2 部分 案例介绍 | 临床预测模型">
+<meta property="og:type" content="book">
+<meta property="og:description" content="2.1 案例背景  2.1.1 数据来源 案例选自UCI机器学习库中的 Heart Disease Data Set数据集。 该数据库包含76个属性，但是所有已发布的实验都引用了其中14个属性的子集。特别是，克利夫兰数据库是迄今为止ML研究人员使用的唯一数据库。 数据来源：https://archive.ics.uci.edu/ml/datasets/Heart+Disease ...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第 2 部分 案例介绍 | 临床预测模型">
+<meta name="twitter:description" content="2.1 案例背景  2.1.1 数据来源 案例选自UCI机器学习库中的 Heart Disease Data Set数据集。 该数据库包含76个属性，但是所有已发布的实验都引用了其中14个属性的子集。特别是，克利夫兰数据库是迄今为止ML研究人员使用的唯一数据库。 数据来源：https://archive.ics.uci.edu/ml/datasets/Heart+Disease ...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap/bootstrap.bundle.min.js"></script><script src="libs/bs3compat/transition.js"></script><script src="libs/bs3compat/tabs.js"></script><script src="libs/bs3compat/bs3compat.js"></script><link href="libs/bs4_book/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">临床预测模型</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">关于课程</a></li>
+<li><a class="" href="%E6%A1%88%E4%BE%8B%E6%95%99%E5%AD%A6-1.html">案例教学</a></li>
+<li><a class="" href="%E4%B8%B4%E5%BA%8A%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B.html"><span class="header-section-number">1</span> 临床预测模型</a></li>
+<li><a class="active" href="%E6%A1%88%E4%BE%8B%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">2</span> 案例介绍</a></li>
+<li><a class="" href="%E5%AE%9E%E6%93%8D%E6%95%99%E5%AD%A6-1.html">实操教学</a></li>
+<li><a class="" href="r-%E5%AE%9E%E6%93%8D.html"><span class="header-section-number">3</span> R 实操</a></li>
+<li><a class="" href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">4</span> Python 安装与入门</a></li>
+<li><a class="" href="r%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">5</span> R安装与入门</a></li>
+<li><a class="" href="r%E5%85%A5%E9%97%A8-1.html"><span class="header-section-number">6</span> R入门</a></li>
+<li><a class="" href="nhanes%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">7</span> NHANES数据库介绍</a></li>
+<li><a class="" href="mimic%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">8</span> MIMIC数据库介绍</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="案例介绍" class="section level1" number="2">
+<h1>
+<span class="header-section-number">第 2 部分</span> 案例介绍<a class="anchor" aria-label="anchor" href="#%E6%A1%88%E4%BE%8B%E4%BB%8B%E7%BB%8D"><i class="fas fa-link"></i></a>
+</h1>
+<div id="案例背景" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> 案例背景<a class="anchor" aria-label="anchor" href="#%E6%A1%88%E4%BE%8B%E8%83%8C%E6%99%AF"><i class="fas fa-link"></i></a>
+</h2>
+<div id="数据来源" class="section level3" number="2.1.1">
+<h3>
+<span class="header-section-number">2.1.1</span> 数据来源<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90"><i class="fas fa-link"></i></a>
+</h3>
+<p>案例选自<a href="http://archive.ics.uci.edu/ml/datasets/Heart+Disease"><strong>UCI</strong></a>机器学习库中的 Heart Disease Data Set数据集。</p>
+<p>该数据库包含76个属性，但是所有已发布的实验都引用了其中<strong>14个属性的子集</strong>。特别是，克利夫兰数据库是迄今为止ML研究人员使用的唯一数据库。</p>
+<p>数据来源：<a href="https://archive.ics.uci.edu/ml/datasets/Heart+Diseasehttps://archive.ics.uci.edu/ml/datasets/Heart+Disease">https://archive.ics.uci.edu/ml/datasets/Heart+Disease</a></p>
+</div>
+<div id="疾病背景" class="section level3" number="2.1.2">
+<h3>
+<span class="header-section-number">2.1.2</span> 疾病背景<a class="anchor" aria-label="anchor" href="#%E7%96%BE%E7%97%85%E8%83%8C%E6%99%AF"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><strong>冠心病（Coronary Heart Disease,CHD）</strong></li>
+</ul>
+<div class="inline-figure"><img src="images/0201.jpg" width="100%"></div>
+<p>心血管疾病是全球第一大死亡原因，每年夺去约1790万人的生命，占全球死亡人数的31%。5例心血管疾病中有4例死于心脏病和中风，其中1 / 3的死亡发生在70岁以下的过早死亡中。</p>
+<p><strong>患有心血管疾病或心血管风险高的人</strong>(由于存在高血压、糖尿病、高脂血症或已经确定的疾病等一种或多种风险因素)需要<strong>早期检测和管理</strong>，其中机器学习模型可以提供很大的帮助。</p>
+<ul>
+<li>
+<p><strong>目前把冠心病分类两大类：</strong></p>
+<p>① 急性冠脉综合征：</p>
+<p>不稳定型心绞痛（UA）；非ST段抬高性心肌梗死（NSTEMI）；ST段抬高性心肌梗死（STEMI）</p>
+<p>② 慢性冠脉综合征：</p>
+<p>慢性稳定型心绞痛；冠脉正常的心绞痛（如X综合征）；无症状性心肌缺血；缺血性心力衰竭；</p>
+</li>
+<li>
+<p><strong>冠心病有”5+3”危险因素：</strong></p>
+<p>① 五种可防可控的危险因素：</p>
+<p>高血压；血脂异常；糖尿病以及糖耐量的异常；吸烟；肥胖</p>
+<p>② 三种不可防不可控的危险因素：</p>
+<p>性别；年龄；家族史</p>
+</li>
+<li>
+<p><strong>目前，冠心病的诊断流程极其繁琐：</strong></p>
+<p>① 怀疑冠心病的患者最开始可能会安排这3项检查：常规心电图、超声心动图和血液的心肌标志物检查；</p>
+<p>② 上述检查后如果没有查出明显病变，但是患者仍有冠心病相关症状的话，医生可能会安排进行运动负荷试验或动态心电图检查；</p>
+<p>③ 进行完基础检查后如果怀疑患者冠心病的可能性极大，医生可能会建议进行CTA或心肌血流灌注检查；</p>
+<p>④ 也有些医生会直接建议患者进行心脏冠状动脉造影检查，因为冠状动脉造影检查是诊断冠心病最准确的办法；</p>
+</li>
+</ul>
+<p><strong>在本项研究中，研究者负责分析导致患者的冠心病的因素，并探索各个变量的影响程度。他们希望能够通过有效的机器学习算法构建模型，用于预测患者是否有冠心病。</strong></p>
+</div>
+<div id="研究目的" class="section level3" number="2.1.3">
+<h3>
+<span class="header-section-number">2.1.3</span> <strong>研究目的</strong><a class="anchor" aria-label="anchor" href="#%E7%A0%94%E7%A9%B6%E7%9B%AE%E7%9A%84"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p>如何快速准确判断患者是否有冠心病？</p></li>
+<li><p>影响冠心病的危险因素有哪些？</p></li>
+</ul>
+</div>
+</div>
+<div id="数据描述" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> 数据描述<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E6%8F%8F%E8%BF%B0"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>数据展示（选取前10行）</li>
+</ul>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="5%">
+<col width="5%">
+<col width="4%">
+<col width="10%">
+<col width="6%">
+<col width="5%">
+<col width="9%">
+<col width="9%">
+<col width="7%">
+<col width="9%">
+<col width="7%">
+<col width="4%">
+<col width="6%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">age</th>
+<th align="center">sex</th>
+<th align="center">cp</th>
+<th align="center">trestbps</th>
+<th align="center">chol</th>
+<th align="center">fbs</th>
+<th align="center">restecg</th>
+<th align="center">thalach</th>
+<th align="center">exang</th>
+<th align="center">oldpeak</th>
+<th align="center">slope</th>
+<th align="center">ca</th>
+<th align="center">thal</th>
+<th align="center">target</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">63</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">145</td>
+<td align="center">233</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">150</td>
+<td align="center">0</td>
+<td align="center">2.3</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">53</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">140</td>
+<td align="center">203</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">155</td>
+<td align="center">1</td>
+<td align="center">3.1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">41</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">130</td>
+<td align="center">204</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">172</td>
+<td align="center">0</td>
+<td align="center">1.4</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">56</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">120</td>
+<td align="center">236</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">178</td>
+<td align="center">0</td>
+<td align="center">0.8</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">60</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">130</td>
+<td align="center">206</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">132</td>
+<td align="center">1</td>
+<td align="center">2.4</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">57</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">140</td>
+<td align="center">192</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">148</td>
+<td align="center">0</td>
+<td align="center">0.4</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">56</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">140</td>
+<td align="center">294</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">153</td>
+<td align="center">0</td>
+<td align="center">1.3</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">44</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">120</td>
+<td align="center">263</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">173</td>
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">52</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">172</td>
+<td align="center">199</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">162</td>
+<td align="center">0</td>
+<td align="center">0.5</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">57</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">150</td>
+<td align="center">168</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">174</td>
+<td align="center">0</td>
+<td align="center">1.6</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>数据集变量信息</li>
+</ul>
+<pre><code>## Rows: 303
+## Columns: 14
+## $ age      &lt;dbl&gt; 63, 53, 41, 56, 60, 57, 56, 44, 52, …
+## $ sex      &lt;dbl&gt; 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, …
+## $ cp       &lt;dbl&gt; 3, 0, 1, 1, 0, 0, 1, 1, 2, 2, 0, 2, …
+## $ trestbps &lt;dbl&gt; 145, 140, 130, 120, 130, 140, 140, 1…
+## $ chol     &lt;dbl&gt; 233, 203, 204, 236, 206, 192, 294, 2…
+## $ fbs      &lt;dbl&gt; 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, …
+## $ restecg  &lt;dbl&gt; 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, …
+## $ thalach  &lt;dbl&gt; 150, 155, 172, 178, 132, 148, 153, 1…
+## $ exang    &lt;dbl&gt; 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, …
+## $ oldpeak  &lt;dbl&gt; 2.3, 3.1, 1.4, 0.8, 2.4, 0.4, 1.3, 0…
+## $ slope    &lt;dbl&gt; 0, 0, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, …
+## $ ca       &lt;dbl&gt; 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, …
+## $ thal     &lt;dbl&gt; 1, 3, 2, 2, 3, 1, 2, 3, 3, 2, 2, 2, …
+## $ target   &lt;dbl&gt; 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, …</code></pre>
+<blockquote>
+<p>303个受试者（行：Sample）;</p>
+<p>14列变量属性(列：Feature)；</p>
+<p>变量属性包括：年龄、性别、胸痛经历、静息血压、胆固醇、空腹血糖、静息心电图、最大心率、运动引起的 ST 压低、峰值运动ST段的斜率、运动诱发的心绞痛、主要供血血管的数量、地中海贫血、<strong>心脏病</strong></p>
+</blockquote>
+<div class="inline-figure"><img src="images/0202.png" width="100%"></div>
+<blockquote>
+<p><strong>这些变量包括以下几类：</strong></p>
+<p><strong>① 不可改变的危险因素：</strong>年龄、性别、家族史（收集了地中海贫血）</p>
+<p><strong>② 可改变的危险因素：</strong>静息血压、胆固醇、空腹血糖</p>
+<p><strong>③ 临床检查：</strong>心电图相关、运动触发相关、冠脉检查相关</p>
+</blockquote>
+</div>
+<div id="分析思路" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> 分析思路<a class="anchor" aria-label="anchor" href="#%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-figure"><img src="images/0103.png" width="100%"></div>
+<ul>
+<li><p>诊断模型：主要是基于研究对象的临床特征，预测当前患有某种疾病的概率，多见于横断面研究;</p></li>
+<li><p>结局类型：分类变量 -&gt; 二分类</p></li>
+<li>
+<p>数据预处理：</p>
+<ul>
+<li><p>“整洁”数据：一行是一个样本所有信息、一列是一个variable、中间无乱码、不规范表达</p></li>
+<li><p>离群值，异常值、缺失值、协变量的类型等</p></li>
+</ul>
+</li>
+<li><p>模型的选择：Logistic、随机森林、支持向量机</p></li>
+<li><p>其他具体信息，建模中探索</p></li>
+</ul>
+</div>
+<div id="算法简介" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> 算法简介<a class="anchor" aria-label="anchor" href="#%E7%AE%97%E6%B3%95%E7%AE%80%E4%BB%8B"><i class="fas fa-link"></i></a>
+</h2>
+<div id="logistic" class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> Logistic<a class="anchor" aria-label="anchor" href="#logistic"><i class="fas fa-link"></i></a>
+</h3>
+<p><img src="images/0203logistic1.png" width="100%"><img src="images/0203logistic2.png" width="100%"></p>
+</div>
+<div id="随机森林" class="section level3" number="2.4.2">
+<h3>
+<span class="header-section-number">2.4.2</span> 随机森林<a class="anchor" aria-label="anchor" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97"><i class="fas fa-link"></i></a>
+</h3>
+<p><img src="images/0203rf1.png" width="100%"><img src="images/0203rf2.png" width="100%"><img src="images/0203rf3.png" width="100%"></p>
+</div>
+<div id="支持向量机" class="section level3" number="2.4.3">
+<h3>
+<span class="header-section-number">2.4.3</span> 支持向量机<a class="anchor" aria-label="anchor" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA"><i class="fas fa-link"></i></a>
+</h3>
+<p><img src="images/0203svm1.png" width="100%"><img src="images/0203svm2.png" width="100%"></p>
+</div>
+</div>
+<div id="代码预览" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> 代码预览<a class="anchor" aria-label="anchor" href="#%E4%BB%A3%E7%A0%81%E9%A2%84%E8%A7%88"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="%E4%B8%B4%E5%BA%8A%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B.html"><span class="header-section-number">1</span> 临床预测模型</a></div>
+<div class="next"><a href="%E5%AE%9E%E6%93%8D%E6%95%99%E5%AD%A6-1.html">实操教学</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E4%BB%8B%E7%BB%8D"><span class="header-section-number">2</span> 案例介绍</a></li>
+<li>
+<a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E8%83%8C%E6%99%AF"><span class="header-section-number">2.1</span> 案例背景</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9D%A5%E6%BA%90"><span class="header-section-number">2.1.1</span> 数据来源</a></li>
+<li><a class="nav-link" href="#%E7%96%BE%E7%97%85%E8%83%8C%E6%99%AF"><span class="header-section-number">2.1.2</span> 疾病背景</a></li>
+<li><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E7%9B%AE%E7%9A%84"><span class="header-section-number">2.1.3</span> 研究目的</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8F%8F%E8%BF%B0"><span class="header-section-number">2.2</span> 数据描述</a></li>
+<li><a class="nav-link" href="#%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF"><span class="header-section-number">2.3</span> 分析思路</a></li>
+<li>
+<a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%AE%80%E4%BB%8B"><span class="header-section-number">2.4</span> 算法简介</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#logistic"><span class="header-section-number">2.4.1</span> Logistic</a></li>
+<li><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97"><span class="header-section-number">2.4.2</span> 随机森林</a></li>
+<li><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA"><span class="header-section-number">2.4.3</span> 支持向量机</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E9%A2%84%E8%A7%88"><span class="header-section-number">2.5</span> 代码预览</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/02-example.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/02-example.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

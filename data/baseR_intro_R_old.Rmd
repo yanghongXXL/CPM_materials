@@ -1,0 +1,585 @@
+# R语言基础 {#intro-R}
+
+
+R 软件是一个自由、开源软件平台，具有统计分析、可视化和编程的强大功能。
+你可以从这里免费[下载](https://cloud.r-project.org)。 为了更好的使用 R 软件，我推荐大家使用 [RStudio](https://www.rstudio.com/products/rstudio)这个 IDE。这里有个[在线教程](https://www.rstudio.com/online-learning/)帮助我们熟悉 R 和 RStudio。
+
+
+
+## 安装 R
+
+我们从官方网站[http://cran.r-project.org](https://cloud.r-project.org)下载, 网站界面感觉有点朴素:
+
+
+![](images/Rinstall.png)
+ 
+
+
+
+
+## 安装 RStudio
+安装完R， 还需要安装RStudio。有同学可能要问 R 与 RStudio 是什么关系呢？打个比方吧，R 就像汽车的发动机, RStudio 就是汽车的仪表盘。但我更觉得 R 是有趣的灵魂，而 Rstudio 是好看的皮囊。
+
+```{r intro-R-1, out.width = '100%', echo = FALSE}
+#knitr::include_graphics(c("images/engine.jpg", "images/dashboard.jpg"))
+knitr::include_graphics("images/engine_dashboard.png")
+```
+
+
+
+同样，我们从官方网站下载并安装，如果你是苹果系统的用户，选择苹果系统对应的rstudio版本即可。
+
+- <https://www.rstudio.com/download>
+- 选择`RStudio Desktop`
+
+```{r intro-R-2, out.width = '85%', echo = FALSE}
+knitr::include_graphics("images/rstudio_install.png")
+```
+
+
+```{block intro-R-3, type="danger"}
+这里有个小小的提示：
+
+- 电脑不要用中文用户名，否则Rstudio会杠上中文用户名
+- 尽量安装在非系统盘，比如，可以选择安装在D盘
+- 安装路径不要有中文和空格。比如，这样就比较好
+   - `D:/R`
+   - `D:/Rstudio`
+```
+
+
+
+
+
+## 开始
+
+安装完毕后，从windos`开始菜单`，点开`rstudio`图标，就打开了rstudio的窗口，界面效果如下
+
+```{r intro-R-4, out.width = '75%', echo = FALSE}
+knitr::include_graphics("images/rstudio-editor.png")
+```
+
+
+
+RStudio 的用户界面十分友好，想要运行一段R代码，只需要在 RStudio 控制台面板最下面 (Console)一行内键入R 代码，然后回车即可。比如我们键入`1 + 1` 并按回车后，RStudio 将显示如下结果
+```{r intro-R-5 }
+1 + 1
+```
+
+
+```{r intro-R-6, echo=TRUE, message=TRUE, warning=TRUE}
+log(8)
+```
+
+
+
+
+```{r intro-R-7, echo=TRUE, message=TRUE, warning=TRUE}
+1:15
+```
+
+
+
+## 一切都是对象
+
+
+在R中存储的数据称为**对象**， R语言数据处理实际上就是不断的创建和操控这些对象。创建一个R对象，首先确定一个名称，然后使用
+赋值操作符 `<-` (在Rstudio中同时按下`alt` 和 `-`，就可以产生赋值箭头)，将数据赋值给它。比如，如果想给变量 x 赋值为5，在命令行中可以这样写 `x <- 5` ，然后回车。
+
+```{r assignment operator}
+x <- 5
+```
+
+
+可以把 x 想象成一个**盒子**，里面装着一个大小等于5的数。
+当键入`x` 然后回车，就打印出 x 的值。当然也可以使用命令`print(x)`，结果一样。
+```{r print x}
+x
+```
+
+
+
+```{r intro-R-8, echo=TRUE, message=TRUE, warning=TRUE}
+x + 2
+```
+
+
+
+
+
+```{r intro-R-9, echo=TRUE, message=TRUE, warning=TRUE}
+d <- 1:6
+```
+
+
+```{r intro-R-10, echo=TRUE, message=TRUE, warning=TRUE}
+d
+```
+
+
+```{r intro-R-11, echo=TRUE, message=TRUE, warning=TRUE}
+d / 2
+```
+
+
+```{r intro-R-12, echo=TRUE, message=TRUE, warning=TRUE}
+d * d
+```
+
+
+
+```{r intro-R-13, echo=TRUE, message=TRUE, warning=TRUE}
+d %*% d
+```
+
+
+
+```{r intro-R-14, echo=TRUE, message=TRUE, warning=TRUE}
+d %o% d
+```
+
+
+
+## 数据类型
+
+
+```{r intro-R-15, out.width = '65%', echo = FALSE}
+knitr::include_graphics("images/data_type.png")
+```
+
+- 数值型
+```{r intro-R-16}
+3
+5000
+3e+06
+class(0.0001)
+```
+
+- 字符串型，要用引号
+```{r intro-R-17}
+"hello"
+"girl"
+"1"     # 注意 1 和 "1" 的区别
+```
+
+```{r intro-R-18}
+class("1")
+```
+
+- 逻辑型
+```{r intro-R-19}
+TRUE
+FALSE
+3 < 4
+```
+
+
+```{r intro-R-20}
+class(T)
+```
+
+
+```{r intro-R-21}
+3 < 4
+```
+
+- 因子型(factor)
+
+因子型可以看作是字符串向量的增强版，它是带有层级（Levels）的字符串向量。比如这里四个季节的名称，他们构成一个向量
+
+```{r}
+four_seasons <- c("spring", "summer", "autumn", "winter")
+four_seasons
+```
+我们使用 factor() 函数可以将向量转换成因子型向量
+
+```{r}
+four_seasons_factor <- factor(four_seasons)
+four_seasons_factor
+```
+
+可以看到，它在输出因子型向量的时候，同时也输出了层级信息，默认的情况，它是按照字符串首字母的顺序排序，也可以指定我们喜欢的顺序，比如按照我对四个季节的喜欢排序
+
+```{r}
+four_seasons <- c("spring", "summer", "autumn", "winter")
+four_seasons_factor <- factor(four_seasons, 
+                              levels = c("summer", "winter", "spring", "autumn")
+                              )
+four_seasons_factor
+```
+
+
+再比如 "Alice", "Bob", "Carol", "Ted" 是四个人名的字符串，因子型就在字符串的基础上，告诉计算机他们每个人都是有官阶层级的，比如  "排长"，"团长", "师长", "军长", 也就说"Ted"排第一，"Carol"排第二，"Bob"排第三，"Alice" 排最后， 相比字符串而言，多了官阶层级信息。
+
+
+```{r intro-R-22}
+fac <- factor(c("Alice", "Bob", "Carol", "Ted"), 
+              levels = c("Ted", "Carol", "Bob", "Alice")
+       )
+fac
+```
+
+```{r intro-R-23}
+class(fac)
+```
+
+
+再比如，General上将；Colonel上校；Captain上尉, 如果没有指定层级levels，`c("Colonel", "General", "Captain")`就是一个常规的字符串向量，若指定了层级levels，这个字符串就有了军衔信息.
+```{r intro-R-23-1}
+factor(c("Colonel", "General", "Captain"), 
+       levels = c("General", "Colonel", "Captain")
+       )
+
+```
+
+
+
+
+
+
+## 数据结构
+
+- 大家前面看到`x <- 1` 和 `x <- c(1, 2, 3)`，这就是最简单的数据对象，叫**原子型向量**。
+- 用`c`函数将一组数据**构造**成向量，要求每个元素用逗
+号分隔，且每个元素的数据类型是一致的，可以把它想象成**手里拿着一个糖葫芦**，或者想象成有很多个格子的抽屉
+
+```{r intro-R-24, echo=TRUE, message=TRUE, warning=TRUE}
+x <- c(2, 4, 3, 1, 5, 7)
+x
+```
+
+將四季的名称构成一个向量，可以想象他们分别放在一个有四个格子的抽屉里
+```{r}
+four_seasons <- c("spring", "summer", "autumn", "winter")
+four_seasons
+```
+
+长度为 1 的原子型向量
+```{r intro-R-25, echo=TRUE, message=TRUE, warning=TRUE}
+x <- c(1) # or
+x <- 1 
+```
+
+强制转换
+```{r intro-R-26}
+vec <- c("R", 1, TRUE)
+class(vec)
+```
+
+你依次输入，就发现三种类型的优先级关系
+
+```{r intro-R-27}
+c(TRUE, 1)                   # 被转换成了数值型
+c(      1,  "R")             # 被转换成了字符串型
+c(TRUE, 1,  "R")             # 被转换成了字符串型
+c("R", 1, 1L, TRUE)          # logical -> integer -> double -> character.
+```
+
+
+
+
+
+- 大家看到前面`d %o% d` 是**矩阵**类型，矩阵就是二维数组。可以用`matrix` 函数创建，可以想象成糖葫芦太多，一个棒子串不下，就多用几根棒子串。
+```{r intro-R-28, echo=TRUE, message=TRUE, warning=TRUE}
+m <- matrix(c(2, 4, 3, 1, 5, 7),
+  nrow = 2, ncol = 3, byrow = TRUE
+)
+
+m
+```
+
+
+- 数据对象：**数组**，
+
+矩阵被限制为二维，但阵列可以具有任何数量的维度。`array` 函数使用一个 dim 属性创建所需的维数， 在下面的例子中，我们创建了一个包含3个元素的数组，每个元素为 2x2 的矩阵。
+
+
+```{r intro-R-30, echo=TRUE, message=TRUE, warning=TRUE}
+ar <- array(c(11:14, 21:24, 31:34), dim = c(2, 2, 3))
+ar
+```
+
+可以想象成我们吃的土司面包一样，这里有3层土司，每个土司是一个 2x2 的矩阵。
+
+
+
+
+- 数据对象：**列表**
+- 与`c`函数创建向量的方式相似，不同的元素用逗号分开。不同的是，列表允许不同的数据类型（数值型，字符型，逻辑型等）， 而向量要求每个元素的数据类型必须相同。可以想象成小火车，每节车厢可以装自己喜欢的东西
+
+```{r intro-R-31, echo=TRUE, message=TRUE, warning=TRUE}
+list1 <- list(100:110, "R", c(2, 4, 3, 1, 5, 7))
+list1
+```
+
+
+
+
+- 数据对象：**数据框**，这个不用想象，它与我们经常用的excel表格一个样
+- `data.frame`函数构建
+
+```{r intro-R-32, echo=TRUE, message=TRUE, warning=TRUE}
+df <- data.frame(
+  name = c("ace", "bob", "carl", "kaite"),
+  age = c(21, 14, 13, 15),
+  sex = c("girl", "boy", "boy", "girl")
+)
+df
+```
+
+
+
+
+
+
+R 对象的数据结构(向量、矩阵、数组、列表和数据框)，总结如下
+
+```{r intro-R-33, out.width = '90%', echo = FALSE}
+knitr::include_graphics("images/data_struction1.png")
+```
+
+为了更好地理解相关概念，建议大家阅读Garrett Grolemund的
+[hopr](https://rstudio-education.github.io/hopr/)这本书 [@Garrett2014]。
+
+
+
+
+
+## 函数
+
+R 语言的强大在于使用**函数**操控各种对象，你可以把对象看作是名词，而函数看作是动词。
+我们用一个简单的例子，`sum()`来演示函数如何工作的。这个函数的功能正如它的名字一样，对输入的各个对象求和，然后返回求和后的值，你可以在命令行中键入`?sum()`查看其官方文档。
+`sum()`后的结果可以直接显示出来，也可以赋名。比如下面代码，首先计算`x + 10`并赋以名字`y`， 然后第二行中打印出来这个新创建的对象`y`
+
+```{r sum}
+y <- sum(x, 10)
+y
+```
+
+因为代码的灵活性，可以不断地重新定义对象。只要数据发生改变，原来的代码就会返回新的值。比如，对`x`重新赋值为 15， 同样运行`sum()`函数，这次我们不赋值给对象`y`，而是让它直接显示
+
+```{r reassign object}
+x <- 15
+sum(x, 10)
+```
+
+再比如
+```{r intro-R-34, echo=TRUE, message=TRUE, warning=TRUE}
+round(3.14159)
+```
+
+
+
+```{r intro-R-35, echo=TRUE, message=TRUE, warning=TRUE}
+mean(1:6)
+```
+
+
+
+```{r intro-R-36, echo=TRUE, message=TRUE, warning=TRUE}
+n <- 100
+x <- seq(1, n)
+sum(x)
+```
+
+
+
+```{r intro-R-37, echo=TRUE, message=TRUE, warning=TRUE}
+dt <- mtcars[, 1:4]
+head(dt)
+```
+
+
+```{r intro-R-38, echo=TRUE, message=TRUE, warning=TRUE}
+cor(dt)
+```
+
+
+## 脚本
+
+如果我们已经写好了一段R程序，我们可以保存为**脚本**文件，脚本文件通常以.R作为文件的后缀名。比如我们可以将刚才创建`x`和 `y`对象的命令，保存为脚本文件`my_script.R`。
+这样我们可以在其它时间修改和重新运行它。
+
+在RStudio中，你可以通过菜单栏依此点击`File > New File > R Script` 来创建一个新的脚本。
+强烈建议大家在运行代码之前，使用脚本的形式编写和编辑自己的程序，养成这样的习惯后，你今后所有的工作都有案可查，并且具有可重复性。
+
+```{r intro-R-39, out.width = '75%', echo = FALSE}
+knitr::include_graphics("images/script1.png")
+```
+
+
+- 点击 `Run` 或者 `Source` 运行脚本
+
+  
+```{r intro-R-40, out.width = '75%', echo = FALSE}
+knitr::include_graphics("images/script2.png")
+```
+
+  - 点击 `Run`, 运行光标所在行的代码
+  - 点击 `Source`，从头到尾运行全部代码
+
+
+
+
+## 宏包
+
+R 语言的强大还在于各种宏包，一般在[The Comprehensive R Archive Network (CRAN)](https://cran.r-project.org)下载安装。宏包扩展了R语言本身的各种功能，也为解决问题提供了各种方案。截至撰写本书时止，CRAN上大约有1.4万个宏包可以使用。但由于各种包接口不统一，语法不一致，也带来一些困扰。为了解决这个问题，RStudio 公司的[Hadley Wickham](http://hadley.nz) 与其带领的团队推出了`tidyverse`宏包， [tidyverse](https://www.tidyverse.org)将常用的宏包整合在一起，并保持了语法的一致性。可以说，`tidyverse`宏包是R语言[入门](http://varianceexplained.org/r/teach-tidyverse/) 学习的首选。
+本书正是基于`tidyverse`宏包而成的，本书也将通过一些例子不断地展示`tidyverse`在数据分析和可视化的应用。
+
+可以用如下命令安装 `ggplot2` 宏包:
+
+```{r intro-R-41, eval = FALSE }
+# 安装单个包
+install.packages("tidyverse")
+```
+
+```{r intro-R-42, eval = FALSE }
+# 安装多个包
+install.packages(c("ggplot2", "devtools", "dplyr"))
+```
+
+
+
+
+```{r intro-R-43, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+my_packages <- c("ggplot2", "dplyr", "tidyr", "stringr", "widyr", "ggRadar",
+                 "ggraph", "tidygraph", "patchwork", "ggridges", "here", 
+                 "brms", "sf", "rvest", "rmarkdown", "cowplot", "gapminder",
+                 "broom", "modelr", "knitr", "rlang", "tidytext", "wordcloud2", 
+                 "tibbletime",  "scales", "devtools")
+
+#install.packages(my_packages, repos = "http://cran.rstudio.com")
+```
+
+
+
+## 可能的问题
+
+- 问题1：如果下载速度太慢，可以选择国内镜像，
+
+```{r intro-R-44, out.width = '75%', echo = FALSE}
+knitr::include_graphics("images/mirror1.png")
+knitr::include_graphics("images/mirror2.png")
+```
+
+然后再输入命令`install.packages("tidyverse")`，或者直接指定清华大学镜像
+```{r intro-R-45, eval = FALSE }
+install.packages("tidyverse", repos = "http://mirrors.tuna.tsinghua.edu.cn/CRAN")
+```
+
+
+- 问题2：如果遇到如下报错信息
+```{r intro-R-46, eval = FALSE }
+Warning in install.packages :
+  unable to access index for repository http://cran.rstudio.com/src/contrib:
+  cannot open URL 'http://cran.rstudio.com/src/contrib/PACKAGES'
+```
+
+输入下面命令后，再试试
+```{r intro-R-47, eval = FALSE }
+options(download.file.method="libcurl")
+```
+
+或者打开`D:\R\etc\Rprofile.site`，添加以下内容：
+```{r intro-R-48, eval = FALSE }
+local({r <- getOption("repos")
+       r["CRAN"] <- "http://mirrors.tuna.tsinghua.edu.cn/CRAN"
+       options(repos=r)})
+
+options(download.file.method="libcurl")
+```
+
+- 问题3：如果打开代码是乱码，可以试试修改如下设置
+
+```{r intro-R-49, out.width = '75%', echo = FALSE}
+knitr::include_graphics("images/code_utf_8.png")
+```
+
+
+- 问题4：如果每次打开Rstudio非常慢，可以在Rstudio里将这几个选项取消
+```{r intro-R-50, out.width = '75%', echo = FALSE}
+knitr::include_graphics("images/dont-load-data.png")
+```
+
+- 问题5：如果 Rstudio 打开是空白
+
+很大的可能是你的电脑用户名是中文的，修改用户名再试试
+
+
+
+- 问题6：安装过程中提示，我的系统不能兼容 64 位的 Rstudio。
+
+可能你是低版本的windows系统，建议安装旧版本的Rstudio，可以在[这里](https://rstudio.com/products/rstudio/older-versions/)找到旧版本.
+
+
+
+更多Rstudio的使用，可参考这里[introducing-the-rstudio]( https://www.pipinghotdata.com/posts/2020-09-07-introducing-the-rstudio-ide-and-r-markdown/)。
+
+
+## 如何获取帮助
+
+
+- 记住和学习所有的函数几乎是不可能的
+- 打开函数的帮助页面(`Rstudio`右下面板的`Help`选项卡)
+
+```{r intro-R-51, eval = FALSE }
+?sqrt
+?gather
+?spread
+?ggplot2
+?scale
+?map_dfr
+```
+
+比如：
+
+```{r intro-R-52, out.width = '90%', echo = FALSE}
+knitr::include_graphics("images/Rhelp.png")
+```
+
+
+
+## R 语言社区
+
+R 语言社区非常友好，可以在这里找到你问题的答案
+
+  - twitter: <https://twitter.com/>
+  - R-Bloggers: <https://www.r-bloggers.com/>
+  - kaggle: <https://www.kaggle.com/>
+  - stackoverflow: <https://stackoverflow.com/questions/tagged/r>
+  - rstudio: <https://community.rstudio.com/>
+  
+
+
+## 延伸阅读 
+
+- 如何获取向量`a <- c("a", "c", "e")`的第二个元素？矩阵和列表的时候，又该如何?
+- 试试 `c(1, FALSE)` 与 `c("a", TRUE)` 会是什么？ 
+- `1 == "1"` 和 `-1 < FALSE` 为什么为真？ `"one" < 2` 为什么为假？
+- R语言里可以构造哪些数据对象？
+- 数据框可以装载哪些数据类型的数据？
+- 数据框和列表区别在哪里？
+- ()与[]区别？
+- 形容温度的文字
+```{r, eval=FALSE}
+temperatures <- c("warm", "hot", "cold")
+```
+
+要求转换成因子类型向量，并按照温度有高到低排序
+
+```{r, eval=FALSE, include=FALSE}
+temp_factors <- factor(temperatures, ordered = TRUE, levels = c("cold", "warm", "hot"))
+temp_factors
+```
+
+
+```{r intro-R-53, echo = F}
+# remove the objects
+# rm(list=ls())
+rm(ar, df, die, dt, fac, list1, m, n, vec, x, y)
+```
+
+```{r intro-R-54, echo = F, message = F, warning = F, results = "hide"}
+pacman::p_unload(pacman::p_loaded(), character.only = TRUE)
+```
+

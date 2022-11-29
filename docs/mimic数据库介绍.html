@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>第 8 部分 MIMIC数据库介绍 | 临床预测模型</title>
+<meta name="author" content="杨 弘">
+<meta name="description" content="8.1 数据库简介  8.1.1 基本情况 MIMIC （官网：https://mimic.mit.edu/）是一个重症医学数据库，全称是Medical Information Mart for Intensive Care。2003年，在NIH的资助下，来自贝斯以色列女执事医疗中心(Beth Israel Deaconess Medical...">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta property="og:title" content="第 8 部分 MIMIC数据库介绍 | 临床预测模型">
+<meta property="og:type" content="book">
+<meta property="og:description" content="8.1 数据库简介  8.1.1 基本情况 MIMIC （官网：https://mimic.mit.edu/）是一个重症医学数据库，全称是Medical Information Mart for Intensive Care。2003年，在NIH的资助下，来自贝斯以色列女执事医疗中心(Beth Israel Deaconess Medical...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第 8 部分 MIMIC数据库介绍 | 临床预测模型">
+<meta name="twitter:description" content="8.1 数据库简介  8.1.1 基本情况 MIMIC （官网：https://mimic.mit.edu/）是一个重症医学数据库，全称是Medical Information Mart for Intensive Care。2003年，在NIH的资助下，来自贝斯以色列女执事医疗中心(Beth Israel Deaconess Medical...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap/bootstrap.bundle.min.js"></script><script src="libs/bs3compat/transition.js"></script><script src="libs/bs3compat/tabs.js"></script><script src="libs/bs3compat/bs3compat.js"></script><link href="libs/bs4_book/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">临床预测模型</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">关于课程</a></li>
+<li><a class="" href="%E6%A1%88%E4%BE%8B%E6%95%99%E5%AD%A6-1.html">案例教学</a></li>
+<li><a class="" href="%E4%B8%B4%E5%BA%8A%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B.html"><span class="header-section-number">1</span> 临床预测模型</a></li>
+<li><a class="" href="%E6%A1%88%E4%BE%8B%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">2</span> 案例介绍</a></li>
+<li><a class="" href="%E5%AE%9E%E6%93%8D%E6%95%99%E5%AD%A6-1.html">实操教学</a></li>
+<li><a class="" href="r-%E5%AE%9E%E6%93%8D.html"><span class="header-section-number">3</span> R 实操</a></li>
+<li><a class="" href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">4</span> Python 安装与入门</a></li>
+<li><a class="" href="r%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">5</span> R安装与入门</a></li>
+<li><a class="" href="r%E5%85%A5%E9%97%A8-1.html"><span class="header-section-number">6</span> R入门</a></li>
+<li><a class="" href="nhanes%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">7</span> NHANES数据库介绍</a></li>
+<li><a class="active" href="mimic%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">8</span> MIMIC数据库介绍</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mimic数据库介绍" class="section level1" number="8">
+<h1>
+<span class="header-section-number">第 8 部分</span> MIMIC数据库介绍<a class="anchor" aria-label="anchor" href="#mimic%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D"><i class="fas fa-link"></i></a>
+</h1>
+<div id="数据库简介-1" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> 数据库简介<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="基本情况" class="section level3" number="8.1.1">
+<h3>
+<span class="header-section-number">8.1.1</span> 基本情况<a class="anchor" aria-label="anchor" href="#%E5%9F%BA%E6%9C%AC%E6%83%85%E5%86%B5"><i class="fas fa-link"></i></a>
+</h3>
+<p>MIMIC （官网：<a href="https://mimic.mit.edu/" class="uri">https://mimic.mit.edu/</a>）是一个重症医学数据库，全称是Medical Information Mart for Intensive Care。2003年，在NIH的资助下，来自贝斯以色列女执事医疗中心(Beth Israel Deaconess Medical Center)、麻省理工(MIT)、牛津大学和麻省总医院(MGH)的急诊科医生、重症科医生、计算机科学专家等共同建立的一个数据库。</p>
+<div class="inline-figure"><img src="images/paste-40465345.png" style="width:100.0%"></div>
+<div class="inline-figure"><img src="images/paste-E3B50E01.png" style="width:100.0%"></div>
+<div class="inline-figure"><img src="images/paste-E99A1AD1.png" style="width:100.0%"></div>
+<p>在进行隐私数据脱敏后，提供了数十万患者在急诊和ICU治疗期间基本信息（年龄、性别、基础病史），住院期间完整的诊疗信息（治疗措施、药物，生命体征、实验室检查等）以及临床结局等信息。让临床医生无需经过痛苦的收集信息的过程就可以接触到数十万患者的海量临床信息，验证自己的临床思路，发表高质量文章。</p>
+<div class="inline-figure"><img src="images/paste-BD350EB4.png" style="width:100.0%"></div>
+</div>
+<div id="版本介绍" class="section level3" number="8.1.2">
+<h3>
+<span class="header-section-number">8.1.2</span> 版本介绍<a class="anchor" aria-label="anchor" href="#%E7%89%88%E6%9C%AC%E4%BB%8B%E7%BB%8D"><i class="fas fa-link"></i></a>
+</h3>
+<p>MIMIC从开发至今，共存在三个大版本：MIMIC-II，MIMIC-III，MIMIC-IV。</p>
+<ul>
+<li><p>MIMIC-II：MIMIC-II包含2001-2008年的数据。数据是主要从CareVue监视器收集的。MIMIC-II现在已不再公开，但如果想要提取数据，可以从MIMIC-III中获取数据，利用筛选数据库来源为CareVue来提取MIMIC-II的数据。</p></li>
+<li><p>MIMIC-III：MIMIC-III包含2001-2012年的数据。患者数据是从Metavision和CareVue两个地方采集的。MIMIC-III 数据库当前最新版本是v1.4。这个版本是在2016年9月2日发布，此次发布提高了数据库中的数据质量，为Metavision数据库中的病人提供了大量的补充数据。MIMIC-III v1.4从2016年至今，未再进一步的修正，这也是MIMIC-III 数据库的最终版本。</p></li>
+<li><p>MIMIC-IV：MIMIC-IV是对MIMIC-III的更新，MIMIC-IV包含2008年至2019年（含）的数据。最近推出的生物标志物将可用。MIMIC-IV来自两个院内数据库系统：一个是定制的医院范围的数字电子健康记录（EHR）、一个是重症监护室（ICU）特定的临床信息系统。目<em>前已更新到2.1版本（2022.11.16更新）</em>。<u>由于小版本刚更新不稳定，本次主要已<strong>2.0版本</strong>为基础进行介绍。</u></p></li>
+</ul>
+</div>
+<div id="mimic-iv创建流程" class="section level3" number="8.1.3">
+<h3>
+<span class="header-section-number">8.1.3</span> MIMIC-IV创建流程<a class="anchor" aria-label="anchor" href="#mimic-iv%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<p><strong>收购</strong></p>
+<p>从各自的医院数据库中提取了入住BIDMC急诊室或其中一个重症监护病房的患者的数据。创建了一个主患者列表，其中包含与2008年至2019年期间入住ICU或急诊室的患者相对应的所有医疗记录编号。所有源表都筛选为仅与主患者列表中的患者相关的行。</p>
+</li>
+<li>
+<p><strong>制备</strong></p>
+<p>从各自的医院数据库中提取了入住BIDMC急诊室或其中一个重症监护病房的患者的数据。创建了一个主患者列表，其中包含与2008年至2019年期间入住ICU或急诊室的患者相对应的所有医疗记录编号。所有源表都筛选为仅与主患者列表中的患者相关的行。</p>
+</li>
+<li>
+<p><strong>去识别化</strong></p>
+<p>HIPAA 规定的患者标识符已被删除。使用随机密码替换患者标识符，导致患者，住院和ICU住院的整数标识符去识别化。结构化数据是使用查找表格和允许列表过滤的。如有必要，应用了自由文本去识别化算法从自由文本中删除 PHI。<u><strong>最后，日期和时间使用以天为单位的偏移量随机移动到将来。为每个subject_id分配了一个日期班次。因此，单个患者的数据在内部是一致的。</strong></u>例如，如果数据库中两个度量值之间的时间在原始数据中为4 小时，则 MIMIC-IV 中计算的时间差也将为 4 小时。相反，不同的患者在时间上不具有可比性。也就是说，<u><strong>2130年入院的两名患者不一定在同一年入院</strong></u>。</p>
+</li>
+</ul>
+</div>
+<div id="mimic-iv内容组成" class="section level3" number="8.1.4">
+<h3>
+<span class="header-section-number">8.1.4</span> MIMIC-IV内容组成<a class="anchor" aria-label="anchor" href="#mimic-iv%E5%86%85%E5%AE%B9%E7%BB%84%E6%88%90"><i class="fas fa-link"></i></a>
+</h3>
+<p>MIMIC-IV主要分为三大模块，分别是<strong>core、hosp、icu</strong>。</p>
+<ul>
+<li>
+<p><strong>core</strong> 模块存储使用MIMIC-IV进行任何数据分析所需的患者跟踪信息。内容包含三个表：<strong>入院表</strong>、<strong>患者表</strong>和<strong>转移表</strong>。这些表提供了患者的人口统计数据、每次住院的记录以及住院期间每个病房住宿的记录。</p>
+<div class="inline-figure"><img src="images/paste-093EC353.png" style="width:100.0%"></div>
+</li>
+<li>
+<p><strong>hosp</strong> 模块包含从医院范围的EHR 派生的数据。这些测量结果主要记录在<strong>住院期间</strong>，尽管有些表格也包括来自医院外的数据（例如，在实验室活动中进行的门诊实验室检查）。信息包括<strong>实验室测量</strong>、<strong>微生物培养</strong>、提供者订单、药物管理、<strong>药物处方</strong>、医院账单信息和服务相关信息。</p>
+<div class="inline-figure"><img src="images/paste-A630AED5.png" style="width:100.0%"></div>
+</li>
+<li>
+<p><strong>icu</strong> 模块包含来自BIDMC：MetaVision（iMDSoft）的临床信息系统的数据。MetaVision表被非规范化以创建一个星形架构，其中icustays和d_items表链接到一组数据表，所有数据表都以”事件”为后缀。icu模块中记录的数据包括<strong>静脉注射和液体输入</strong>（输入事件）、患者输出（输出事件）、程序（程序事件）、记录为日期或时间的信息（日期时间事件）以及<strong>其他图表信息（图表事件）</strong>。所有事件表都包含一个stay_id列，用于识别icustays中的相关ICU患者，以及一个允许识别d_items中记录的概念的 itemid 列。</p>
+<div class="inline-figure"><img src="images/paste-C2671B05.png" style="width:100.0%"></div>
+</li>
+<li>
+<p>数据总览</p>
+<div class="inline-figure"><img src="images/paste-B2A0D0D1.png" style="width:100.0%"></div>
+</li>
+</ul>
+</div>
+</div>
+<div id="数据库申请" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> 数据库申请<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%94%B3%E8%AF%B7"><i class="fas fa-link"></i></a>
+</h2>
+<div id="注册physionet账号" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">8.2.1</span> 注册Physionet账号<a class="anchor" aria-label="anchor" href="#%E6%B3%A8%E5%86%8Cphysionet%E8%B4%A6%E5%8F%B7"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<p>进入网址：<a href="www.physionet.org">www.physionet.org</a>，注册账号。</p>
+<p>建议使用机构/学校邮箱申请，注册后邮箱会收到激活账号链接，点击网址激活。</p>
+</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-6238DB23.png" style="width:100.0%"></div>
+<ul>
+<li>登录后选设置</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-7C7550A7.png" style="width:100.0%"></div>
+<ul>
+<li>然后点Credentialing，apply for access</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-C2041C4B.png" style="width:100.0%"></div>
+<p>就会提示你为了获得认证，需要通过相关培训认证，培训认证，是在CITI这个网站提供的。</p>
+</div>
+<div id="注册citi账号" class="section level3" number="8.2.2">
+<h3>
+<span class="header-section-number">8.2.2</span> 注册CITI账号<a class="anchor" aria-label="anchor" href="#%E6%B3%A8%E5%86%8Cciti%E8%B4%A6%E5%8F%B7"><i class="fas fa-link"></i></a>
+</h3>
+<p>①复制这句话：“Massachusetts Institute of Technology Affiliates”，表示是MIT附属单位，这样才能免费获取课程。</p>
+<p>②在Physionet网页上点击或者直接访问（<a href="https://about.citiprogram.org/%EF%BC%8C%E7%82%B9Register">https://about.citiprogram.org</a>），注意要贴上之前复制的文字。</p>
+<div class="inline-figure"><img src="images/paste-AAE6E5B6.png" style="width:100.0%"></div>
+<div class="inline-figure"><img src="images/paste-65F08B03.png" style="width:100.0%"></div>
+<div class="inline-figure"><img src="images/paste-77C91118.png" style="width:100.0%"></div>
+<div class="inline-figure"><img src="images/paste-A1713B55.png" style="width:100.0%"></div>
+<div class="inline-figure"><img src="images/paste-F90E5003.png" style="width:100.0%"></div>
+<div class="inline-figure"><img src="images/paste-8560DC5C.png" style="width:100.0%"></div>
+<div class="inline-figure"><img src="images/paste-F3B27C5E.png" style="width:100.0%"></div>
+<div class="inline-figure"><img src="images/paste-EB5AE949.png" style="width:100.0%"></div>
+<ul>
+<li>注册完成，登录进去就可以看到课程。</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-AD888F3F.png" style="width:100.0%"></div>
+<p>两个都考</p>
+<div class="inline-figure"><img src="images/paste-A2D11D9F.png" style="width:100.0%"></div>
+<p>第一门有两个模块，第二门有九个模块。</p>
+<p><strong>考试可反复参加，90%以上正确率才合格，完成考试后需下载报告。</strong></p>
+<blockquote>
+<p>部分试题答案：</p>
+<p>Which of the followingproposed studies would constitute human subjects research as defined under thefederal regulations?</p>
+<p>A researcher from a school of social workobtains access to students’ academic records (including identifiableinformation) to assess the effect of drug awareness programs on studentacademic achievement.</p>
+<p> </p>
+<p>Which of the followingactivities meets the federal definitions of research?</p>
+<p>Collection of elementary school test scoresto evaluate the effectiveness of an experimental program to teach reading</p>
+<p> </p>
+<p>Which of the followingconstitutes both a breach of a confidentiality (the research data have beendisclosed, counter to the agreement between researcher and subjects) and aviolation of subjects’ privacy (the right of the individuals to be protectedagainst intrusion into their personal lives or affairs)?</p>
+<p>A faculty member makes identifiable dataabout sexual behavior available to graduate students, although the subjectswere assured that the data would be de-identified.</p>
+<p> </p>
+<p>Which of the following isa measure researchers can use to protect the confidentiality of subject data?</p>
+<p>Keep sensitive and identifiable data inencrypted files on a password protected hard drive.</p>
+<p> </p>
+<p>When the primarypotential harm is the breach of individually identifiable data, to protectagainst such disclosure the researcher should.</p>
+<p>Encrypt the data and store it in passwordprotected files.</p>
+<p> </p>
+<p>Which of the followingstatements about individually identifiable research data is correct?</p>
+<p>Researchers may be required to releaseindividually identifiable information outside the research setting.</p>
+<p> </p>
+<p>Which of the followingresearch activities with children qualifies for exemption?</p>
+<p>A researcher observing children in aplayground to identify bullying behaviors.</p>
+<p> </p>
+<p>In accordance withfederal regulations, which of the following statements best describes whenresearch with children may be exempt?</p>
+<p>Only certain exemption categories can beused with research involving children.</p>
+<p> </p>
+<p>Which of the followingactivities constitutes engagement in research?</p>
+<p>Obtaining informed consent and conductingresearch interviews.</p>
+<p> </p>
+<p>If federally fundedresearch involves collaboration with an organization that is”engaged” in research in a foreign country, the foreign organizationcan rely on the US researcher’s institution’s IRB for its review.</p>
+<p><br></p>
+<p> </p>
+<p>Which of the followingpractices is an example of how the principle of beneficence is applied to astudy involving human subjects?</p>
+<p>Ensuring that risks are reasonable inrelationship to anticipated benefits.</p>
+<p> </p>
+<p>A researcher fails toinform subjects about the risks and benefits of being in a focus group. Whichof the following describes the ethical principle violated by the researcher?</p>
+<p>Respect for persons</p>
+<p> </p>
+<p>When evaluating risks ofharm IRBs must determine that:</p>
+<p>isks are reasonable in relation toanticipated benefits.</p>
+<p> </p>
+<p>According to the criteriafor IRB approval, when considering equitable treatment of subjects, specialcare must be taken with which of the following populations?</p>
+<p>prisoners</p>
+<p> </p>
+<p>Which statement iscorrect about informed consent?</p>
+<p>It requires disclosure of any benefits tothe subject or to others that may reasonably be expected</p>
+<p> </p>
+<p>The informed consentdocument, regardless of the research topic, must always include the following:</p>
+<p>A statement describing the extent, if any,to which confidentiality of records identifying the subject will be maintained.</p>
+<p> </p>
+<p>A graduate student inCommunications intends to write her thesis, as part of a federally-fundedstudy, on the effect of print versus televised media on people’s daily lives.The researcher wishes to conduct the study in a local prison because of limitedresources for subject recruitment. The subjects will be asked for 15 minutes oftheir time. The questionnaire appears innocuous and the risks appear to beminimal. The IRB should:</p>
+<p>Not approve this project because theresearch question could be answered without the participation of prisoners.</p>
+<p> </p>
+<p>A researcher wishes toconduct a study on the relationship between paternal care giving (that is, thecare the prisoner subjects received as children from their fathers) andincarceration, using a short 15-minute survey. Which category applies to thisresearch?</p>
+<p>Study of the possible causes, effects, andprocesses of incarceration, and of criminal behavior, provided that the studypresents no more than minimal risk and no more than inconvenience to thesubjects (Category i)</p>
+<p>Comment</p>
+<p> </p>
+<p>Providing parentsinformation about a study, in lieu of active parental permission, is allowedwhen:</p>
+<p>An IRB has approved a waiver of therequirement for parental permission</p>
+<p> </p>
+<p>When research isconducted in educational settings with children, when is the assent ofpotential student subjects required?</p>
+<p>When the IRB has determined that studentsare capable of providing assent.</p>
+</blockquote>
+</div>
+<div id="上传成绩单及个人信息等待人工审核" class="section level3" number="8.2.3">
+<h3>
+<span class="header-section-number">8.2.3</span> 上传成绩单及个人信息，等待人工审核<a class="anchor" aria-label="anchor" href="#%E4%B8%8A%E4%BC%A0%E6%88%90%E7%BB%A9%E5%8D%95%E5%8F%8A%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E7%AD%89%E5%BE%85%E4%BA%BA%E5%B7%A5%E5%AE%A1%E6%A0%B8"><i class="fas fa-link"></i></a>
+</h3>
+<p>考试通过后，回到Physionet，acount，credentialing那里，把所有的信息都填上，上传CITI的成绩单，提交申请，等待通过，注意Reference这里一定要认真填写，邮箱要正确。</p>
+<div class="inline-figure"><img src="images/paste-24B8ACF3.png" style="width:100.0%"></div>
+<ul>
+<li>等待…..邮件通知通过注册。</li>
+</ul>
+</div>
+<div id="通过后签署同意书下载数据" class="section level3" number="8.2.4">
+<h3>
+<span class="header-section-number">8.2.4</span> 通过后签署同意书，下载数据<a class="anchor" aria-label="anchor" href="#%E9%80%9A%E8%BF%87%E5%90%8E%E7%AD%BE%E7%BD%B2%E5%90%8C%E6%84%8F%E4%B9%A6%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE"><i class="fas fa-link"></i></a>
+</h3>
+<p>审核通过后，就可以在Physionet首页，Data这里点击进去，下载数据，你会看到，除了MIMIC以外，这里还有好多其他数据集。</p>
+<div class="inline-figure"><img src="images/paste-6707E051.png" style="width:100.0%"></div>
+</div>
+</div>
+<div id="数据库下载与安装" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> 数据库下载与安装<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><i class="fas fa-link"></i></a>
+</h2>
+<div id="数据下载" class="section level3" number="8.3.1">
+<h3>
+<span class="header-section-number">8.3.1</span> 数据下载<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><i class="fas fa-link"></i></a>
+</h3>
+<p>通过注册后，进入<a href="https://physionet.org/content/mimiciv/2.0/" class="uri">https://physionet.org/content/mimiciv/2.0/</a> 签署知情同意</p>
+<div class="inline-figure"><img src="images/paste-1FFADDC2.png" style="width:100.0%"></div>
+<p>正常是在Files有一个下载的链接：</p>
+<div class="inline-figure"><img src="images/paste-9F6B0387.png" style="width:50.0%"></div>
+<p>但是由于版本更新，2.0目前无下载链接。</p>
+<div class="inline-figure"><img src="images/paste-82F3D8B9.png" style="width:100.0%"></div>
+<p>所以使用我提供的数据进行演练（<strong>仅供内部练习使用，没有获得权限无法发表文章</strong>）</p>
+<p>百度云地址：（留好足够空间，建议80G以上）</p>
+<p><a href="https://pan.baidu.com/s/1FMYJh4IFuqMpH1f69OuJXw?pwd=ed5c" class="uri">https://pan.baidu.com/s/1FMYJh4IFuqMpH1f69OuJXw?pwd=ed5c</a></p>
+<p>提取码：ed5c</p>
+</div>
+<div id="数据安装" class="section level3" number="8.3.2">
+<h3>
+<span class="header-section-number">8.3.2</span> 数据安装<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E5%AE%89%E8%A3%85"><i class="fas fa-link"></i></a>
+</h3>
+<div id="官方教程的安装" class="section level4" number="8.3.2.1">
+<h4>
+<span class="header-section-number">8.3.2.1</span> 官方教程的安装<a class="anchor" aria-label="anchor" href="#%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%E7%9A%84%E5%AE%89%E8%A3%85"><i class="fas fa-link"></i></a>
+</h4>
+<blockquote>
+<p>安装比较难….流程都一样，但会出现各种莫名奇妙的问题，推荐几个安装教程，大家自己尝试下。</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzIyMTEyOTEzNg==&amp;mid=2247520947&amp;idx=1&amp;sn=68496f2fef007667a34a080b95bab421&amp;chksm=97c3a26ca0b42b7a784a8db0afba3c84d9966bd49ff7fb1b4347e632a66e55529ddf773fd1b9&amp;scene=21#wechat_redirect">MIMIC-IV数据库安装过程更简化（电脑小白保姆版）</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzIyMTEyOTEzNg==&amp;mid=2247505644&amp;idx=1&amp;sn=cc5192e325c63f2670147923a993fcf4&amp;scene=21#wechat_redirect">手把手教你MIMIC-IV数据库安装</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzIyMTEyOTEzNg==&amp;mid=2247511241&amp;idx=3&amp;sn=2689e66ec9850f567d81577f7dfd9054&amp;chksm=97c39c16a0b41500b05f77b2c036fbadb8482953c8fee958a79f6ed858ba368e1a67a3cafca5&amp;scene=21#wechat_redirect">前方有雷！MIMIC-IV数据库安装排雷指南</a></li>
+<li><a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI3OTkxNjEyNw==&amp;action=getalbum&amp;album_id=1844026174826446849&amp;scene=173&amp;from_msgid=2247485252&amp;from_itemidx=1&amp;count=3&amp;nolastread=1#wechat_redirect">智慧ICU</a></li>
+</ol>
+</blockquote>
+<ul>
+<li><p>我们再次进入mimic官网（<a href="https://mimic.physionet.org/gettingstarted/access/" class="uri">https://mimic.physionet.org/gettingstarted/access/</a>）</p></li>
+<li>
+<p>点击getting started，拉到下面点击 Local database setup</p>
+<div class="inline-figure"><img src="images/paste-BE67FFF3.png" style="width:100.0%"></div>
+</li>
+<li>
+<p><a href="https://mimic.mit.edu/docs/gettingstarted/local/install-mimic-locally-windows/">按照教程页面安装</a>PostgreSQL、7-zip，随后在命令框输入教程代码进行配置数据库即可。</p>
+<div class="inline-figure"><img src="images/paste-D4FC1A3C.png" style="width:100.0%"></div>
+</li>
+</ul>
+</div>
+<div id="navicat-的安装" class="section level4" number="8.3.2.2">
+<h4>
+<span class="header-section-number">8.3.2.2</span> Navicat 的安装<a class="anchor" aria-label="anchor" href="#navicat-%E7%9A%84%E5%AE%89%E8%A3%85"><i class="fas fa-link"></i></a>
+</h4>
+<p>按照官方教程安装完成后，下面再进行安装Navicat软件，<a href="http://www.navicat.com.cn/">官网</a>提供14天免费的试用功能。大家可以下载安装（提供的百度云链接里也有安装包）。</p>
+<div class="inline-figure"><img src="images/paste-2B525CDD.png" style="width:100.0%"></div>
+<ul>
+<li>打开Navicat，点击连接-PostgreSQL，如下图；</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-D4D4380B.png" style="width:100.0%"></div>
+<ul>
+<li>进入如下界面，在连接名里随意输入名称，密码填之前设置的超级管理员postgres的密码；</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-524F873D.png" style="width:100.0%"></div>
+<ul>
+<li>点击确定，连接成功，这是可在左侧看到我们连接到的mimic iv数据库。</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-BBB88F3D.png" style="width:100.0%"></div>
+<ul>
+<li>观看&lt;科研杂录&gt;安装教程</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="数据提取-1" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> 数据提取<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96-1"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="nhanes%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">7</span> NHANES数据库介绍</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mimic%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D"><span class="header-section-number">8</span> MIMIC数据库介绍</a></li>
+<li>
+<a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B-1"><span class="header-section-number">8.1</span> 数据库简介</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%83%85%E5%86%B5"><span class="header-section-number">8.1.1</span> 基本情况</a></li>
+<li><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="header-section-number">8.1.2</span> 版本介绍</a></li>
+<li><a class="nav-link" href="#mimic-iv%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B"><span class="header-section-number">8.1.3</span> MIMIC-IV创建流程</a></li>
+<li><a class="nav-link" href="#mimic-iv%E5%86%85%E5%AE%B9%E7%BB%84%E6%88%90"><span class="header-section-number">8.1.4</span> MIMIC-IV内容组成</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%94%B3%E8%AF%B7"><span class="header-section-number">8.2</span> 数据库申请</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E6%B3%A8%E5%86%8Cphysionet%E8%B4%A6%E5%8F%B7"><span class="header-section-number">8.2.1</span> 注册Physionet账号</a></li>
+<li><a class="nav-link" href="#%E6%B3%A8%E5%86%8Cciti%E8%B4%A6%E5%8F%B7"><span class="header-section-number">8.2.2</span> 注册CITI账号</a></li>
+<li><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E6%88%90%E7%BB%A9%E5%8D%95%E5%8F%8A%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E7%AD%89%E5%BE%85%E4%BA%BA%E5%B7%A5%E5%AE%A1%E6%A0%B8"><span class="header-section-number">8.2.3</span> 上传成绩单及个人信息，等待人工审核</a></li>
+<li><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%90%8E%E7%AD%BE%E7%BD%B2%E5%90%8C%E6%84%8F%E4%B9%A6%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="header-section-number">8.2.4</span> 通过后签署同意书，下载数据</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="header-section-number">8.3</span> 数据库下载与安装</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="header-section-number">8.3.1</span> 数据下载</a></li>
+<li><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%89%E8%A3%85"><span class="header-section-number">8.3.2</span> 数据安装</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96-1"><span class="header-section-number">8.4</span> 数据提取</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/08-MIMIC.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/08-MIMIC.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

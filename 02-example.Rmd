@@ -1,0 +1,160 @@
+```{r setup, include=FALSE, warning=FALSE}
+options(digits = 4, 
+        dplyr.print_min = 6, 
+        dplyr.print_max = 6,
+        htmltools.dir.version = FALSE, 
+        formatR.indent = 2, 
+        width = 55
+        )
+
+knitr::opts_chunk$set(
+                      echo = TRUE, 
+                      warning = FALSE, 
+                      message = FALSE,
+                      fig.width = 6, 
+                      fig.height = 4,
+                      fig.showtext = TRUE
+                      )
+library(tidyverse)
+```
+
+# 案例介绍
+
+## 案例背景
+
+### 数据来源
+
+案例选自[**UCI**](http://archive.ics.uci.edu/ml/datasets/Heart+Disease)机器学习库中的 Heart Disease Data Set数据集。
+
+该数据库包含76个属性，但是所有已发布的实验都引用了其中**14个属性的子集**。特别是，克利夫兰数据库是迄今为止ML研究人员使用的唯一数据库。
+
+数据来源：[https://archive.ics.uci.edu/ml/datasets/Heart+Disease](https://archive.ics.uci.edu/ml/datasets/Heart+Diseasehttps://archive.ics.uci.edu/ml/datasets/Heart+Disease)
+
+### 疾病背景
+
+-   **冠心病（Coronary Heart Disease,CHD）**
+
+```{r , out.width = '100%', echo = FALSE}
+knitr::include_graphics("images/0201.jpg", dpi = 300)
+```
+
+心血管疾病是全球第一大死亡原因，每年夺去约1790万人的生命，占全球死亡人数的31%。5例心血管疾病中有4例死于心脏病和中风，其中1 / 3的死亡发生在70岁以下的过早死亡中。
+
+**患有心血管疾病或心血管风险高的人**(由于存在高血压、糖尿病、高脂血症或已经确定的疾病等一种或多种风险因素)需要**早期检测和管理**，其中机器学习模型可以提供很大的帮助。
+
+-   **目前把冠心病分类两大类：**
+
+    ① 急性冠脉综合征：
+
+    不稳定型心绞痛（UA）；非ST段抬高性心肌梗死（NSTEMI）；ST段抬高性心肌梗死（STEMI）
+
+    ② 慢性冠脉综合征：
+
+    慢性稳定型心绞痛；冠脉正常的心绞痛（如X综合征）；无症状性心肌缺血；缺血性心力衰竭；
+
+-   **冠心病有"5+3"危险因素：**
+
+    ① 五种可防可控的危险因素：
+
+    高血压；血脂异常；糖尿病以及糖耐量的异常；吸烟；肥胖
+
+    ② 三种不可防不可控的危险因素：
+
+    性别；年龄；家族史
+
+-   **目前，冠心病的诊断流程极其繁琐：**
+
+    ① 怀疑冠心病的患者最开始可能会安排这3项检查：常规心电图、超声心动图和血液的心肌标志物检查；
+
+    ② 上述检查后如果没有查出明显病变，但是患者仍有冠心病相关症状的话，医生可能会安排进行运动负荷试验或动态心电图检查；
+
+    ③ 进行完基础检查后如果怀疑患者冠心病的可能性极大，医生可能会建议进行CTA或心肌血流灌注检查；
+
+    ④ 也有些医生会直接建议患者进行心脏冠状动脉造影检查，因为冠状动脉造影检查是诊断冠心病最准确的办法；
+
+**在本项研究中，研究者负责分析导致患者的冠心病的因素，并探索各个变量的影响程度。他们希望能够通过有效的机器学习算法构建模型，用于预测患者是否有冠心病。**
+
+### **研究目的**
+
+-   如何快速准确判断患者是否有冠心病？
+
+-   影响冠心病的危险因素有哪些？
+
+## 数据描述
+
+-   数据展示（选取前10行）
+
+```{r echo=FALSE, warning=FALSE}
+heart <- read_csv("data/CardiovascularDataset.csv")
+knitr::kable(heart[1:10, ] ,align = "c") #实现结构化展示数据
+```
+
+-   数据集变量信息
+
+```{r echo=FALSE, warning=FALSE}
+glimpse(heart)
+```
+
+> 303个受试者（行：Sample）;
+>
+> 14列变量属性(列：Feature)；
+>
+> 变量属性包括：年龄、性别、胸痛经历、静息血压、胆固醇、空腹血糖、静息心电图、最大心率、运动引起的 ST 压低、峰值运动ST段的斜率、运动诱发的心绞痛、主要供血血管的数量、地中海贫血、**心脏病**
+
+```{r , out.width = '100%', echo = FALSE}
+knitr::include_graphics("images/0202.png", dpi = 300)
+```
+
+> **这些变量包括以下几类：**
+>
+> **① 不可改变的危险因素：**年龄、性别、家族史（收集了地中海贫血）
+>
+> **② 可改变的危险因素：**静息血压、胆固醇、空腹血糖
+>
+> **③ 临床检查：**心电图相关、运动触发相关、冠脉检查相关
+
+## 分析思路
+
+```{r , out.width = '100%', echo = FALSE}
+knitr::include_graphics("images/0103.png", dpi = 300)
+```
+
+-   诊断模型：主要是基于研究对象的临床特征，预测当前患有某种疾病的概率，多见于横断面研究;
+
+-   结局类型：分类变量 -\> 二分类
+
+-   数据预处理：
+
+    -   "整洁"数据：一行是一个样本所有信息、一列是一个variable、中间无乱码、不规范表达
+
+    -   离群值，异常值、缺失值、协变量的类型等
+
+-   模型的选择：Logistic、随机森林、支持向量机
+
+-   其他具体信息，建模中探索
+
+## 算法简介
+
+### Logistic
+
+```{r , out.width = '100%', echo = FALSE}
+knitr::include_graphics("images/0203logistic1.png", dpi = 300)
+knitr::include_graphics("images/0203logistic2.png", dpi = 300)
+```
+
+### 随机森林
+
+```{r , out.width = '100%', echo = FALSE}
+knitr::include_graphics("images/0203rf1.png", dpi = 300)
+knitr::include_graphics("images/0203rf2.png", dpi = 300)
+knitr::include_graphics("images/0203rf3.png", dpi = 300)
+```
+
+### 支持向量机
+
+```{r , out.width = '100%', echo = FALSE}
+knitr::include_graphics("images/0203svm1.png", dpi = 300)
+knitr::include_graphics("images/0203svm2.png", dpi = 300)
+```
+
+## 代码预览

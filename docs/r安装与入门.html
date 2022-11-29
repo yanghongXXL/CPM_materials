@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>第 5 部分 R安装与入门 | 临床预测模型</title>
+<meta name="author" content="杨 弘">
+<meta name="description" content="5.1 r与Rstudio的安装  5.1.1 R简介 R（语言）是一套完整的数据处理、计算和制图软件系统。其功能包括：数据存储和处理系统，数组运算工具，完整连贯的统计分析工具，优秀的统计制图功能。R软件具有简便而强大的编程语言工具。 官方的 R 软件环境是GNU 软件包中的开源自由软件环境，可在GNU 通用公共许可证下获得。它主要用C、Fortran和 R...">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta property="og:title" content="第 5 部分 R安装与入门 | 临床预测模型">
+<meta property="og:type" content="book">
+<meta property="og:description" content="5.1 r与Rstudio的安装  5.1.1 R简介 R（语言）是一套完整的数据处理、计算和制图软件系统。其功能包括：数据存储和处理系统，数组运算工具，完整连贯的统计分析工具，优秀的统计制图功能。R软件具有简便而强大的编程语言工具。 官方的 R 软件环境是GNU 软件包中的开源自由软件环境，可在GNU 通用公共许可证下获得。它主要用C、Fortran和 R...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第 5 部分 R安装与入门 | 临床预测模型">
+<meta name="twitter:description" content="5.1 r与Rstudio的安装  5.1.1 R简介 R（语言）是一套完整的数据处理、计算和制图软件系统。其功能包括：数据存储和处理系统，数组运算工具，完整连贯的统计分析工具，优秀的统计制图功能。R软件具有简便而强大的编程语言工具。 官方的 R 软件环境是GNU 软件包中的开源自由软件环境，可在GNU 通用公共许可证下获得。它主要用C、Fortran和 R...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap/bootstrap.bundle.min.js"></script><script src="libs/bs3compat/transition.js"></script><script src="libs/bs3compat/tabs.js"></script><script src="libs/bs3compat/bs3compat.js"></script><link href="libs/bs4_book/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">临床预测模型</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">关于课程</a></li>
+<li><a class="" href="%E6%A1%88%E4%BE%8B%E6%95%99%E5%AD%A6-1.html">案例教学</a></li>
+<li><a class="" href="%E4%B8%B4%E5%BA%8A%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B.html"><span class="header-section-number">1</span> 临床预测模型</a></li>
+<li><a class="" href="%E6%A1%88%E4%BE%8B%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">2</span> 案例介绍</a></li>
+<li><a class="" href="%E5%AE%9E%E6%93%8D%E6%95%99%E5%AD%A6-1.html">实操教学</a></li>
+<li><a class="" href="r-%E5%AE%9E%E6%93%8D.html"><span class="header-section-number">3</span> R 实操</a></li>
+<li><a class="" href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">4</span> Python 安装与入门</a></li>
+<li><a class="active" href="r%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">5</span> R安装与入门</a></li>
+<li><a class="" href="r%E5%85%A5%E9%97%A8-1.html"><span class="header-section-number">6</span> R入门</a></li>
+<li><a class="" href="nhanes%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">7</span> NHANES数据库介绍</a></li>
+<li><a class="" href="mimic%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">8</span> MIMIC数据库介绍</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="r安装与入门" class="section level1" number="5">
+<h1>
+<span class="header-section-number">第 5 部分</span> R安装与入门<a class="anchor" aria-label="anchor" href="#r%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><i class="fas fa-link"></i></a>
+</h1>
+<div id="r与rstudio的安装" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> r与Rstudio的安装<a class="anchor" aria-label="anchor" href="#r%E4%B8%8Erstudio%E7%9A%84%E5%AE%89%E8%A3%85"><i class="fas fa-link"></i></a>
+</h2>
+<div id="r简介" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> R简介<a class="anchor" aria-label="anchor" href="#r%E7%AE%80%E4%BB%8B"><i class="fas fa-link"></i></a>
+</h3>
+<p>R（语言）是一套完整的数据处理、计算和制图软件系统。其功能包括：数据存储和处理系统，数组运算工具，完整连贯的统计分析工具，优秀的统计制图功能。R软件具有简便而强大的编程语言工具。</p>
+<p>官方的 R 软件环境是GNU 软件包中的开源自由软件环境，可在GNU 通用公共许可证下获得。它主要用C、Fortran和 R 本身（部分自托管）编写，为各种操作系统提供了预编译的可执行文件。</p>
+<p>R有一个命令行界面。还提供多个第三方图形用户界面，例如集成开发环境RStudio。 RStudio是一个功能强大、节省成本的反删除和数据恢复软件，且具有强大、简洁、易操作的编程软件。RStudio是辅助R进行编辑的语言工具，而它自身不附带R程序。所以必须先安装R软件，再安装RStudio软件，而编程操作都在RStudio中完成。</p>
+</div>
+<div id="r下载" class="section level3" number="5.1.2">
+<h3>
+<span class="header-section-number">5.1.2</span> R下载<a class="anchor" aria-label="anchor" href="#r%E4%B8%8B%E8%BD%BD"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<p>官网：</p>
+<p>R官网：<a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a></p>
+<p>Rstudio官网：<a href="https://www.rstudio.com/products/rstudio/" class="uri">https://www.rstudio.com/products/rstudio/</a></p>
+</li>
+<li>
+<p>百度云：</p>
+<p>链接：<a href="https://pan.baidu.com/s/1lr5ks5FiTgCrS-jrXdNZQQ?pwd=ab5q" class="uri">https://pan.baidu.com/s/1lr5ks5FiTgCrS-jrXdNZQQ?pwd=ab5q</a></p>
+<p>提取码：ab5q</p>
+</li>
+</ul>
+</div>
+<div id="r的安装" class="section level3" number="5.1.3">
+<h3>
+<span class="header-section-number">5.1.3</span> R的安装<a class="anchor" aria-label="anchor" href="#r%E7%9A%84%E5%AE%89%E8%A3%85"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-figure"><img src="images/paste-F5B502C4.png" style="width:100.0%"></div>
+<ul>
+<li>选择【R-4.2.1】，右击选择【以管理员身份运行】,选择【中文（简体）】</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-50717280.png" style="width:100.0%"></div>
+<ul>
+<li>打开后会显示安装向导，点击【下一步】开始安装。</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-766D2B7D.png" style="width:100.0%"></div>
+<ul>
+<li>选择安装位置，默认的是C盘，安装路径必须是非中文路径。建议选择其他位置</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-8475E7A2.png" style="width:100.0%"></div>
+<ul>
+<li>以下全部为默认，点击【下一步】，直到完成安装。</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-49CD35A1.png" style="width:100.0%"></div>
+</div>
+<div id="安装rstudio" class="section level3" number="5.1.4">
+<h3>
+<span class="header-section-number">5.1.4</span> 安装Rstudio<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%85rstudio"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p>双击安装程序</p></li>
+<li><p>欢迎界面，点击【下一步】</p></li>
+</ul>
+<div class="inline-figure"><img src="images/paste-8B4E7321.png" style="width:100.0%"></div>
+<ul>
+<li>选择安装位置：选择与R-4.2.1一样的安装路径。</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-ABBBB863.png" style="width:100.0%"></div>
+<ul>
+<li>一路默认安装，直至完成</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-151F1C13.png" style="width:100.0%"></div>
+<ul>
+<li>双击Rstudio图标打开</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-FDDDADB5.png"></div>
+<ul>
+<li>Rstudio 初始界面</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-319C5AAF.png" style="width:100.0%"></div>
+</div>
+</div>
+<div id="r入门" class="section level2 unnumbered">
+<h2>R入门<a class="anchor" aria-label="anchor" href="#r%E5%85%A5%E9%97%A8"><i class="fas fa-link"></i></a>
+</h2>
+<p>推荐教程：李东风 <a href="https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/index.html">R语言教程</a></p>
+
+<hr>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">4</span> Python 安装与入门</a></div>
+<div class="next"><a href="r%E5%85%A5%E9%97%A8-1.html"><span class="header-section-number">6</span> R入门</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#r%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><span class="header-section-number">5</span> R安装与入门</a></li>
+<li>
+<a class="nav-link" href="#r%E4%B8%8Erstudio%E7%9A%84%E5%AE%89%E8%A3%85"><span class="header-section-number">5.1</span> r与Rstudio的安装</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#r%E7%AE%80%E4%BB%8B"><span class="header-section-number">5.1.1</span> R简介</a></li>
+<li><a class="nav-link" href="#r%E4%B8%8B%E8%BD%BD"><span class="header-section-number">5.1.2</span> R下载</a></li>
+<li><a class="nav-link" href="#r%E7%9A%84%E5%AE%89%E8%A3%85"><span class="header-section-number">5.1.3</span> R的安装</a></li>
+<li><a class="nav-link" href="#%E5%AE%89%E8%A3%85rstudio"><span class="header-section-number">5.1.4</span> 安装Rstudio</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#r%E5%85%A5%E9%97%A8">R入门</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/05-R_install_basis.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/05-R_install_basis.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

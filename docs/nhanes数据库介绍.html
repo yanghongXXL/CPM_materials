@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>第 7 部分 NHANES数据库介绍 | 临床预测模型</title>
+<meta name="author" content="杨 弘">
+<meta name="description" content="7.1 数据库简介 National Health and Nutrition Examination Survey （NHANES数据库，网址：https://www.cdc.gov/nchs/nhanes/index.htm）收集了有关美国家庭人口健康和营养信息，是一项基于人群的横断面调查。...">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta property="og:title" content="第 7 部分 NHANES数据库介绍 | 临床预测模型">
+<meta property="og:type" content="book">
+<meta property="og:description" content="7.1 数据库简介 National Health and Nutrition Examination Survey （NHANES数据库，网址：https://www.cdc.gov/nchs/nhanes/index.htm）收集了有关美国家庭人口健康和营养信息，是一项基于人群的横断面调查。...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第 7 部分 NHANES数据库介绍 | 临床预测模型">
+<meta name="twitter:description" content="7.1 数据库简介 National Health and Nutrition Examination Survey （NHANES数据库，网址：https://www.cdc.gov/nchs/nhanes/index.htm）收集了有关美国家庭人口健康和营养信息，是一项基于人群的横断面调查。...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap/bootstrap.bundle.min.js"></script><script src="libs/bs3compat/transition.js"></script><script src="libs/bs3compat/tabs.js"></script><script src="libs/bs3compat/bs3compat.js"></script><link href="libs/bs4_book/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">临床预测模型</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">关于课程</a></li>
+<li><a class="" href="%E6%A1%88%E4%BE%8B%E6%95%99%E5%AD%A6-1.html">案例教学</a></li>
+<li><a class="" href="%E4%B8%B4%E5%BA%8A%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B.html"><span class="header-section-number">1</span> 临床预测模型</a></li>
+<li><a class="" href="%E6%A1%88%E4%BE%8B%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">2</span> 案例介绍</a></li>
+<li><a class="" href="%E5%AE%9E%E6%93%8D%E6%95%99%E5%AD%A6-1.html">实操教学</a></li>
+<li><a class="" href="r-%E5%AE%9E%E6%93%8D.html"><span class="header-section-number">3</span> R 实操</a></li>
+<li><a class="" href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">4</span> Python 安装与入门</a></li>
+<li><a class="" href="r%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">5</span> R安装与入门</a></li>
+<li><a class="" href="r%E5%85%A5%E9%97%A8-1.html"><span class="header-section-number">6</span> R入门</a></li>
+<li><a class="active" href="nhanes%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">7</span> NHANES数据库介绍</a></li>
+<li><a class="" href="mimic%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">8</span> MIMIC数据库介绍</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nhanes数据库介绍" class="section level1" number="7">
+<h1>
+<span class="header-section-number">第 7 部分</span> NHANES数据库介绍<a class="anchor" aria-label="anchor" href="#nhanes%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D"><i class="fas fa-link"></i></a>
+</h1>
+<div id="数据库简介" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> 数据库简介<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B"><i class="fas fa-link"></i></a>
+</h2>
+<p>National Health and Nutrition Examination Survey （NHANES数据库，网址：<a href="https://www.cdc.gov/nchs/nhanes/index.htm%EF%BC%89%EF%BC%8C%E6%94%B6%E9%9B%86%E4%BA%86%E6%9C%89%E5%85%B3%E7%BE%8E%E5%9B%BD%E5%AE%B6%E5%BA%AD%E4%BA%BA%E5%8F%A3%E5%81%A5%E5%BA%B7%E5%92%8C%E8%90%A5%E5%85%BB%E4%BF%A1%E6%81%AF%EF%BC%8C%E6%98%AF%E4%B8%80%E9%A1%B9%E5%9F%BA%E4%BA%8E%E4%BA%BA%E7%BE%A4%E7%9A%84%E6%A8%AA%E6%96%AD%E9%9D%A2%E8%B0%83%E6%9F%A5%E3%80%82">https://www.cdc.gov/nchs/nhanes/index.htm）</a>收集了有关美国家庭人口健康和营养信息，是一项基于人群的横断面调查。</p>
+<p>该数据库开始于80年代，生物样本包含了参与者的血清，血浆，尿液等，涉及多种测量指标。此外，还包含了大量的调查问卷数据，调查问卷涉及广泛，包括人口统计学、社会经济学、饮食和健康相关问题，体检部分包括生理测量、实验室检查等内容。</p>
+<ul>
+<li><strong>观看NHANES官方视频介绍</strong></li>
+</ul>
+<p>该数据库自20世纪末开始，每两年一个周期，更新数据，而且是免费对外开放的，研究者可以根据需要直接下载数据。</p>
+<div class="inline-figure"><img src="images/paste-9466CDA4.png" style="width:100.0%"></div>
+<p>在网站首页，进入Publications and Products，我们可以进行交互式数据可视化展示，数据简报，电子病例等。比如，我们进入数据可视化页面的数据。这些数据代表了从1999-2000年到2017-2018年国家健康和营养检查调查 (NHANES) 的估计值。</p>
+<div class="inline-figure"><img src="images/paste-A96593D5.png" style="width:100.0%"></div>
+<p>虽然NHANES数据库自带分析功能并以线图、bar图和表等展示数据，但是并不能满足我们发表论文的需求。因此，我们需要学会数据的下载和处理。当然，如何把数据库数据转化为论文，还要通过相关医学文献的阅读来实现。</p>
+<p>在NHANES数据库官网首页，点击左栏的NHANES Questionnaires, Datasets, and Related Documentation，进入调查表、数据集和相关文档。待下载的数据在Continuous NHANES选项里面。这些数据是按照年份进行上传和保存的。</p>
+<ul>
+<li>
+<strong>Step 1.</strong> 点击1处或2处直接进入数据下载页面（如下图）</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-F72308A4.png" style="width:100.0%"></div>
+<ul>
+<li>
+<strong>Step 2.</strong> 可以从下图中的1、2、3处下载数据。</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-C8A64C0E.png" style="width:100.0%"></div>
+<p>从1或3处可以按年份下载，每个年份包含Demographics Data”（人口数据）、“Dietary Data”（饮食数据）、“Examination Data”（检查数据）、“Laboratory Data”（化验数据）、“Questionnaire Data”（问卷数据）、“Limited Access Data”（限制访问数据）。</p>
+<p>比如，我们选取2017-2018年的数据进行下载。点击选择左栏选项中的NHANES 2017-2018或右侧Continuous NHANES里面的NHANES 2017-2018。然后页面自动跳转到2017-2018数据页面。数据内容包括四部分：①数据、文档和密码文件，包含人口统计资料、饮食数据、检查资料、实验室资料、问卷表和有限访问的数据；②详细资料，包括问卷工具、实验方法、程序手册以及小册子和知情同意文件；③使用数据，包括概述、发行说明、实验室数据概览、检查资料概览、问卷数据概览、调查途径和数据分析指南、回应率和人口统计，网站还提供了网络教程。④内容概览，主要是常见问题的汇总等。</p>
+<div class="inline-figure"><img src="images/paste-2D402A6A.png" style="width:100.0%"></div>
+<p>点击要下载的数据文件，选择存储位置，点击下载。我们以Demographics Data为例。选择Data File下面的DEMO_J_ Data进行下载（Doc_File是对访问资料的介绍，无需下载）。文件类型是.XPT，下载时对网速有要求。下载后数据可用统计软件SPSS等打开，或者用R也可以。</p>
+<div class="inline-figure"><img src="images/paste-9E470B16.png" style="width:100.0%"></div>
+<ul>
+<li>或者直接用nhanesA下载数据（速度可能比较慢）</li>
+</ul>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=nhanesA">nhanesA</a></span><span class="op">)</span></span>
+<span><span class="va">mydata1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanes.html">nhanes</a></span><span class="op">(</span><span class="st">'DEMO_J'</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="数据提取" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> 数据提取<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96"><i class="fas fa-link"></i></a>
+</h2>
+<p>数据下好后用R读取</p>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/haven/man/read_xpt.html">read_xpt</a></span><span class="op">(</span><span class="st">"data/demo_j.xpt"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mydata</span>,<span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 10 × 46
+##    SEQN SDDSR…¹ RIDST…² RIAGE…³ RIDAG…⁴ RIDAG…⁵ RIDRE…⁶
+##   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 93703      10       2       2       2      NA       5
+## 2 93704      10       2       1       2      NA       3
+## 3 93705      10       2       2      66      NA       4
+## 4 93706      10       2       1      18      NA       5
+## 5 93707      10       2       1      13      NA       5
+## 6 93708      10       2       2      66      NA       5
+## # … with 4 more rows, 39 more variables:
+## #   RIDRETH3 &lt;dbl&gt;, RIDEXMON &lt;dbl&gt;, RIDEXAGM &lt;dbl&gt;,
+## #   DMQMILIZ &lt;dbl&gt;, DMQADFC &lt;dbl&gt;, DMDBORN4 &lt;dbl&gt;,
+## #   DMDCITZN &lt;dbl&gt;, DMDYRSUS &lt;dbl&gt;, DMDEDUC3 &lt;dbl&gt;,
+## #   DMDEDUC2 &lt;dbl&gt;, DMDMARTL &lt;dbl&gt;, RIDEXPRG &lt;dbl&gt;,
+## #   SIALANG &lt;dbl&gt;, SIAPROXY &lt;dbl&gt;, SIAINTRP &lt;dbl&gt;,
+## #   FIALANG &lt;dbl&gt;, FIAPROXY &lt;dbl&gt;, FIAINTRP &lt;dbl&gt;, …</code></pre>
+<ul>
+<li><a href="https://wwwn.cdc.gov/Nchs/Nhanes/2017-2018/DEMO_J.htm">对照变量说明提取需要得变量</a></li>
+</ul>
+<div class="inline-figure"><img src="images/paste-C7547CC6.png" style="width:100.0%"></div>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat1</span><span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">SEQN</span>, <span class="co"># 序列号</span></span>
+<span>                         <span class="va">RIAGENDR</span>, <span class="co"># 性别</span></span>
+<span>                         <span class="va">RIDAGEYR</span>, <span class="co"># 年龄</span></span>
+<span>                         <span class="va">RIDRETH3</span>, <span class="co"># 种族</span></span>
+<span>                         <span class="va">DMDMARTL</span>, <span class="co"># 婚姻状况</span></span>
+<span>                         <span class="va">WTINT2YR</span>,<span class="va">WTMEC2YR</span>, <span class="co"># 权重</span></span>
+<span>                         <span class="va">SDMVPSU</span>, <span class="co"># psu</span></span>
+<span>                         <span class="va">SDMVSTRA</span><span class="op">)</span> <span class="co"># strata</span></span></code></pre></div>
+<p>以上demo文件中只有人口统计学指标，提取其他信息还需要下载其他数据。假如我们想提取血糖，血糖应该在<a href="https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Laboratory&amp;CycleBeginYear=2017">化验室指标</a>那里，这次我们使用nhanesA包来下载。</p>
+<div class="inline-figure"><img src="images/paste-6AA51C32.png" style="width:100.0%"></div>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># xuetang1 &lt;- nhanes('GLU_J') # 在线提取</span></span>
+<span><span class="va">xuetang</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/haven/man/read_xpt.html">read_xpt</a></span><span class="op">(</span><span class="st">"data/glu_j.xpt"</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">xuetang</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span> ,align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="center">SEQN</th>
+<th align="center">WTSAF2YR</th>
+<th align="center">LBXGLU</th>
+<th align="center">LBDGLUSI</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">93708</td>
+<td align="center">25654</td>
+<td align="center">122</td>
+<td align="center">6.77</td>
+</tr>
+<tr class="even">
+<td align="center">93711</td>
+<td align="center">29226</td>
+<td align="center">107</td>
+<td align="center">5.94</td>
+</tr>
+<tr class="odd">
+<td align="center">93717</td>
+<td align="center">137151</td>
+<td align="center">91</td>
+<td align="center">5.05</td>
+</tr>
+<tr class="even">
+<td align="center">93718</td>
+<td align="center">58883</td>
+<td align="center">89</td>
+<td align="center">4.94</td>
+</tr>
+<tr class="odd">
+<td align="center">93719</td>
+<td align="center">0</td>
+<td align="center">86</td>
+<td align="center">4.77</td>
+</tr>
+<tr class="even">
+<td align="center">93721</td>
+<td align="center">17155</td>
+<td align="center">104</td>
+<td align="center">5.77</td>
+</tr>
+<tr class="odd">
+<td align="center">93722</td>
+<td align="center">294374</td>
+<td align="center">101</td>
+<td align="center">5.61</td>
+</tr>
+<tr class="even">
+<td align="center">93731</td>
+<td align="center">65813</td>
+<td align="center">98</td>
+<td align="center">5.44</td>
+</tr>
+<tr class="odd">
+<td align="center">93732</td>
+<td align="center">0</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93735</td>
+<td align="center">20279</td>
+<td align="center">83</td>
+<td align="center">4.61</td>
+</tr>
+</tbody>
+</table></div>
+<p>提取好指标后进行合并</p>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hdata</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">xuetang</span>, by <span class="op">=</span> <span class="st">'SEQN'</span>, type <span class="op">=</span> <span class="st">'full'</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">hdata</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span> ,align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
+<colgroup>
+<col width="6%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="8%">
+<col width="7%">
+<col width="8%">
+<col width="8%">
+<col width="7%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">SEQN</th>
+<th align="center">RIAGENDR</th>
+<th align="center">RIDAGEYR</th>
+<th align="center">RIDRETH3</th>
+<th align="center">DMDMARTL</th>
+<th align="center">WTINT2YR</th>
+<th align="center">WTMEC2YR</th>
+<th align="center">SDMVPSU</th>
+<th align="center">SDMVSTRA</th>
+<th align="center">WTSAF2YR</th>
+<th align="center">LBXGLU</th>
+<th align="center">LBDGLUSI</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">93703</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">6</td>
+<td align="center">NA</td>
+<td align="center">9246</td>
+<td align="center">8540</td>
+<td align="center">2</td>
+<td align="center">145</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93704</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">NA</td>
+<td align="center">37339</td>
+<td align="center">42567</td>
+<td align="center">1</td>
+<td align="center">143</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">93705</td>
+<td align="center">2</td>
+<td align="center">66</td>
+<td align="center">4</td>
+<td align="center">3</td>
+<td align="center">8615</td>
+<td align="center">8338</td>
+<td align="center">2</td>
+<td align="center">145</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93706</td>
+<td align="center">1</td>
+<td align="center">18</td>
+<td align="center">6</td>
+<td align="center">NA</td>
+<td align="center">8549</td>
+<td align="center">8723</td>
+<td align="center">2</td>
+<td align="center">134</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">93707</td>
+<td align="center">1</td>
+<td align="center">13</td>
+<td align="center">7</td>
+<td align="center">NA</td>
+<td align="center">6769</td>
+<td align="center">7065</td>
+<td align="center">1</td>
+<td align="center">138</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93708</td>
+<td align="center">2</td>
+<td align="center">66</td>
+<td align="center">6</td>
+<td align="center">1</td>
+<td align="center">13329</td>
+<td align="center">14372</td>
+<td align="center">2</td>
+<td align="center">138</td>
+<td align="center">25654</td>
+<td align="center">122</td>
+<td align="center">6.77</td>
+</tr>
+<tr class="odd">
+<td align="center">93709</td>
+<td align="center">2</td>
+<td align="center">75</td>
+<td align="center">4</td>
+<td align="center">2</td>
+<td align="center">12043</td>
+<td align="center">12278</td>
+<td align="center">1</td>
+<td align="center">136</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">93710</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">NA</td>
+<td align="center">16418</td>
+<td align="center">16848</td>
+<td align="center">1</td>
+<td align="center">134</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">93711</td>
+<td align="center">1</td>
+<td align="center">56</td>
+<td align="center">6</td>
+<td align="center">1</td>
+<td align="center">11178</td>
+<td align="center">12391</td>
+<td align="center">2</td>
+<td align="center">134</td>
+<td align="center">29226</td>
+<td align="center">107</td>
+<td align="center">5.94</td>
+</tr>
+<tr class="even">
+<td align="center">93712</td>
+<td align="center">1</td>
+<td align="center">18</td>
+<td align="center">1</td>
+<td align="center">NA</td>
+<td align="center">29040</td>
+<td align="center">30337</td>
+<td align="center">2</td>
+<td align="center">147</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table></div>
+<p>把它保存起来，今后的操作将在这个数据展开</p>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">hdata</span>,file<span class="op">=</span> <span class="st">"1.csv"</span>,row.names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="需要注意的点" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> 需要注意的点<a class="anchor" aria-label="anchor" href="#%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9"><i class="fas fa-link"></i></a>
+</h2>
+<div id="结局" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> 结局<a class="anchor" aria-label="anchor" href="#%E7%BB%93%E5%B1%80"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<a href="https://www.cdc.gov/nchs/data-linkage/mortality-public.htm">有死亡信息</a>，需要另外页面下载。</li>
+</ul>
+<p>进入死亡数据下载界面（Data Linkage——NDI Mortality Files——Public-Use Files）</p>
+<div class="inline-figure"><img src="images/paste-060CC920.png" style="width:100.0%"></div>
+<p>Public-Use Linked Mortality Files点击FTP Site，进入死亡数据索引目录。阅读数据集说明文件及变量说明，可以对数据集内容有个基本的了解。</p>
+<div class="inline-figure"><img src="images/paste-8C65DCE3.png" style="width:100.0%"></div>
+<p>选择需要年份的死亡数据下载；</p>
+<div class="inline-figure"><img src="images/paste-021D5180.png" style="width:100.0%"></div>
+</div>
+<div id="数据分析" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> 数据分析<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><i class="fas fa-link"></i></a>
+</h3>
+<p>NHANES是<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/module2.aspx">复杂抽样</a>，所以需要用到”复杂抽样”的分析方法。</p>
+<p>并且要注意<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/module3.aspx">权重的合并</a>！</p>
+<blockquote>
+<ul>
+<li>
+<p>NHANES样本分为四个阶段：</p>
+<p>（a）PSU（县、县内的区域组或相邻县的组合）；</p>
+<p>（b）PSU内的部分（普查区或区的组合）；</p>
+<p>（c）分段内的居住单元、家庭（DU）；</p>
+<p>（d）家庭中的个人。PSU是从美国所有县取样的。根据过采样标准，在DU级别进行筛选以识别被抽样的人（SP）。</p>
+</li>
+<li>
+<p>year:样本中年数的调整</p>
+<p>NHANES是每年都会进行的抽样，但由于样本量的限制，经常需要合并多年以增强统计效能。但是不同年份测量的变量不一致。比如要合并6年的数据，这可能导致有的变量2年一测，有的变量3年一测，有的变量6年一测。此时不可以直接提取进行计算。</p>
+<p>以4年的数据为例：由于4年样本设计，从原始抽样率计算的初始基本权重对应于4年样本。 这些初始基权值是基于抽样概率的， 为了产生与1年和2年样本的全国人口总数相一致的权重，需要调整因子。 例如，为了为2015-2016年NHANES和2017-2018年NHANES在公共使用文件中发布的数据创建两年样本权重，将4年基权重乘以2，以考虑2年的选择（设计中的年数除以样本中的年数，4除以2=2）。</p>
+</li>
+</ul>
+</blockquote>
+<p>多看官网的各种分析提供的<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/module6.aspx">代码示例</a></p>
+</div>
+<div id="一些技巧" class="section level3" number="7.3.3">
+<h3>
+<span class="header-section-number">7.3.3</span> 一些技巧<a class="anchor" aria-label="anchor" href="#%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>查看指定年份和指定类别的信息</li>
+</ul>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=nhanesA">nhanesA</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanesTables.html">nhanesTables</a></span><span class="op">(</span><span class="st">'EXAM'</span>, <span class="fl">2017</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="images/paste-3A10DDA1.png" style="width:100.0%"></div>
+<ul>
+<li>查看详细信息</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>假设我们需要进一步查看BPX_J的内部信息</li>
+</ol>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanesTableVars.html">nhanesTableVars</a></span><span class="op">(</span>data_group <span class="op">=</span> <span class="st">'Exam'</span>, nh_table <span class="op">=</span> <span class="st">'BPX_J'</span>, namesonly <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="images/paste-2D0C163C.png" style="width:100.0%"></div>
+<p>可以看到，此表之中有27列。Seqn是受访者的序列号，可以用来连接各表。</p>
+
+<hr>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="r%E5%85%A5%E9%97%A8-1.html"><span class="header-section-number">6</span> R入门</a></div>
+<div class="next"><a href="mimic%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">8</span> MIMIC数据库介绍</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#nhanes%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D"><span class="header-section-number">7</span> NHANES数据库介绍</a></li>
+<li><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B"><span class="header-section-number">7.1</span> 数据库简介</a></li>
+<li><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96"><span class="header-section-number">7.2</span> 数据提取</a></li>
+<li>
+<a class="nav-link" href="#%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9"><span class="header-section-number">7.3</span> 需要注意的点</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%E7%BB%93%E5%B1%80"><span class="header-section-number">7.3.1</span> 结局</a></li>
+<li><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90"><span class="header-section-number">7.3.2</span> 数据分析</a></li>
+<li><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7"><span class="header-section-number">7.3.3</span> 一些技巧</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/07-Nhanes.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/07-Nhanes.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

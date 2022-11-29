@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>第 4 部分 Python 安装与入门 | 临床预测模型</title>
+<meta name="author" content="杨 弘">
+<meta name="description" content="4.1 Anaconda 的安装  4.1.1 Anaconda简介 Anaconda，是一个开源的Python发行版本，其包含了conda、Python以及一大堆安装好的工具包及依赖项，比如numpy、pandas、matplotlib等。...">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta property="og:title" content="第 4 部分 Python 安装与入门 | 临床预测模型">
+<meta property="og:type" content="book">
+<meta property="og:description" content="4.1 Anaconda 的安装  4.1.1 Anaconda简介 Anaconda，是一个开源的Python发行版本，其包含了conda、Python以及一大堆安装好的工具包及依赖项，比如numpy、pandas、matplotlib等。...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第 4 部分 Python 安装与入门 | 临床预测模型">
+<meta name="twitter:description" content="4.1 Anaconda 的安装  4.1.1 Anaconda简介 Anaconda，是一个开源的Python发行版本，其包含了conda、Python以及一大堆安装好的工具包及依赖项，比如numpy、pandas、matplotlib等。...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap/bootstrap.bundle.min.js"></script><script src="libs/bs3compat/transition.js"></script><script src="libs/bs3compat/tabs.js"></script><script src="libs/bs3compat/bs3compat.js"></script><link href="libs/bs4_book/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">临床预测模型</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">关于课程</a></li>
+<li><a class="" href="%E6%A1%88%E4%BE%8B%E6%95%99%E5%AD%A6-1.html">案例教学</a></li>
+<li><a class="" href="%E4%B8%B4%E5%BA%8A%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B.html"><span class="header-section-number">1</span> 临床预测模型</a></li>
+<li><a class="" href="%E6%A1%88%E4%BE%8B%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">2</span> 案例介绍</a></li>
+<li><a class="" href="%E5%AE%9E%E6%93%8D%E6%95%99%E5%AD%A6-1.html">实操教学</a></li>
+<li><a class="" href="r-%E5%AE%9E%E6%93%8D.html"><span class="header-section-number">3</span> R 实操</a></li>
+<li><a class="active" href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">4</span> Python 安装与入门</a></li>
+<li><a class="" href="r%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">5</span> R安装与入门</a></li>
+<li><a class="" href="r%E5%85%A5%E9%97%A8-1.html"><span class="header-section-number">6</span> R入门</a></li>
+<li><a class="" href="nhanes%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">7</span> NHANES数据库介绍</a></li>
+<li><a class="" href="mimic%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BB%8B%E7%BB%8D.html"><span class="header-section-number">8</span> MIMIC数据库介绍</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="python-安装与入门" class="section level1" number="4">
+<h1>
+<span class="header-section-number">第 4 部分</span> Python 安装与入门<a class="anchor" aria-label="anchor" href="#python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><i class="fas fa-link"></i></a>
+</h1>
+<div id="anaconda-的安装" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Anaconda 的安装<a class="anchor" aria-label="anchor" href="#anaconda-%E7%9A%84%E5%AE%89%E8%A3%85"><i class="fas fa-link"></i></a>
+</h2>
+<div id="anaconda简介" class="section level3" number="4.1.1">
+<h3>
+<span class="header-section-number">4.1.1</span> Anaconda简介<a class="anchor" aria-label="anchor" href="#anaconda%E7%AE%80%E4%BB%8B"><i class="fas fa-link"></i></a>
+</h3>
+<p>Anaconda，是一个开源的Python发行版本，其包含了conda、Python以及一大堆安装好的工具包及依赖项，比如numpy、pandas、matplotlib等。</p>
+<p>conda是一个开源的包、环境管理器，可以用于在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换。不同的Python项目常常会对应不同的Python版本和依赖包版本，使用conda就可以方便的对不同的环境进行管理。</p>
+<p>Anaconda还附带了数据分析常用的<strong>Jupyter Notebook</strong>，之前被称为 IPython notebook，是一个交互式笔记本。Jupyter Notebook 的本质是一个 Web应用程序，可以将代码、图像和文档全部组合到一个web文档中，便于创建和共享程序文档，支持实时代码，数学方程，可视化和markdown，在数据清理和转换，数据分析，统计建模，机器学习等方面应用广泛。</p>
+</div>
+<div id="anaconda-下载" class="section level3" number="4.1.2">
+<h3>
+<span class="header-section-number">4.1.2</span> Anaconda 下载<a class="anchor" aria-label="anchor" href="#anaconda-%E4%B8%8B%E8%BD%BD"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p>官网：<a href="https://www.anaconda.com/" class="uri">https://www.anaconda.com/</a></p></li>
+<li>
+<p>百度云：</p>
+<p>链接：<a href="https://pan.baidu.com/s/1lr5ks5FiTgCrS-jrXdNZQQ?pwd=ab5q" class="uri">https://pan.baidu.com/s/1lr5ks5FiTgCrS-jrXdNZQQ?pwd=ab5q</a></p>
+<p>提取码：ab5q</p>
+</li>
+</ul>
+</div>
+<div id="安装步骤" class="section level3" number="4.1.3">
+<h3>
+<span class="header-section-number">4.1.3</span> 安装步骤<a class="anchor" aria-label="anchor" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>双击安装包进行安装，点击下一步。</li>
+</ul>
+<div class="inline-figure"><img src="images/0401.png" width="100%"></div>
+<div class="inline-figure"><img src="images/0402.png" width="100%"></div>
+<div class="inline-figure"><img src="images/0403.png" width="100%"></div>
+<ul>
+<li>选择安装位置，一定要记住。</li>
+</ul>
+<p>出现下面的界面，选择安装路径，尽量不要装入系统盘，系统盘的空间资源很宝贵。建议安装到<strong>其他盘</strong>，注意安装路径<strong>不要包含汉字并且尽量不要包含空格</strong>。选择后安装路径之后，点击 next。</p>
+<p>比如，我安装位置为：G:\develop\anaconda</p>
+<div class="inline-figure"><img src="images/0404.png" width="100%"></div>
+<ul>
+<li>这一步是选择是否勾选环境变量，这里暂时先不勾选，后面再配置好了。之后点击install进行安装即可。</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-56613E09.png" style="width:100.0%"></div>
+<ul>
+<li>安装进行中，等待安装完成。 <img src="images/paste-F31B00B9.png" style="width:100.0%">
+</li>
+</ul>
+<!-- --><ul>
+<li>一会儿之后就会安装完成，根据如下提示进行勾选和不勾选即可，点击finish，表示安装完成。 <img src="images/paste-5EE87A3E.png" style="width:100.0%">
+</li>
+</ul>
+<!-- --><ul>
+<li>安装完成后手动添加环境变量</li>
+</ul>
+<p><strong>第一步：此电脑&gt;右键&gt;属性&gt;高级系统设置</strong></p>
+<div class="inline-figure"><img src="images/paste-183CEFCF.png" style="width:100.0%"></div>
+<p><strong>第二步：点击环境变量</strong></p>
+<div class="inline-figure"><img src="images/paste-89F61225.png" style="width:100.0%"></div>
+<p><strong>第三步：选择系统变量中的path&gt;编辑</strong></p>
+<div class="inline-figure"><img src="images/paste-B0E59370.png" style="width:100.0%"></div>
+<p><strong>第四步：新建环境变量</strong></p>
+<div class="inline-figure"><img src="images/paste-39DF9402.png" style="width:100.0%"></div>
+<p><strong>第五步：输入本地的anaconda的相关目录，注意这个目录是你自己的安装目录。</strong></p>
+<p>下面是我的anaconda相关目录：</p>
+<p>G:\develop\anaconda</p>
+<p>G:\develop\anaconda\Library\mingw-w64\bin</p>
+<p>G:\develop\anaconda\Library\usr\bin</p>
+<p>G:\develop\anaconda\Library\bin</p>
+<p>G:\develop\anaconda\Scripts</p>
+<p>要把以上目录修改成自己的anaconda安装目录。比如你的anaconda安装在E盘下，那么就写成E:\anaconda，E:\anaconda\Library\mingw-w64\bin 等等。</p>
+<div class="inline-figure"><img src="images/paste-0CE15498.png" style="width:100.0%"></div>
+<p><strong>第六步：依次点击确定关闭所有的windows窗口，重启cmd</strong></p>
+<blockquote>
+<p>win+R</p>
+<p>输入：cmd</p>
+</blockquote>
+<p><strong>第七步：输入conda --version验证（注意空格，注意两个横线）</strong></p>
+<p>如果如下图所示，就代表配置成功了。conda后面的数字可以不一样，这个是conda的版本信息</p>
+<div class="inline-figure"><img src="images/paste-D98C02F3.png" style="width:100.0%"></div>
+</div>
+<div id="conda基本命令" class="section level3" number="4.1.4">
+<h3>
+<span class="header-section-number">4.1.4</span> conda基本命令<a class="anchor" aria-label="anchor" href="#conda%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>添加镜像</li>
+</ul>
+<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 为了装包速度快点，添加国内镜像</span></span>
+<span id="cb70-2"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span>
+<span id="cb70-4"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span>
+<span id="cb70-5"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span>
+<span id="cb70-6"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</span>
+<span id="cb70-7"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> show_channel_urls yes</span></code></pre></div>
+<ul>
+<li>基本命令</li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list    <span class="co">#查看当前环境所安装的包</span></span>
+<span id="cb71-2"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install numpy <span class="co"># 安装包</span></span>
+<span id="cb71-3"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install python=2.7    <span class="co">#安装指定版本包或软件</span></span>
+<span id="cb71-4"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> uninstall numpy  <span class="co"># 卸载包</span></span>
+<span id="cb71-5"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-6"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> list    <span class="co">#查看当前环境所安装的包</span></span>
+<span id="cb71-7"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy <span class="co"># 安装包</span></span>
+<span id="cb71-8"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-9"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 可以在使用pip的时候加参数-i https://pypi.tuna.tsinghua.edu.cn/simple </span></span>
+<span id="cb71-10"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 例如：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple gevent，这样就会从清华这边的镜像去安装gevent库。</span></span></code></pre></div>
+</div>
+<div id="打开jupyter-notebook" class="section level3" number="4.1.5">
+<h3>
+<span class="header-section-number">4.1.5</span> 打开jupyter notebook<a class="anchor" aria-label="anchor" href="#%E6%89%93%E5%BC%80jupyter-notebook"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>将带有.ipynb 文件夹放到桌面</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-C3298670.png" style="width:100.0%"></div>
+<ul>
+<li>打开 anaconda prompt</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-660D1490.png" style="width:100.0%"></div>
+<ul>
+<li>输入： cd desktop 按回车键</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-601F6B02.png" style="width:100.0%"></div>
+<ul>
+<li>接着输入：jupyter notebook 按回车键</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-EA0A9E85.png" style="width:100.0%"></div>
+<ul>
+<li>稍等一会，打开自带浏览器，找到python这个文件，打开</li>
+</ul>
+<div class="inline-figure"><img src="images/paste-76C826E1.png" style="width:100.0%"></div>
+<ul>
+<li>点python-example.ipynb文件就可以了</li>
+</ul>
+</div>
+</div>
+<div id="python-入门" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> python 入门<a class="anchor" aria-label="anchor" href="#python-%E5%85%A5%E9%97%A8"><i class="fas fa-link"></i></a>
+</h2>
+<p>推荐教程：<a href="https://www.cainiaojc.com/python/python-tutorial.html" class="uri">https://www.cainiaojc.com/python/python-tutorial.html</a></p>
+<p>简单介绍：</p>
+<p>文档链接: <a href="https://www.mubucm.com/doc/5y3mswgOYWg" class="uri">https://www.mubucm.com/doc/5y3mswgOYWg</a></p>
+<p>文档链接: <a href="https://www.mubucm.com/doc/3U7gD8xHiWg" class="uri">https://www.mubucm.com/doc/3U7gD8xHiWg</a></p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="r-%E5%AE%9E%E6%93%8D.html"><span class="header-section-number">3</span> R 实操</a></div>
+<div class="next"><a href="r%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html"><span class="header-section-number">5</span> R安装与入门</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><span class="header-section-number">4</span> Python 安装与入门</a></li>
+<li>
+<a class="nav-link" href="#anaconda-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="header-section-number">4.1</span> Anaconda 的安装</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#anaconda%E7%AE%80%E4%BB%8B"><span class="header-section-number">4.1.1</span> Anaconda简介</a></li>
+<li><a class="nav-link" href="#anaconda-%E4%B8%8B%E8%BD%BD"><span class="header-section-number">4.1.2</span> Anaconda 下载</a></li>
+<li><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="header-section-number">4.1.3</span> 安装步骤</a></li>
+<li><a class="nav-link" href="#conda%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="header-section-number">4.1.4</span> conda基本命令</a></li>
+<li><a class="nav-link" href="#%E6%89%93%E5%BC%80jupyter-notebook"><span class="header-section-number">4.1.5</span> 打开jupyter notebook</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#python-%E5%85%A5%E9%97%A8"><span class="header-section-number">4.2</span> python 入门</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/04-python_install_basis.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/04-python_install_basis.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

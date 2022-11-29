@@ -1,0 +1,423 @@
+```{r setup, include=FALSE, warning=FALSE}
+options(digits = 4, 
+        dplyr.print_min = 6, 
+        dplyr.print_max = 6,
+        htmltools.dir.version = FALSE, 
+        formatR.indent = 2, 
+        width = 55
+        )
+
+knitr::opts_chunk$set(
+                      echo = TRUE, 
+                      warning = FALSE, 
+                      message = FALSE,
+                      fig.width = 6, 
+                      fig.height = 4,
+                      fig.showtext = TRUE
+                      )
+
+```
+
+# 实操教学 {.unnumbered}
+
+# R 实操
+
+## **机器学习模型构建**
+
+### **加载需要的r包**
+
+```{r}
+rm(list = ls())
+library(tidyverse) # 数据整理
+library(dlookr) # 自动化EDA
+library(plotROC) # 绘制ROC
+library(pROC) # 计算AUC
+library(e1071) # 支持向量机
+library(caret) # 机器学习包
+library(ggplot2)
+library(rms) # 计算校准曲线\绘制nomo
+library(glmnet) # lasso
+```
+
+### **加载数据**
+
+```{r}
+data <- read_csv("data/CardiovascularDataset.csv")
+# dlookr 是一个自动输出一份数据诊断报告包，可以自行探索
+# eda_report(data) # 输出诊断报告
+# eda_report(data, target = 1) # 添加按照target的分组信息
+```
+
+-   查看数据情况
+
+```{r}
+# 查看前10行树
+head(data,10)
+```
+
+```{r}
+# 查看数据变量属性
+str(data)
+```
+
+### 划分数据集
+
+使用caret包来生成并比较不同的模型与性能。
+
+使用sample()函数，将数据集按照8:2随机拆分为训练集（264例）和测试集（61例）
+
+```{r}
+set.seed(1002)
+trainset <- sample(nrow(data), 0.8*nrow(data))
+testset <- data[-trainset,]
+trainset <- data[trainset, ]
+```
+
+-   为方便后续建模，将target转为factor
+
+```{r}
+trainset$target <- ifelse(trainset$target == 1, "yes", "no")
+testset$target <- ifelse(testset$target == 1, "yes", "no")
+trainset$target <- as.factor(trainset$target)
+testset$target <- as.factor(testset$target)
+```
+
+```{r}
+str(trainset$target)
+# str(testset)
+```
+
+### lasso变量筛选
+
+在统计学习中存在一个重要理论：**方差权衡**。一般常理认为模型建立得越复杂，分析和预测效果应该越好。而方差权衡恰恰指出了其中的弊端。复杂的模型一般对已知数据（training sample）的拟合（fitting）大过于简单模型，但是**复杂模型很容易对数据出现过度拟合（over-fitting）**。因为所有实际数据都会有各种形式的误差，过度拟合相当于把误差也当做有用的信息进行学习。**所以在未知数据（test sample）上的分析和预测效果会大大下降。**
+
+下图说明了方差权衡的结果。模型复杂度在**最低的时候（比如线性回归）预测的偏差比较大，但是方差很小**。随着模型复杂度的增大，对已知数据的预测误差会一直下降（因为拟合度增大），而对未知数据却出现拐点，一旦过于复杂，预测方差会变大，模型变得非常不稳定。
+
+![](images/%E6%96%B9%E5%B7%AE%E6%9D%83%E8%A1%A1-%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E%E6%8B%9F%E5%90%88%E4%B8%8D%E8%B6%B3.jpg){width="100%"}
+
+因此在很多实际生活应用中，线性模型因为其预测方差小，参数估计稳定可靠，仍然起着相当大的作用。正如上面的方差权衡所述，**建立线性模型中一个重要的问题就是变量选择（或者叫模型选择），指的是选择建立线性模型所用到的独立变量的选择。**在实际问题例如疾病风险控制中，独立变量一般会有200 \~ 300个之多。如果使用所有的变量，很可能会出现模型的过度拟合。所以对**变量的选择显得尤为重要**。
+
+传统的变量选择是采用逐步回归法（stepwise selection），其中又分为向前（forward）和向后（backward）的逐步回归。向前逐步是从0个变量开始逐步加入变量，而向后逐步是从所有变量的集合开始逐次去掉变量。加入或去掉变量一般按照标准的统计信息量来决定。**这种传统的变量选择的弊端是模型的方差一般会比较高，而且灵活性较差**。
+
+近年来回归分析中的一个重大突破是引入了正则化回归（regularized regression）的概念, 而最受关注和广泛应用的**正则化回归**是1996年由现任斯坦福教授的Robert Tibshirani提出的**LASSO回归**。**LASSO回归最突出的优势在于通过对所有变量系数进行回归惩罚（penalized regression）, 使得相对不重要的独立变量系数变为0，从而排除在建模之外。**
+
+LASSO方法不同于传统的逐步回归的最大之处是**它可以对所有独立变量同时进行处理，而不是逐步处理**。这一改进使得建模的**稳定性大大增加**。除此以外，LASSO还具有**计算速度快**，模型容易解释等很多优点。而模型发明者Tibshirani教授也因此获得当年的有统计学诺贝尔奖之称的考普斯总统奖（COPSS award）。
+
+#### 训练集中变量筛选
+
+1.  首先告诉软件，哪些是你的分类变量。分类变量转为因子
+
+```{r}
+data1 <- trainset
+
+data1[,c(2,3,6,7,9,11:13)] <- lapply(data1[, c(2,3,6,7,9,11:13)], factor)
+
+str(data1)
+```
+
+2.  因子的处理,分类变量处理 onehot encodeing（**自由选择**）
+
+```{r}
+# 为了做lasso把y定义为numeric
+data1$target <- as.numeric(data1$target)
+# 分类变量转为factor
+x.factors <- model.matrix(data1$target ~ data1$sex + data1$cp+data1$fbs+data1$restecg+data1$exang+data1$slope+data1$ca+data1$thal)[,-1]
+```
+
+```{r}
+#生成自变量和因变量矩阵
+x=as.matrix(data.frame(x.factors,data1[,c(1,4:5,8,10)]))
+```
+
+```{r}
+#定义y
+y=data1$target
+```
+
+-   进行拟合，默认为L1也就是Lasso
+
+```{r}
+fit1 <- glmnet(x,y,family="binomial")
+#解释偏差百分比以及相应的λ值
+print(fit1)
+#解释偏差不再随着λ值的增加而减小，因此而停止
+```
+
+```{r}
+#画出收缩曲线图
+plot(fit1,label = FALSE)
+plot(fit1,label = TRUE,xvar = "lambda")#系数值如何随着λ的变化而变化
+plot(fit1,label = TRUE,xvar = "dev")#偏差与系数之间的关系图
+```
+
+```{r}
+#指定lamda给出相应参数
+lasso.coef <- predict(fit1, type = "coefficients",s = 0.040 )
+lasso.coef
+```
+
+glmnet包在使用cv.glmnet()估计λ值时，默认使用10折交叉验证。在K折交叉验证中，数据被划分成k个相同的子集（折），#每次使用k-1个子集拟合模型，然后使用剩下的那个子集做测试集，最后将k次拟合的结果综合起来（一般取平均数），确定最后的参数。
+
+在这个方法中，每个子集只有一次用作测试集。在glmnet包中使用K折交叉验证非常容易，结果包括每次拟合的λ值和响应的MSE。默认设置为α=1。
+
+-   进行交叉验证，选择最优的惩罚系数lambada
+
+```{r}
+set.seed(317)
+cv.fit <- cv.glmnet(x,y,family="binomial")
+#cv.fit <- cv.glmnet(x,y,family="binomial",type.measure = "auc")#AUC和λ的关系
+#cv.fit <- cv.glmnet(x,y,family="binomial")#不要反复运行
+plot(cv.fit)
+```
+
+```{r}
+#显示一个标准误的系数
+coef(cv.fit, s = "lambda.1se")
+```
+
+```{r}
+#选择交叉验证误差最小的lambda
+cv.fit$lambda.min
+cv.fit$lambda.1se
+coef(cv.fit, s = "lambda.min")
+```
+
+```{r}
+#画出收缩系数图，及最小的lambda曲线
+plot(cv.fit$glmnet.fit,xvar="lambda")
+abline(v=log(c(cv.fit$lambda.min,cv.fit$lambda.1se)),lty=2)
+```
+
+```{r}
+#系数不为0的结果为Lasso筛选后的值
+predict(cv.fit,type='coefficient',s=cv.fit$lambda.min)
+predict(cv.fit,type='coefficient',s=cv.fit$lambda.1se)
+predict(cv.fit,type='coefficient',s=0.1)
+```
+
+#### 测试集\\验证集中 验证
+
+```{r}
+library(rms)
+#导入验证集
+test <- testset
+str(test)
+test$target <- as.numeric(test$target)
+#制作x矩阵
+test[,c(2,3,6,7,9,11:13)] <- lapply(test[, c(2,3,6,7,9,11:13)], factor)
+
+x.factors_test <- model.matrix(test$target ~ test$sex + test$cp+test$fbs+test$restecg+test$exang+test$slope+test$ca+test$thal)[,-1]
+
+newx=as.matrix(data.frame(x.factors_test,test[,c(1,4:5,8,10)]))
+```
+
+-   利用lasso在测试集中保存预测值，验证集当中的预测值
+
+```{r}
+test.y <- predict(cv.fit, newx = newx, type = "response", s=cv.fit$lambda.1se)
+library(rms)
+#在R当中做calibration plot
+test <- data.frame(test,test.y)
+# write.csv(test,file="test0.csv")
+# str(test)
+##########val.prob#####
+val.prob(test$s1,test$target)
+```
+
+### 训练集建立模型
+
+-   训练Logistic
+
+```{r}
+fitControl = trainControl(method = "none", classProbs = TRUE)
+
+set.seed(10101) # 设置种子数，复现结果
+LR_model <- train(target~. ,
+                  data = trainset,
+                  method = "glm",
+                  trControl = fitControl,
+                  metric = "ROC")
+```
+
+-   训练随机森林
+
+```{r}
+set.seed(10101) # 设置种子数，复现结果
+RF_model <- train(target~. ,
+                  data = trainset,
+                  method = "parRF",
+                  trControl = fitControl,
+                  metric = "ROC")
+```
+
+-   训练SVM
+
+```{r}
+set.seed(10101) # 设置种子数，复现结果
+SVM_model <- train(target~. ,
+                  data = trainset,
+                  method = "svmRadial",
+                  trControl = fitControl,
+                  metric = "ROC")
+```
+
+### 测试集评价模型
+
+从临床预测模型角度，构建模型有三度。区分度、校准度和临床实用性
+
+区分度我们通常采用的是AUROC或C-Index；
+
+校准度评价采用的是HL（hosmer lemeshow）检验以及校准曲线。
+
+Briser Score综合区分度和校准度的表现呢。
+
+#### 区分度
+
+-   获得模型测试集风险概率
+
+```{r}
+LR_pro <- predict (LR_model, newdata =testset, type= "prob") 
+RF_pro <- predict (RF_model, newdata =testset, type= "prob") 
+SVM_pro <-  predict (SVM_model, newdata =testset, type= "prob")
+
+testset$LR <- LR_pro$yes
+testset$RF <- RF_pro$yes
+testset$SVM <- SVM_pro$yes
+```
+
+-   使用plotROC包和ggplot2绘制ROC曲线
+
+```{r}
+ROC <- melt_roc(testset, "target", c("LR", "RF", "SVM"))
+ROC_plot <- ggplot(ROC, aes(d = D.target, m = M, color = name)) +
+    geom_roc(n.cuts = 0) +
+    labs(title = "三种模型测试集ROC曲线") + 
+    theme(plot.title = element_text(hjust = 0.5))+
+    geom_abline()
+# theme(text = element_text(size = 50)) 设置所有字体大小
+```
+
+```{r}
+ROC_plot
+```
+
+-   pROC包的roc()和auc()函数，计算AUC
+
+```{r}
+roc_LR <- roc(testset$target, testset$LR)
+auc_LR <- auc(roc_LR)
+auc_LR   # Area under the curve: 0.956
+
+roc_RF <- roc(testset$target, testset$RF)
+auc_RF <- auc(roc_RF)
+auc_RF   # Area under the curve: 0.935
+
+roc_SVM <- roc(testset$target, testset$SVM)
+auc_SVM <- auc(roc_SVM)
+auc_SVM  # Area under the curve: 0.969
+```
+
+#### 校准度
+
+-   校准曲线
+
+> 最理想的情况下, 校准曲线是一条对角线(预测概率等于经验概率)，表现较差的模型的校准曲线是sigmoid形的。
+
+使用rms包的calibration()函数 和ggplot2包绘制三种模型的校准曲线。
+
+能够看到，与对角线相比，两个模型的校准曲线存在一些偏差，整体上三种模型的校准曲线部分位于对角线上方（低估风险），部分位于下方（高估风险）。校准曲线置信区间宽度较大，这可能是由于样本量较小。但整体尚可。
+
+```{r}
+trellis.par.set(caretTheme())
+cal_obj <- calibration(target ~ LR+RF+SVM,
+                       data = testset, class = "yes", cuts = 3)
+CC_plot <- ggplot(cal_obj) + 
+    geom_line() +
+    labs(title = "三种模型测试集校准曲线") +
+     theme(plot.title = element_text(hjust = 0.5))+
+    geom_abline()
+```
+
+```{r}
+CC_plot
+```
+
+-   Brier评分
+
+> Brier Score（BS）评分用于评价模型的总体表现（overall performance），如果模型总体表现完美，那么预测值和实际值就完全一致，那么BS评分就等于零。如果BS\>0.25，某些文献则认为worthless。
+
+Brier评分=∑(Y-P)\^2/N，其中Y为实际观测概率，P为模型预测概率，N为总样本量。Brier评分取值范围0～1，Brier评分值越小，校准度越高。
+
+能够看到，三个模型的Brier评分都比较小，没有超过0.2，其中LR模型的Brier评分最小。
+
+```{r}
+LR_brier <- mean((testset$LR - as.numeric(testset$target)+1)^2)
+LR_brier  # 0.0735
+
+RF_brier <- mean((testset$RF - as.numeric(testset$target)+1)^2)
+RF_brier  # 0.1011
+
+SVM_brier <- mean((testset$SVM - as.numeric(testset$target)+1)^2)
+SVM_brier  # 0.07433
+```
+
+#### 临床实用性
+
+> DCA曲线
+>
+> DCA曲线横坐标是判断恶性/良性的风险阈值（0\~1），纵坐标为不同阈值对应的临床净获益（net benifit）。主要比较了根据四种模型划分恶性/良性患者（针对性干预），相比于把所有患者都看作恶性实施干预（ALL曲线）和所有患者都不干预（None曲线），是否有临床净获益。
+>
+> 006年首次介绍了DCA曲线，并提供了使用R语言绘制DCA曲线的dca()函代码下载链接：<https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis>
+
+```{r}
+testset$target <- ifelse(testset$target == "yes", 1, 0)
+# write_csv(testset, file = "data/testset.csv")
+```
+
+```{r}
+source("dca/dca.r")
+testset1 <- read.csv("data/testset.csv")
+DCA <- dca(data = testset1, outcome = "target",
+           predictors = c("LR", "RF", "SVM"))
+```
+
+能够看到，当风险阈值范围在0\~1 时，三种模型的临床净获益均高于ALL曲线和None曲线，能够取得临床净获益的阈值范围还是比较大的，但应该注意的是，随着阈值增大，四种模型的临床净获益也在减小。
+
+### Logistic的Nomogram绘制
+
+```{r}
+# 解决"variable 变量名 does not have limits defined by datadist"
+dd <- datadist(testset)
+options(datadist="dd")
+
+# 设置变量标签
+testset$sex <- factor(testset$sex,levels=c(0,1),labels=c("Female","Male"))
+# 构建LR模型
+f1 <- lrm(target~ age+sex+chol+oldpeak, data= testset, x = T, y = T)
+```
+
+```{r}
+# 绘制Nomogram
+nom <- nomogram(f1,
+                fun=function(x)1/(1+exp(-x)),
+                #也可fun=plogis,fun.at概率坐标范围
+                fun.at=c(.001,.01,.05,seq(.1,.9,by=.1),.95,.99,.999),
+                funlabel="Risk of target",
+                conf.int=F,
+                abbrev=F,
+                minlength=1,
+                #lp线性预测值
+                lp=F)
+plot(nom)
+```
+
+-   另外一种
+
+```{r message=FALSE, paged.print=FALSE}
+library(regplot)
+regplot(f1)
+```
+
+```{r , out.width = '100%', echo = FALSE}
+knitr::include_graphics("images/0301.png", dpi = 300)
+```
