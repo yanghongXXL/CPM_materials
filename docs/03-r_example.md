@@ -41,8 +41,8 @@ head(data,10)
 ```
 
 ```
-## # A tibble: 10 x 14
-##     age   sex    cp trest~1  chol   fbs restecg thalach
+## # A tibble: 10 × 14
+##     age   sex    cp trest…¹  chol   fbs restecg thalach
 ##   <dbl> <dbl> <dbl>   <dbl> <dbl> <dbl>   <dbl>   <dbl>
 ## 1    63     1     3     145   233     1       0     150
 ## 2    53     1     0     140   203     1       0     155
@@ -50,10 +50,10 @@ head(data,10)
 ## 4    56     1     1     120   236     0       1     178
 ## 5    60     1     0     130   206     0       0     132
 ## 6    57     1     0     140   192     0       1     148
-## # ... with 4 more rows, 6 more variables: exang <dbl>,
+## # … with 4 more rows, 6 more variables: exang <dbl>,
 ## #   oldpeak <dbl>, slope <dbl>, ca <dbl>, thal <dbl>,
 ## #   target <dbl>, and abbreviated variable name
-## #   1: trestbps
+## #   ¹​trestbps
 ```
 
 
@@ -63,7 +63,7 @@ str(data)
 ```
 
 ```
-## spc_tbl_ [303 x 14] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+## spc_tbl_ [303 × 14] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ age     : num [1:303] 63 53 41 56 60 57 56 44 52 57 ...
 ##  $ sex     : num [1:303] 1 1 0 1 1 1 0 1 1 1 ...
 ##  $ cp      : num [1:303] 3 0 1 1 0 0 1 1 2 2 ...
@@ -165,7 +165,7 @@ str(data1)
 ```
 
 ```
-## tibble [242 x 14] (S3: tbl_df/tbl/data.frame)
+## tibble [242 × 14] (S3: tbl_df/tbl/data.frame)
 ##  $ age     : num [1:242] 57 41 43 37 66 46 60 57 61 44 ...
 ##  $ sex     : Factor w/ 2 levels "0","1": 2 2 2 2 1 2 2 2 2 2 ...
 ##  $ cp      : Factor w/ 4 levels "0","1","2","3": 1 3 1 3 3 3 1 1 4 1 ...
@@ -302,19 +302,19 @@ print(fit1)
 plot(fit1,label = FALSE)
 ```
 
-![](03-r_example_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
+<img src="03-r_example_files/figure-html/unnamed-chunk-13-1.png" width="576" />
 
 ```r
 plot(fit1,label = TRUE,xvar = "lambda")#系数值如何随着λ的变化而变化
 ```
 
-![](03-r_example_files/figure-latex/unnamed-chunk-13-2.pdf)<!-- --> 
+<img src="03-r_example_files/figure-html/unnamed-chunk-13-2.png" width="576" />
 
 ```r
 plot(fit1,label = TRUE,xvar = "dev")#偏差与系数之间的关系图
 ```
 
-![](03-r_example_files/figure-latex/unnamed-chunk-13-3.pdf)<!-- --> 
+<img src="03-r_example_files/figure-html/unnamed-chunk-13-3.png" width="576" />
 
 
 ```r
@@ -366,7 +366,7 @@ cv.fit <- cv.glmnet(x,y,family="binomial")
 plot(cv.fit)
 ```
 
-![](03-r_example_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
+<img src="03-r_example_files/figure-html/unnamed-chunk-15-1.png" width="576" />
 
 
 ```r
@@ -459,7 +459,7 @@ plot(cv.fit$glmnet.fit,xvar="lambda")
 abline(v=log(c(cv.fit$lambda.min,cv.fit$lambda.1se)),lty=2)
 ```
 
-![](03-r_example_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
+<img src="03-r_example_files/figure-html/unnamed-chunk-18-1.png" width="576" />
 
 
 ```r
@@ -570,7 +570,7 @@ str(test)
 ```
 
 ```
-## tibble [61 x 14] (S3: tbl_df/tbl/data.frame)
+## tibble [61 × 14] (S3: tbl_df/tbl/data.frame)
 ##  $ age     : num [1:61] 63 56 44 64 58 58 57 61 60 54 ...
 ##  $ sex     : num [1:61] 1 0 1 1 0 1 0 0 1 1 ...
 ##  $ cp      : num [1:61] 3 1 1 3 2 2 0 0 0 0 ...
@@ -611,7 +611,7 @@ test <- data.frame(test,test.y)
 val.prob(test$s1,test$target)
 ```
 
-![](03-r_example_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
+<img src="03-r_example_files/figure-html/unnamed-chunk-21-1.png" width="576" />
 
 ```
 ##        Dxy    C (ROC)         R2          D   D:Chi-sq 
@@ -697,7 +697,7 @@ ROC_plot <- ggplot(ROC, aes(d = D.target, m = M, color = name)) +
 ROC_plot
 ```
 
-![](03-r_example_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
+<img src="03-r_example_files/figure-html/unnamed-chunk-27-1.png" width="576" />
 
 -   pROC包的roc()和auc()函数，计算AUC
 
@@ -756,7 +756,7 @@ DCA <- dca(data = testset1, outcome = "target",
            predictors = c("LR"))
 ```
 
-![](03-r_example_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
+<img src="03-r_example_files/figure-html/unnamed-chunk-30-1.png" width="576" />
 
 能够看到，当风险阈值范围在0\~1 时，模型的临床净获益均高于ALL曲线和None曲线，能够取得临床净获益的阈值范围还是比较大的，但应该注意的是，随着阈值增大，模型的临床净获益也在减小。
 
@@ -790,7 +790,7 @@ nom <- nomogram(f1,
 plot(nom)
 ```
 
-![](03-r_example_files/figure-latex/unnamed-chunk-32-1.pdf)<!-- --> 
+<img src="03-r_example_files/figure-html/unnamed-chunk-32-1.png" width="576" />
 
 -   另外一种
 
@@ -804,5 +804,4 @@ regplot(f1)
 ## [1] "note: points tables not constructed unless points=TRUE "
 ```
 
-
-\includegraphics[width=1\linewidth]{images/0301} 
+<img src="images/0301.png" width="100%" />

@@ -1,13 +1,106 @@
 # 案例教学 {.unnumbered}
 
+# 健康医疗大数据驱动下的临床科研
 
 
-# 临床预测模型
+
+## 健康医疗大数据驱动下的临床科研
+
+### 医疗大数据及其应用
+
+-   **什么是大数据**
+
+**大数据（Big data）**是结构化和非结构化数据集的广义术语，既庞大又复杂，以至于传统的数据处理应用程序和系统无法充分处理它们。健康医疗大数据为疾病人工智能诊断与预测预后分析提供强大支撑。
+
+![](images/paste-2EA007AE.png){width="60%"}
+
+-   **医疗大数据的特点**
+
+![](images/paste-BD5A1B16.png){width="100%"}
+
+-   **医疗大数据的应用**
+
+<img src="images/医疗大数据的应用.png" width="100%" />
+
+### **疾病模型类型**
+
+-   **疾病的全周期模型类型**
+
+![](images/paste-A371A507.png){width="100%"}
+
+### **研究设计类型**
+
+-   **研究设计方法**
+
+<img src="images/研究设计方法.png" width="100%" />
+
+-   **临床研究五要素（PiCOT）**
+
+<img src="images/临床研究5个要素.png" width="100%" />
+
+### 临床数据获取
+
+-   **数据的获取与处理**
+
+![](images/paste-AA89058B.png){width="100%"}
+
+-   **数据的集成和整合**
+
+![](images/paste-188063EB.png){width="100%"}
+
+-   **全过程分析**
+
+![](images/paste-482C8761.png){width="100%"}
+
+-   **CRF表的制定**
+
+**设计要点**
+
+1.  **科学性**：每个问题都要**真实**、**可靠**地测量研究人群的属性、特征、知识、态度或行为
+
+2.  **逻辑性**：逻辑结构自然、顺畅，问题之间的逻辑关系较强
+
+3.  **易用性**：易于被研究对象和调查员理解和接受
+
+-   COPD-CRF基线部分（例）
+
+<img src="images/CRF基线.png" width="100%" />
+
+-   COPD-CRF随访部分（例）
+
+<img src="images/CRF2.png" width="100%" />
+
+### 变量类型与筛选
+
+-   **变量角色**
+
+<img src="images/变量角色.png" width="100%" />
+
+-   **预测变量/自变量选择**
+
+<img src="images/预测变量.png" width="100%" />
+
+-   **指标组合的建模方法**
+
+    -   **C模型**：基于临床特征（**C**linic character/history）：如来自HIS、LIS系统的数据、非结构化数据的量化与建模，如心电图、彩超、影像数据等
+
+    -   **BC模型**：基于临床特征+ 生物标志物（ **B**iomarker）的预后模型
+
+    -   **ABC模型**：基于临床特征 + 生物标志物 +人口学（或一般情况）的预后模型
+
+-   **生命质量或患者报告结局（PRO）**
+
+<img src="images/PRO.png" width="100%" />
+
+-   **结局变量选择**
+
+<img src="images/COPD结局.png" width="100%" /><img src="images/COPD2.png" width="100%" /><img src="images/COPD3.png" width="100%" />
+
+## 临床预测模型
 
 当今医学从经验医学发展到循证医学，再到精准医学，临床数据的应用也随着大数据时代的来临越来越受到重视。
 
-
-\includegraphics[width=1\linewidth]{images/0101} 
+<img src="images/0101.png" width="100%" />
 
 **循证医学缺点：**
 
@@ -19,14 +112,13 @@
 
 临床预测模型就是在精准医学研究思维模式的基础上应运而生，成为当下最炙手可热的临床领域之一。
 
-
-\includegraphics[width=1\linewidth]{images/0102} 
+<img src="images/0102.png" width="100%" />
 
 > 在PubMed以"Clinical Prediction Model" 搜索，自1964年发表的第一篇文章以来，到2015年论文发表数量以极快的趋势增长，其火热程度可见一斑。
 
-## 临床预测模型应用场景
+### 临床预测模型应用场景
 
-### 什么是临床预测模型？
+#### 什么是临床预测模型？
 
 -   **预测模型**
 
@@ -54,7 +146,7 @@
 
     是指利用多因素模型估算患有某病的概率或者将来某结局发生的概率。
 
-### 应用场景
+#### 应用场景
 
 临床预测模型的应用场景主要是临床，针对个体患者，进行结局预测，例如预测医学事件：某种疾病的发生率、复发率、伤残率、并发症的发生以及死亡率等，也可以用于预测结局值：住院天数、住院费用等。
 
@@ -90,7 +182,7 @@
 
     -   **指导个体化治疗和康复方案的制定**，防止病情恶化，预防并发症和伤残，提高患者生存质量
 
-### 为什么做临床预测模型？
+#### 为什么做临床预测模型？
 
 **临床医生可能常常面临这样的困惑：**
 
@@ -108,14 +200,13 @@
 
 另一方面是**对医生发展的影响**，临床预测模型目前已成为SCI期刊发表论文的热门，更是SCI高分期刊的宠儿，通过收集数据，构建临床预测模型，能够快速地发表学术论文，提升职称，完成医生的高级进阶。
 
-## 临床预测模型怎么构建
+### 临床预测模型怎么构建
 
-### 完整构建流程
+#### 完整构建流程
 
+<img src="images/0103.png" width="100%" />
 
-\includegraphics[width=1\linewidth]{images/0103} 
-
-### 确定研究问题和预测模型类型
+#### 确定研究问题和预测模型类型
 
 最常见的两种类型
 
@@ -127,8 +218,7 @@
 
     是研究对象在患某种疾病时，预测其未来疾病的复发、死亡、伤残等转归情况的概率，多见于纵向研究，如**队列研究**等。
 
-
-\includegraphics[width=1\linewidth]{images/0104} 
+<img src="images/0104.png" width="100%" />
 
 **预测模型的类型取决于感兴趣的结局**
 
@@ -142,7 +232,7 @@
 
 不同结局类型确定选用的模型 ------\> **数据决定模型**
 
-### 数据的预处理
+#### 数据的预处理
 
 -   数据的收集：现有的试验、队列研究、登记注册或管理的数据集
 
@@ -150,8 +240,7 @@
 
     > 注意：数据预处理前做好数据"**整洁**" 避免"**脏**"数据！
 
-
-\includegraphics[width=1\linewidth]{images/0105} 
+<img src="images/0105.png" width="100%" />
 
 > **"整洁"数据：**
 >
@@ -161,8 +250,7 @@
 >
 > -   中间无乱码、不规范表达
 
-
-\includegraphics[width=1\linewidth]{images/0106} 
+<img src="images/0106.png" width="100%" />
 
 > **"脏"数据：**
 >
@@ -192,32 +280,27 @@
 
         -   对数转化等（[参考知乎讨论](https://www.zhihu.com/question/22012482)）
 
+<img src="images/0107数据预处理.png" width="100%" />
 
-\includegraphics[width=1\linewidth]{images/0107数据预处理} 
+#### 变量筛选
 
-### 变量筛选
+<img src="images/0108变量筛选.png" width="100%" />
 
-
-\includegraphics[width=1\linewidth]{images/0108变量筛选} 
-
-### 模型的选择
+#### 模型的选择
 
 **传统模型梳理**
 
-
-\includegraphics[width=1\linewidth]{images/0110传统与机器学习模型梳理} 
+<img src="images/0110传统与机器学习模型梳理.png" width="100%" />
 
 **机器学习类型**
 
+<img src="images/0111纯机器学习模型梳理.png" width="100%" />
 
-\includegraphics[width=1\linewidth]{images/0111纯机器学习模型梳理} 
+#### 模型的构建
 
-### 模型的构建
+<img src="images/0112模型构建.png" width="100%" />
 
-
-\includegraphics[width=1\linewidth]{images/0112模型构建} 
-
-### 模型的评价
+#### 模型的评价
 
 -   **常用概率解释**
 
@@ -270,10 +353,9 @@
 
 -   [**Diagnostic testing**](https://en.wikipedia.org/wiki/F-score)
 
+<img src="images/0122评价指标.png" width="100%" />
 
-\includegraphics[width=1\linewidth]{images/0122评价指标} 
-
-### 模型的展示
+#### 模型的展示
 
 -   应用程序网页
 
@@ -285,26 +367,21 @@
 
 > **应用程序网页**
 
+<img src="images/0113.png" width="100%" />
 
-\includegraphics[width=1\linewidth]{images/0113} 
-
-
-\includegraphics[width=1\linewidth]{images/0114} 
+<img src="images/0114.png" width="100%" />
 
 > **Nomogram**
 
-
-\includegraphics[width=1\linewidth]{images/0115} 
+<img src="images/0115.png" width="100%" />
 
 > **评分系统**
 
-
-\includegraphics[width=1\linewidth]{images/0116} 
+<img src="images/0116.png" width="100%" />
 
 > **彩色打分卡**
 
-
-\includegraphics[width=1\linewidth]{images/0117} 
+<img src="images/0117.png" width="100%" />
 
 +------------------+--------------------+--------------------+
 |                  | 优 势              | 劣 势              |
@@ -328,50 +405,38 @@
 |                  |                    | 预测因子不能太多   |
 +------------------+--------------------+--------------------+
 
-## 模型报告
+### 模型报告
 
 只有对预测模型各方面的信息进行全面和明确的报告，才能充分评估预测模型的偏倚风险和潜在有用性。
 
 个体预后或诊断多变量预测模型透明报告**Transparent Reporting of a multivariable prediction model for Individual Prognosis Or Diagnosis ([TRIPOD](https://www.equator-network.org/reporting-guidelines/tripod-statement/))**为开发、验证或更新预测模型的研究报告提出了一套建议。
 
-### 临床预测模型报告规范（TRIPOD）
+#### 临床预测模型报告规范（TRIPOD）
 
-
-\includegraphics[width=1\linewidth]{images/0118TRIPOD} 
+<img src="images/0118TRIPOD.png" width="100%" />
 
 **TRIPOD条目解读**
 
+<img src="images/012101.png" width="100%" /><img src="images/012102.png" width="100%" /><img src="images/012103.png" width="100%" /><img src="images/012104.png" width="100%" />
 
-\includegraphics[width=1\linewidth]{images/012101} 
-\includegraphics[width=1\linewidth]{images/012102} 
-\includegraphics[width=1\linewidth]{images/012103} 
-\includegraphics[width=1\linewidth]{images/012104} 
+#### 临床预测模型指南
 
-### 临床预测模型指南
+<img src="images/0119指南.png" width="100%" />
 
+#### 研究设计和方法学评价：PROBAST
 
-\includegraphics[width=1\linewidth]{images/0119指南} 
-
-### 研究设计和方法学评价：PROBAST
-
-
-\includegraphics[width=1\linewidth]{images/0120} 
+<img src="images/0120.png" width="100%" />
 
 -   [**机器学习构建流程总结**](https://www.mubucm.com/doc/3mH9_G3rgIg)
 
-## [机器学习 VS 传统统计](https://www.datasciencecentral.com/machine-learning-vs-traditional-statistics-different-philosophi-1/)
+### [机器学习 VS 传统统计](https://www.datasciencecentral.com/machine-learning-vs-traditional-statistics-different-philosophi-1/)
 
+<img src="images/0123.png" width="100%" />
 
-\includegraphics[width=1\linewidth]{images/0123} 
+<img src="images/0124.png" width="100%" />
 
+<img src="images/0125.png" width="100%" />
 
-\includegraphics[width=1\linewidth]{images/0124} 
+<img src="images/0126.png" width="100%" />
 
-
-\includegraphics[width=1\linewidth]{images/0125} 
-
-
-\includegraphics[width=1\linewidth]{images/0126} 
-
-
-\includegraphics[width=1\linewidth]{images/0127} 
+<img src="images/0127.png" width="100%" />

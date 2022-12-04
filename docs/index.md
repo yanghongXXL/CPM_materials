@@ -7,6 +7,7 @@ output:
   pdf_document: default
 documentclass: book
 # bibliography: [book.bib, packages.bib]
+cover-image: images/封面.png
 description: "了解临床预测模型相关概念与构建流程"
 site: bookdown::bookdown_site
 biblio-style: apalike

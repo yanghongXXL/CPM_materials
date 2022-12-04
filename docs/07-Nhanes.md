@@ -61,8 +61,8 @@ head(mydata,10)
 ```
 
 ```
-## # A tibble: 10 x 46
-##    SEQN SDDSR~1 RIDST~2 RIAGE~3 RIDAG~4 RIDAG~5 RIDRE~6
+## # A tibble: 10 × 46
+##    SEQN SDDSR…¹ RIDST…² RIAGE…³ RIDAG…⁴ RIDAG…⁵ RIDRE…⁶
 ##   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
 ## 1 93703      10       2       2       2      NA       5
 ## 2 93704      10       2       1       2      NA       3
@@ -70,13 +70,13 @@ head(mydata,10)
 ## 4 93706      10       2       1      18      NA       5
 ## 5 93707      10       2       1      13      NA       5
 ## 6 93708      10       2       2      66      NA       5
-## # ... with 4 more rows, 39 more variables:
+## # … with 4 more rows, 39 more variables:
 ## #   RIDRETH3 <dbl>, RIDEXMON <dbl>, RIDEXAGM <dbl>,
 ## #   DMQMILIZ <dbl>, DMQADFC <dbl>, DMDBORN4 <dbl>,
 ## #   DMDCITZN <dbl>, DMDYRSUS <dbl>, DMDEDUC3 <dbl>,
 ## #   DMDEDUC2 <dbl>, DMDMARTL <dbl>, RIDEXPRG <dbl>,
 ## #   SIALANG <dbl>, SIAPROXY <dbl>, SIAINTRP <dbl>,
-## #   FIALANG <dbl>, FIAPROXY <dbl>, FIAINTRP <dbl>, ...
+## #   FIALANG <dbl>, FIAPROXY <dbl>, FIAINTRP <dbl>, …
 ```
 
 -   [对照变量说明提取需要得变量](https://wwwn.cdc.gov/Nchs/Nhanes/2017-2018/DEMO_J.htm)
