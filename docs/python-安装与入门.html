@@ -7,7 +7,7 @@
 <title>第 4 部分 Python 安装与入门 | 临床预测模型</title>
 <meta name="author" content="杨 弘">
 <meta name="description" content="4.1 Anaconda 的安装  4.1.1 Anaconda简介 Anaconda，是一个开源的Python发行版本，其包含了conda、Python以及一大堆安装好的工具包及依赖项，比如numpy、pandas、matplotlib等。...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta name="generator" content="bookdown 0.32 with bs4_book()">
 <meta property="og:title" content="第 4 部分 Python 安装与入门 | 临床预测模型">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/封面.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="/images/封面.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -156,26 +156,26 @@
 <ul>
 <li>添加镜像</li>
 </ul>
-<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 为了装包速度快点，添加国内镜像</span></span>
-<span id="cb70-2"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-3"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span>
-<span id="cb70-4"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span>
-<span id="cb70-5"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span>
-<span id="cb70-6"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</span>
-<span id="cb70-7"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> show_channel_urls yes</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb78-1"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 为了装包速度快点，添加国内镜像</span></span>
+<span id="cb78-2"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span>
+<span id="cb78-4"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span>
+<span id="cb78-5"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span>
+<span id="cb78-6"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--add</span> channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/</span>
+<span id="cb78-7"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb78-7" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> config <span class="at">--set</span> show_channel_urls yes</span></code></pre></div>
 <ul>
 <li>基本命令</li>
 </ul>
-<div class="sourceCode" id="cb71"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb71-1"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list    <span class="co">#查看当前环境所安装的包</span></span>
-<span id="cb71-2"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install numpy <span class="co"># 安装包</span></span>
-<span id="cb71-3"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install python=2.7    <span class="co">#安装指定版本包或软件</span></span>
-<span id="cb71-4"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> uninstall numpy  <span class="co"># 卸载包</span></span>
-<span id="cb71-5"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-6"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> list    <span class="co">#查看当前环境所安装的包</span></span>
-<span id="cb71-7"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy <span class="co"># 安装包</span></span>
-<span id="cb71-8"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-9"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 可以在使用pip的时候加参数-i https://pypi.tuna.tsinghua.edu.cn/simple </span></span>
-<span id="cb71-10"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 例如：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple gevent，这样就会从清华这边的镜像去安装gevent库。</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb79-1"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> list    <span class="co">#查看当前环境所安装的包</span></span>
+<span id="cb79-2"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install numpy <span class="co"># 安装包</span></span>
+<span id="cb79-3"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install python=2.7    <span class="co">#安装指定版本包或软件</span></span>
+<span id="cb79-4"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> uninstall numpy  <span class="co"># 卸载包</span></span>
+<span id="cb79-5"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-6"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> list    <span class="co">#查看当前环境所安装的包</span></span>
+<span id="cb79-7"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy <span class="co"># 安装包</span></span>
+<span id="cb79-8"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-9"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 可以在使用pip的时候加参数-i https://pypi.tuna.tsinghua.edu.cn/simple </span></span>
+<span id="cb79-10"><a href="python-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8.html#cb79-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 例如：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple gevent，这样就会从清华这边的镜像去安装gevent库。</span></span></code></pre></div>
 </div>
 <div id="打开jupyter-notebook" class="section level3" number="4.1.5">
 <h3>
@@ -251,7 +251,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2023-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

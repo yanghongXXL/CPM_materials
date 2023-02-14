@@ -7,7 +7,7 @@
 <title>第 7 部分 NHANES数据库介绍 | 临床预测模型</title>
 <meta name="author" content="杨 弘">
 <meta name="description" content="7.1 数据库简介 National Health and Nutrition Examination Survey （NHANES数据库，网址：https://www.cdc.gov/nchs/nhanes/index.htm）收集了有关美国家庭人口健康和营养信息，是一项基于人群的横断面调查。...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta name="generator" content="bookdown 0.32 with bs4_book()">
 <meta property="og:title" content="第 7 部分 NHANES数据库介绍 | 临床预测模型">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/封面.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="/images/封面.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -100,7 +100,7 @@
 <ul>
 <li>或者直接用nhanesA下载数据（速度可能比较慢）</li>
 </ul>
-<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=nhanesA">nhanesA</a></span><span class="op">)</span></span>
 <span><span class="va">mydata1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanes.html">nhanes</a></span><span class="op">(</span><span class="st">'DEMO_J'</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -109,7 +109,7 @@
 <span class="header-section-number">7.2</span> 数据提取<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96"><i class="fas fa-link"></i></a>
 </h2>
 <p>数据下好后用R读取</p>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_xpt.html">read_xpt</a></span><span class="op">(</span><span class="st">"data/demo_j.xpt"</span><span class="op">)</span></span>
@@ -134,8 +134,9 @@
 <li><a href="https://wwwn.cdc.gov/Nchs/Nhanes/2017-2018/DEMO_J.htm">对照变量说明提取需要得变量</a></li>
 </ul>
 <div class="inline-figure"><img src="images/paste-C7547CC6.png" style="width:100.0%"></div>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat1</span><span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">SEQN</span>, <span class="co"># 序列号</span></span>
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat1</span><span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">SEQN</span>, <span class="co"># 序列号</span></span>
 <span>                         <span class="va">RIAGENDR</span>, <span class="co"># 性别</span></span>
 <span>                         <span class="va">RIDAGEYR</span>, <span class="co"># 年龄</span></span>
 <span>                         <span class="va">RIDRETH3</span>, <span class="co"># 种族</span></span>
@@ -145,7 +146,7 @@
 <span>                         <span class="va">SDMVSTRA</span><span class="op">)</span> <span class="co"># strata</span></span></code></pre></div>
 <p>以上demo文件中只有人口统计学指标，提取其他信息还需要下载其他数据。假如我们想提取血糖，血糖应该在<a href="https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx?Component=Laboratory&amp;CycleBeginYear=2017">化验室指标</a>那里，这次我们使用nhanesA包来下载。</p>
 <div class="inline-figure"><img src="images/paste-6AA51C32.png" style="width:100.0%"></div>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># xuetang1 &lt;- nhanes('GLU_J') # 在线提取</span></span>
 <span><span class="va">xuetang</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_xpt.html">read_xpt</a></span><span class="op">(</span><span class="st">"data/glu_j.xpt"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">xuetang</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span> ,align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span></span></code></pre></div>
@@ -220,183 +221,11 @@
 </tbody>
 </table></div>
 <p>提取好指标后进行合并</p>
-<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hdata</span><span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">xuetang</span>, by <span class="op">=</span> <span class="st">'SEQN'</span>, type <span class="op">=</span> <span class="st">'full'</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">hdata</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span> ,align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-table"><table style="width:100%;" class="table table-sm">
-<colgroup>
-<col width="6%">
-<col width="8%">
-<col width="8%">
-<col width="8%">
-<col width="8%">
-<col width="8%">
-<col width="8%">
-<col width="7%">
-<col width="8%">
-<col width="8%">
-<col width="7%">
-<col width="8%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">SEQN</th>
-<th align="center">RIAGENDR</th>
-<th align="center">RIDAGEYR</th>
-<th align="center">RIDRETH3</th>
-<th align="center">DMDMARTL</th>
-<th align="center">WTINT2YR</th>
-<th align="center">WTMEC2YR</th>
-<th align="center">SDMVPSU</th>
-<th align="center">SDMVSTRA</th>
-<th align="center">WTSAF2YR</th>
-<th align="center">LBXGLU</th>
-<th align="center">LBDGLUSI</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">93703</td>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">6</td>
-<td align="center">NA</td>
-<td align="center">9246</td>
-<td align="center">8540</td>
-<td align="center">2</td>
-<td align="center">145</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-</tr>
-<tr class="even">
-<td align="center">93704</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">3</td>
-<td align="center">NA</td>
-<td align="center">37339</td>
-<td align="center">42567</td>
-<td align="center">1</td>
-<td align="center">143</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-</tr>
-<tr class="odd">
-<td align="center">93705</td>
-<td align="center">2</td>
-<td align="center">66</td>
-<td align="center">4</td>
-<td align="center">3</td>
-<td align="center">8615</td>
-<td align="center">8338</td>
-<td align="center">2</td>
-<td align="center">145</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-</tr>
-<tr class="even">
-<td align="center">93706</td>
-<td align="center">1</td>
-<td align="center">18</td>
-<td align="center">6</td>
-<td align="center">NA</td>
-<td align="center">8549</td>
-<td align="center">8723</td>
-<td align="center">2</td>
-<td align="center">134</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-</tr>
-<tr class="odd">
-<td align="center">93707</td>
-<td align="center">1</td>
-<td align="center">13</td>
-<td align="center">7</td>
-<td align="center">NA</td>
-<td align="center">6769</td>
-<td align="center">7065</td>
-<td align="center">1</td>
-<td align="center">138</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-</tr>
-<tr class="even">
-<td align="center">93708</td>
-<td align="center">2</td>
-<td align="center">66</td>
-<td align="center">6</td>
-<td align="center">1</td>
-<td align="center">13329</td>
-<td align="center">14372</td>
-<td align="center">2</td>
-<td align="center">138</td>
-<td align="center">25654</td>
-<td align="center">122</td>
-<td align="center">6.77</td>
-</tr>
-<tr class="odd">
-<td align="center">93709</td>
-<td align="center">2</td>
-<td align="center">75</td>
-<td align="center">4</td>
-<td align="center">2</td>
-<td align="center">12043</td>
-<td align="center">12278</td>
-<td align="center">1</td>
-<td align="center">136</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-</tr>
-<tr class="even">
-<td align="center">93710</td>
-<td align="center">2</td>
-<td align="center">0</td>
-<td align="center">3</td>
-<td align="center">NA</td>
-<td align="center">16418</td>
-<td align="center">16848</td>
-<td align="center">1</td>
-<td align="center">134</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-</tr>
-<tr class="odd">
-<td align="center">93711</td>
-<td align="center">1</td>
-<td align="center">56</td>
-<td align="center">6</td>
-<td align="center">1</td>
-<td align="center">11178</td>
-<td align="center">12391</td>
-<td align="center">2</td>
-<td align="center">134</td>
-<td align="center">29226</td>
-<td align="center">107</td>
-<td align="center">5.94</td>
-</tr>
-<tr class="even">
-<td align="center">93712</td>
-<td align="center">1</td>
-<td align="center">18</td>
-<td align="center">1</td>
-<td align="center">NA</td>
-<td align="center">29040</td>
-<td align="center">30337</td>
-<td align="center">2</td>
-<td align="center">147</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-<td align="center">NA</td>
-</tr>
-</tbody>
-</table></div>
 <p>把它保存起来，今后的操作将在这个数据展开</p>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">hdata</span>,file<span class="op">=</span> <span class="st">"1.csv"</span>,row.names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="需要注意的点" class="section level2" number="7.3">
@@ -440,6 +269,16 @@
 </li>
 </ul>
 </blockquote>
+<ul>
+<li>
+<p>关于权重的介绍</p>
+<ul>
+<li>
+<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/module3.aspx">官方</a>+<a href="https://mp.weixin.qq.com/s/smoTeoW_KUdnvoidHnWfpg">中文版</a>
+</li>
+</ul>
+</li>
+</ul>
 <p>多看官网的各种分析提供的<a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/module6.aspx">代码示例</a></p>
 </div>
 <div id="一些技巧" class="section level3" number="7.3.3">
@@ -449,7 +288,7 @@
 <ul>
 <li>查看指定年份和指定类别的信息</li>
 </ul>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=nhanesA">nhanesA</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanesTables.html">nhanesTables</a></span><span class="op">(</span><span class="st">'EXAM'</span>, <span class="fl">2017</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="images/paste-3A10DDA1.png" style="width:100.0%"></div>
@@ -459,13 +298,92 @@
 <ol style="list-style-type: decimal">
 <li>假设我们需要进一步查看BPX_J的内部信息</li>
 </ol>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanesTableVars.html">nhanesTableVars</a></span><span class="op">(</span>data_group <span class="op">=</span> <span class="st">'Exam'</span>, nh_table <span class="op">=</span> <span class="st">'BPX_J'</span>, namesonly <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="images/paste-2D0C163C.png" style="width:100.0%"></div>
 <p>可以看到，此表之中有27列。Seqn是受访者的序列号，可以用来连接各表。</p>
+</div>
+</div>
+<div id="实战" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> 实战<a class="anchor" aria-label="anchor" href="#%E5%AE%9E%E6%88%98"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>先确定所需变量及需要的数据位置</li>
+</ul>
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 1. 下载整理数据----</span></span>
+<span><span class="co"># 安装包</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=nhanesA">nhanesA</a></span><span class="op">)</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'nhanesA'</span>,updata<span class="op">=</span> <span class="cn">F</span>, ask<span class="op">=</span>  <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'tidyverse'</span>,updata<span class="op">=</span> <span class="cn">F</span>, ask<span class="op">=</span>  <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/plyr">plyr</a></span><span class="op">)</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'plyr'</span>,updata<span class="op">=</span> <span class="cn">F</span>, ask<span class="op">=</span>  <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org">haven</a></span><span class="op">)</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'haven'</span>,updata<span class="op">=</span> <span class="cn">F</span>, ask<span class="op">=</span>  <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://r-survey.r-forge.r-project.org/survey/">survey</a></span><span class="op">)</span><span class="op">)</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'survey'</span>,updata<span class="op">=</span> <span class="cn">F</span>, ask<span class="op">=</span>  <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># data_group=DEMO/DIET/EXAM/LAB/Q, year写入一个周期中的奇数年份即可</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanesTables.html">nhanesTables</a></span><span class="op">(</span>data_group <span class="op">=</span> <span class="st">'DEMO'</span>, year <span class="op">=</span> <span class="fl">2017</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 查找表格中包含的字段</span></span>
+<span><span class="fu">kable</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanesTableVars.html">nhanesTableVars</a></span><span class="op">(</span>data_group <span class="op">=</span> <span class="st">'DEMO'</span>, nh_table <span class="op">=</span> <span class="st">'DEMO_J'</span>, namesonly <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#某个字段跳转官网查询</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/browseNHANES.html">browseNHANES</a></span><span class="op">(</span>data_group <span class="op">=</span> <span class="st">'DEMO'</span>, nh_table <span class="op">=</span> <span class="st">'DEMO_J'</span><span class="op">)</span></span>
+<span><span class="co">#下载数据</span></span>
+<span><span class="co"># demo &lt;- nhanes('DEMO_J')</span></span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 加载数据</span></span>
+<span><span class="va">demo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_xpt.html">read_xpt</a></span><span class="op">(</span>file <span class="op">=</span><span class="st">'data/DEMO_J.xpt'</span><span class="op">)</span></span>
+<span><span class="va">yesuan</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_xpt.html">read_xpt</a></span><span class="op">(</span>file <span class="op">=</span><span class="st">'data/FOLATE_J.xpt'</span><span class="op">)</span></span>
+<span><span class="va">guzhi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_xpt.html">read_xpt</a></span><span class="op">(</span>file <span class="op">=</span><span class="st">'data/OSQ_J.xpt'</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 选择相应变量</span></span>
+<span><span class="va">demo1</span> <span class="op">&lt;-</span> <span class="va">demo</span><span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">SEQN</span>, <span class="co"># 序列号</span></span>
+<span>                         <span class="va">RIAGENDR</span>, <span class="co"># 性别</span></span>
+<span>                         <span class="va">RIDAGEYR</span>, <span class="co"># 年龄</span></span>
+<span>                         <span class="va">WTINT2YR</span>,<span class="va">WTMEC2YR</span>, <span class="co"># 权重</span></span>
+<span>                         <span class="va">SDMVPSU</span>, <span class="co"># psu</span></span>
+<span>                         <span class="va">SDMVSTRA</span><span class="op">)</span> <span class="co"># strata</span></span>
+<span></span>
+<span><span class="va">guzhi1</span> <span class="op">&lt;-</span> <span class="va">guzhi</span><span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">SEQN</span>, <span class="va">OSQ060</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#分类资料转置</span></span>
+<span><span class="va">demo_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">demo1</span><span class="op">)</span></span>
+<span><span class="va">demo2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanesTranslate.html">nhanesTranslate</a></span><span class="op">(</span><span class="st">'DEMO_J'</span>, <span class="va">demo_vars</span>, data<span class="op">=</span><span class="va">demo1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">guzhi_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">guzhi1</span><span class="op">)</span></span>
+<span><span class="va">guzhi2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/nhanesA/man/nhanesTranslate.html">nhanesTranslate</a></span><span class="op">(</span><span class="st">'OSQ_J'</span>, <span class="va">guzhi_var</span>, data<span class="op">=</span> <span class="va">guzhi1</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 合并数据</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plyr/man/join_all.html">join_all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">demo2</span>, <span class="va">yesuan</span>, <span class="va">guzhi2</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">'SEQN'</span>, type <span class="op">=</span> <span class="st">'full'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span><span class="va">data2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">data1</span>, <span class="va">OSQ060</span><span class="op">==</span><span class="st">"Yes"</span> <span class="op">|</span> <span class="va">OSQ060</span> <span class="op">==</span> <span class="st">"No"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># 2. 计算复杂抽样分析----</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"data/data2.RData"</span><span class="op">)</span></span>
+<span><span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survey/man/svydesign.html">svydesign</a></span><span class="op">(</span>id      <span class="op">=</span> <span class="op">~</span><span class="va">SDMVPSU</span>,</span>
+<span>                          strata  <span class="op">=</span> <span class="op">~</span><span class="va">SDMVSTRA</span>,</span>
+<span>                          weights <span class="op">=</span> <span class="op">~</span><span class="va">WTMEC2YR</span>,</span>
+<span>                          nest    <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                          data    <span class="op">=</span> <span class="va">data2</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/survey/man/surveysummary.html">svymean</a></span><span class="op">(</span><span class="op">~</span><span class="va">LBDRFOSI</span><span class="op">+</span> <span class="va">LBDRFO</span>, <span class="va">aa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tt</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/survey/man/svyttest.html">svyttest</a></span><span class="op">(</span><span class="va">LBDRFOSI</span><span class="op">~</span><span class="va">OSQ060</span>, <span class="va">aa</span><span class="op">)</span></span>
+<span><span class="va">tt1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/survey/man/svyttest.html">svyttest</a></span><span class="op">(</span><span class="va">LBDRFO</span><span class="op">~</span><span class="va">OSQ060</span>, <span class="va">aa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tt</span></span>
+<span><span class="va">tt1</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/survey/man/svyby.html">svyby</a></span><span class="op">(</span><span class="op">~</span><span class="va">LBDRFO</span><span class="op">+</span><span class="va">LBDRFOSI</span>, <span class="op">~</span><span class="va">OSQ060</span>, design<span class="op">=</span><span class="va">aa</span>, <span class="va">svymean</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># save(data2, file = "data2.RData")</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">LBDRFOSI</span><span class="op">~</span><span class="va">OSQ060</span>,data <span class="op">=</span> <span class="va">data2</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/survey/man/svyttest.html">svyttest</a></span><span class="op">(</span><span class="va">LBDRFOSI</span><span class="op">~</span><span class="va">OSQ060</span>, <span class="va">aa</span><span class="op">)</span></span></code></pre></div>
 
 <hr>
-</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -484,6 +402,7 @@
 <li><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7"><span class="header-section-number">7.3.3</span> 一些技巧</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#%E5%AE%9E%E6%88%98"><span class="header-section-number">7.4</span> 实战</a></li>
 </ul>
 
       <div class="book-extra">
@@ -501,7 +420,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2023-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

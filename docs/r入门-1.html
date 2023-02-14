@@ -7,7 +7,7 @@
 <title>第 6 部分 R入门 | 临床预测模型</title>
 <meta name="author" content="杨 弘">
 <meta name="description" content="6.1 基础拾遗  6.1.1 Rstudio 设置 初识Rstudio Rstudio 默认由四个窗口组成，分别为：代码编辑窗口，环境变量窗口，控制台，以及绘图帮助窗口。窗口可以通过拖动分割柱移动。 个性化 Tools -&gt; Global Options -&gt; Appearance -&gt; 设定喜欢的编辑界面 packages 下载镜像设置 Tools -&gt; Global Options...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta name="generator" content="bookdown 0.32 with bs4_book()">
 <meta property="og:title" content="第 6 部分 R入门 | 临床预测模型">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/封面.png">
@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="/images/封面.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -89,13 +89,13 @@
 </ul>
 <p>Tools -&gt; Global Options -&gt; Packages -&gt; primary CRAN repository -&gt;changes(选择距离你最近的镜像)</p>
 <div class="inline-figure"><img src="images/paste-41D896CE.png" style="width:100.0%"></div>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="r%E5%85%A5%E9%97%A8-1.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 下载 R 包：</span></span>
-<span id="cb72-2"><a href="r%E5%85%A5%E9%97%A8-1.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)  注意打上英文的引号哦！ Ctrl<span class="sc">+</span>enter 运行！！</span></code></pre></div>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="r%E5%85%A5%E9%97%A8-1.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 下载 R 包：</span></span>
+<span id="cb80-2"><a href="r%E5%85%A5%E9%97%A8-1.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)  注意打上英文的引号哦！ Ctrl<span class="sc">+</span>enter 运行！！</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 加载 R 包：</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># 注意并不需要引号哦！</span></span></code></pre></div>
 <p><strong>注意！ R 包安装成功后，要及时注释安装语句，避免重复安装。</strong></p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("tidyverse")</span></span></code></pre></div>
 <p><strong>注释： R 语言中，在代码前面加 “#” 号表示该行后面的内容为解释性语句，默认不运行。快捷键:Ctrl+shift+C</strong></p>
 </div>
@@ -127,27 +127,27 @@
 <ul>
 <li>设定工作路径:</li>
 </ul>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># set working directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"D:\\数据"</span><span class="op">)</span> <span class="co"># 注意：斜杠与反斜杠，双反斜杠的不同</span></span></code></pre></div>
 <ul>
 <li>加载 R 包：</li>
 </ul>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>读取数据:</li>
 </ul>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/CardiovascularDataset.csv"</span>,header <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> </span>
 <span><span class="co"># header=True 表示有表头</span></span></code></pre></div>
 <p>这个语句里面， read.csv 表示在当前工作路径下，读取一个名为 data.csv 的文档； header=T 表示表头为真， T 为 TRUE 的缩写。然后，通过赋值符号”&lt;-“将读取的数据存储在变量 mydata 这里</p>
 <ul>
 <li>查看数据:</li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span> <span class="co">#col 为 colnumn 的前三个字母</span></span></code></pre></div>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 查看数据结构</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">)</span><span class="co"># str 为 structure 的前三个字母</span></span></code></pre></div>
 <pre><code>## 'data.frame':    303 obs. of  14 variables:
@@ -165,11 +165,11 @@
 ##  $ ca      : int  0 0 0 0 2 0 0 0 0 0 ...
 ##  $ thal    : int  1 3 2 2 3 1 2 3 3 2 ...
 ##  $ target  : int  1 0 1 1 0 1 1 1 1 1 ...</code></pre>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 查看分类变量的取值（唯一值）</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span> <span class="co"># 美元符号 $ 表示索引，按变量名索引。</span></span></code></pre></div>
 <pre><code>## [1] 1 0</code></pre>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">mydata</span><span class="op">$</span><span class="va">target</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="一些快捷键" class="section level3" number="6.1.4">
@@ -201,7 +201,7 @@
 <h3>
 <span class="header-section-number">6.2.1</span> 读取数据<a class="anchor" aria-label="anchor" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/CardiovascularDataset.csv"</span><span class="op">)</span> <span class="co"># 读取数据</span></span>
 <span><span class="co"># knitr::kable(mydata, align = "c")</span></span>
 <span></span>
@@ -217,7 +217,7 @@
 <h3>
 <span class="header-section-number">6.2.2</span> 选择数据<a class="anchor" aria-label="anchor" href="#%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydata2</span> <span class="op">&lt;-</span> <span class="va">mydata</span> <span class="op">|&gt;</span> <span class="co"># 管道操作符： %&gt;% 或者 |&gt; ，读作然后</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span><span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">target</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span></span>
@@ -417,7 +417,7 @@
 <h3>
 <span class="header-section-number">6.2.3</span> 保存数据<a class="anchor" aria-label="anchor" href="#%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">mydata2</span>, <span class="co"># 将 mydata2 这个数据</span></span>
 <span><span class="st">"data/sex1_target.csv"</span><span class="op">)</span> <span class="co"># 保存为 HIV.csv 文件</span></span>
 <span></span>
@@ -437,28 +437,28 @@
 <ul>
 <li>数值类型： 1， 2， 3， 4.5,3.8;</li>
 </ul>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "numeric"</code></pre>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="fl">4.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "double"</code></pre>
 <ul>
 <li>字符串类型：“字符”， “123”， “ASIR”， “HIV”</li>
 </ul>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="st">"123"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "character"</code></pre>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="st">"ASIR"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "character"</code></pre>
 <ul>
 <li>逻辑： TRUE， FALSE, T, F;</li>
 </ul>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "logical"</code></pre>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "logical"</code></pre>
 </div>
@@ -480,15 +480,15 @@
 <ul>
 <li>numeric 与 logical 可以转化为 character，而 character 转化为 numeric 或者 logical 有可能出错，产生 NA 值。</li>
 </ul>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fl">1990</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "character"</code></pre>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"1990"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "numeric"</code></pre>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"ABC"</span><span class="op">)</span></span>
 <span><span class="co">## Warning: 强制改变过程中产生了NA</span></span>
 <span><span class="va">c</span></span></code></pre></div>
@@ -496,10 +496,10 @@
 <ul>
 <li>logical 可以转化为数值 0/1, 而在进行逻辑判断的时候， 0/1 也会被认为是 F/T</li>
 </ul>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/logical.html">as.logical</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
@@ -513,22 +513,22 @@
 <p>单个元素组成的数据结构，比如”A”,123,TRUE 等。</p>
 <p>### 向量</p>
 <p>多个标量组成的一维的数据结构，比如 Vector。</p>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 生成向量</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1990</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span></span>
 <span><span class="va">a</span></span></code></pre></div>
 <pre><code>##  [1] 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999
 ## [11] 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009
 ## [21] 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019</code></pre>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">b</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5 6</code></pre>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"A"</span>,<span class="fl">3</span><span class="op">)</span> <span class="co">#repeat 前三个字母</span></span>
 <span><span class="va">c</span></span></code></pre></div>
 <pre><code>## [1] "A" "A" "A"</code></pre>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fl">1</span>,to<span class="op">=</span><span class="fl">10</span>,by<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="co">#sequence 前三个字母</span></span>
 <span><span class="va">d</span></span></code></pre></div>
 <pre><code>## [1] 1 3 5 7 9</code></pre>
@@ -547,7 +547,7 @@
 <span class="header-section-number">6.4.1</span> 函数的结构<a class="anchor" aria-label="anchor" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E7%BB%93%E6%9E%84"><i class="fas fa-link"></i></a>
 </h3>
 <p>R 语言函数一般由三个部分构成：函数体（body），参数（formals） , 环境（environment）。可以通过相应的函数查看函数的相应部分。以常见的 “粘贴” 函数 paste() 为例：</p>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># paste() 函数可以将两个向量对应的元素粘贴在一起。</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
@@ -555,11 +555,11 @@
 <span><span class="va">c</span></span></code></pre></div>
 <pre><code>## [1] "A:1" "B:2" "C:3"</code></pre>
 <p>我们分别使用 body， formals, environment 函数查看 paste() 函数的相应部分。</p>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 查看函数结构</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/body.html">body</a></span><span class="op">(</span><span class="va">paste</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## .Internal(paste(list(...), sep, collapse, recycle0))</code></pre>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 查看函数参数</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/formals.html">formals</a></span><span class="op">(</span><span class="va">paste</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $...
@@ -573,7 +573,7 @@
 ## 
 ## $recycle0
 ## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 查看函数来自哪个包</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span><span class="op">(</span><span class="va">paste</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## &lt;environment: namespace:base&gt;</code></pre>
@@ -595,7 +595,7 @@
 <ul>
 <li>实用的内置函数</li>
 </ul>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 查看R语言自带数据集</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># 描述性统计类</span></span>
@@ -612,7 +612,7 @@
 <ul>
 <li>实用的外来函数（tidyverse）</li>
 </ul>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 根据变量取值进行筛选</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># 选择变量</span></span>
@@ -627,25 +627,25 @@
 <ul>
 <li>演示（使用R自带数据）</li>
 </ul>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 加载数据</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"ToothGrowth"</span><span class="op">)</span></span>
 <span><span class="co"># 查看表头</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">ToothGrowth</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "len"  "supp" "dose"</code></pre>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 查看数据结构</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">ToothGrowth</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 'data.frame':    60 obs. of  3 variables:
 ##  $ len : num  4.2 11.5 7.3 5.8 6.4 10 11.2 11.2 5.2 7 ...
 ##  $ supp: Factor w/ 2 levels "OJ","VC": 2 2 2 2 2 2 2 2 2 2 ...
 ##  $ dose: num  0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...</code></pre>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 查看分组变量的取值</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ToothGrowth</span><span class="op">$</span><span class="va">supp</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] VC OJ
 ## Levels: OJ VC</code></pre>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 生成变量（生成两个标签）</span></span>
 <span><span class="va">ToothGrowth</span> <span class="op">&lt;-</span> <span class="va">ToothGrowth</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>剂量<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dose</span><span class="op">==</span><span class="fl">0.5</span>,<span class="st">"0.5mg"</span>,</span>
@@ -667,7 +667,7 @@
 <h3>
 <span class="header-section-number">6.4.4</span> 查看函数帮助<a class="anchor" aria-label="anchor" href="#%E6%9F%A5%E7%9C%8B%E5%87%BD%E6%95%B0%E5%B8%AE%E5%8A%A9"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 如果知道具体的函数名字：</span></span>
 <span><span class="op">?</span> <span class="co"># 查看函数的帮助，比如 ?filter</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># 同？</span></span>
@@ -685,7 +685,7 @@
 <h3>
 <span class="header-section-number">6.5.1</span> 创建向量<a class="anchor" aria-label="anchor" href="#%E5%88%9B%E5%BB%BA%E5%90%91%E9%87%8F"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -697,7 +697,7 @@
 <ul>
 <li>字符串，数值， logical 类型</li>
 </ul>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 字符串型：</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>,<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"C"</span><span class="op">)</span></span>
 <span><span class="co"># 数值类型</span></span>
@@ -708,7 +708,7 @@
 <li>因子类型</li>
 </ul>
 <p>R 语言有一类非常重要的变量类型，名为因子（factor）。因子可以视为分类变量的特殊类型，它既有值，又对值进行了排序（levels）。</p>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 如何生成因子</span></span>
 <span><span class="va">name1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">name2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">name1</span>,</span>
@@ -716,7 +716,7 @@
 <span>                labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Male"</span>,<span class="st">"Female"</span>,<span class="st">"Both"</span><span class="op">)</span><span class="op">)</span> <span class="co">#labels 是为了</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">name1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "numeric"</code></pre>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">name2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "factor"</code></pre>
 </div>
@@ -724,12 +724,12 @@
 <h3>
 <span class="header-section-number">6.5.3</span> 向量的运算<a class="anchor" aria-label="anchor" href="#%E5%90%91%E9%87%8F%E7%9A%84%E8%BF%90%E7%AE%97"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 简单统计</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 10.5</code></pre>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 算数运算</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">a</span> <span class="co"># 标量与向量</span></span>
 <span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">b</span><span class="op">+</span><span class="va">a</span> <span class="co"># 标量与向量</span></span></code></pre></div>
@@ -738,7 +738,7 @@
 <h3>
 <span class="header-section-number">6.5.4</span> 重要：向量的循环补齐机制<a class="anchor" aria-label="anchor" href="#%E9%87%8D%E8%A6%81%E5%90%91%E9%87%8F%E7%9A%84%E5%BE%AA%E7%8E%AF%E8%A1%A5%E9%BD%90%E6%9C%BA%E5%88%B6"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>,<span class="st">"E"</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">a</span>,<span class="va">b</span>,sep <span class="op">=</span> <span class="st">":"</span><span class="op">)</span></span>
@@ -750,7 +750,7 @@
 <h3>
 <span class="header-section-number">6.5.5</span> 交、并、补<a class="anchor" aria-label="anchor" href="#%E4%BA%A4%E5%B9%B6%E8%A1%A5"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 向量的交、并、补集，找不同，找相同，找不同（背熟）</span></span>
 <span></span>
 <span><span class="co"># 取交集</span></span>
@@ -758,19 +758,19 @@
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">intersect</a></span><span class="op">(</span><span class="va">a</span>,<span class="va">b</span><span class="op">)</span> </span></code></pre></div>
 <pre><code>## [1] 10 11 12 13 14 15</code></pre>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 取并集</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">union</a></span><span class="op">(</span><span class="va">a</span>,<span class="va">b</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17
 ## [18] 18 19 20</code></pre>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 找不同</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="va">a</span>,<span class="va">b</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/setops.html">setdiff</a></span><span class="op">(</span><span class="va">b</span>,<span class="va">a</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 16 17 18 19 20</code></pre>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 去除重复</span></span>
 <span><span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"A"</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">aa</span><span class="op">)</span></span></code></pre></div>
@@ -780,17 +780,17 @@
 <h3>
 <span class="header-section-number">6.5.6</span> 向量的下标索引<a class="anchor" aria-label="anchor" href="#%E5%90%91%E9%87%8F%E7%9A%84%E4%B8%8B%E6%A0%87%E7%B4%A2%E5%BC%95"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 已经知道向量 x</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">" 张三"</span>,<span class="st">" 小明"</span>,<span class="st">" 王五"</span>,<span class="st">" 李思齐"</span><span class="op">)</span></span>
 <span><span class="co"># 如何选择李思齐？</span></span>
 <span><span class="va">x</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] " 李思齐"</code></pre>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 如何同时选择小明与李思齐？</span></span>
 <span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] " 小明"   " 李思齐"</code></pre>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 如何不选择张三</span></span>
 <span><span class="va">x</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] " 小明"   " 王五"   " 李思齐"</code></pre>
@@ -805,10 +805,10 @@
 <h3>
 <span class="header-section-number">6.6.1</span> 生成数据框<a class="anchor" aria-label="anchor" href="#%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E6%A1%86"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 通过 read.csv 函数等读取</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 通过向量组合生成</span></span>
 <span><span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">30</span>,<span class="fl">18</span>,<span class="fl">26</span><span class="op">)</span></span>
 <span><span class="va">name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">" 赵"</span>,<span class="st">" 钱"</span>,<span class="st">" 孙"</span>,<span class="st">" 李"</span><span class="op">)</span></span>
@@ -821,28 +821,28 @@
 <h3>
 <span class="header-section-number">6.6.2</span> 数据框的下标索引<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E6%A1%86%E7%9A%84%E4%B8%8B%E6%A0%87%E7%B4%A2%E5%BC%95"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 数据框下标索引中间有逗号，逗号前表示行，逗号后表示列 [row,col]</span></span>
 <span><span class="co"># 选择 df 前两列</span></span>
 <span><span class="va">df</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="co"># 空着表示全选</span></span></code></pre></div>
 <pre><code>## [1] " 赵" " 钱" " 孙" " 李"</code></pre>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span> <span class="co"># 选择 df 前两行</span></span></code></pre></div>
 <pre><code>##   age name score
 ## 2  30   钱    65</code></pre>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span> <span class="co"># 选择 df 第二行第二列</span></span></code></pre></div>
 <pre><code>## [1] " 钱"</code></pre>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="fl">3</span>,<span class="op">]</span> <span class="co"># 不选择第三行</span></span></code></pre></div>
 <pre><code>##   age name score
 ## 1  20   赵    99
 ## 2  30   钱    65
 ## 4  26   李    88</code></pre>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fl">2</span><span class="op">]</span> <span class="co"># 选择 1， 3 行； 2 列</span></span></code></pre></div>
 <pre><code>## [1] " 赵" " 孙"</code></pre>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">name</span><span class="op">==</span><span class="st">" 李"</span>,<span class="op">]</span> <span class="co"># 选择姓李的数据</span></span></code></pre></div>
 <pre><code>##   age name score
 ## 4  26   李    88</code></pre>
@@ -851,7 +851,7 @@
 <h3>
 <span class="header-section-number">6.6.3</span> 数据框如何生成新的列<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE%E6%A1%86%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E6%96%B0%E7%9A%84%E5%88%97"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 比如生成身高数据</span></span>
 <span><span class="va">height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">178</span>,<span class="fl">180</span>,<span class="fl">169</span>,<span class="fl">175</span><span class="op">)</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">height</span> <span class="op">&lt;-</span> <span class="va">height</span></span>
@@ -937,7 +937,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2023-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -46,7 +46,9 @@ lasso变量筛选
 测试集验证集中-验证
 训练集建立模型
 测试集评价模型
-logistic-dca曲线
+区分度
+校准度
+临床实用性
 logistic的nomogram绘制
 python-安装与入门
 anaconda-的安装
@@ -100,6 +102,7 @@ nhanes数据库介绍
 结局
 数据分析
 一些技巧
+实战
 mimic数据库介绍
 数据库简介-1
 基本情况

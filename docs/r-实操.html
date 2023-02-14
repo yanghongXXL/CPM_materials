@@ -6,19 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>第 3 部分 R 实操 | 临床预测模型</title>
 <meta name="author" content="杨 弘">
-<meta name="description" content="3.1 机器学习模型构建  3.1.1 加载需要的r包 # rm(list = ls()) library(tidyverse) # 数据整理 library(dlookr) # 自动化EDA library(plotROC) # 绘制ROC library(pROC) # 计算AUC library(e1071) # 支持向量机 library(caret) # 机器学习包...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta name="description" content="3.1 机器学习模型构建  3.1.1 加载需要的r包 rm(list = ls()) library(tidyverse) # 数据整理 library(dlookr) # 自动化EDA library(plotROC) # 绘制ROC library(pROC) # 计算AUC library(e1071) # 支持向量机 library(caret) # 机器学习包...">
+<meta name="generator" content="bookdown 0.32 with bs4_book()">
 <meta property="og:title" content="第 3 部分 R 实操 | 临床预测模型">
 <meta property="og:type" content="book">
 <meta property="og:image" content="/images/封面.png">
-<meta property="og:description" content="3.1 机器学习模型构建  3.1.1 加载需要的r包 # rm(list = ls()) library(tidyverse) # 数据整理 library(dlookr) # 自动化EDA library(plotROC) # 绘制ROC library(pROC) # 计算AUC library(e1071) # 支持向量机 library(caret) # 机器学习包...">
+<meta property="og:description" content="3.1 机器学习模型构建  3.1.1 加载需要的r包 rm(list = ls()) library(tidyverse) # 数据整理 library(dlookr) # 自动化EDA library(plotROC) # 绘制ROC library(pROC) # 计算AUC library(e1071) # 支持向量机 library(caret) # 机器学习包...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第 3 部分 R 实操 | 临床预测模型">
-<meta name="twitter:description" content="3.1 机器学习模型构建  3.1.1 加载需要的r包 # rm(list = ls()) library(tidyverse) # 数据整理 library(dlookr) # 自动化EDA library(plotROC) # 绘制ROC library(pROC) # 计算AUC library(e1071) # 支持向量机 library(caret) # 机器学习包...">
+<meta name="twitter:description" content="3.1 机器学习模型构建  3.1.1 加载需要的r包 rm(list = ls()) library(tidyverse) # 数据整理 library(dlookr) # 自动化EDA library(plotROC) # 绘制ROC library(pROC) # 计算AUC library(e1071) # 支持向量机 library(caret) # 机器学习包...">
 <meta name="twitter:image" content="/images/封面.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -76,7 +76,7 @@
 <span class="header-section-number">3.1.1</span> <strong>加载需要的r包</strong><a class="anchor" aria-label="anchor" href="#%E5%8A%A0%E8%BD%BD%E9%9C%80%E8%A6%81%E7%9A%84r%E5%8C%85"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># rm(list = ls())</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># 数据整理</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/choonghyunryu/dlookr/">dlookr</a></span><span class="op">)</span> <span class="co"># 自动化EDA</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sachsmc.github.io/plotROC/">plotROC</a></span><span class="op">)</span> <span class="co"># 绘制ROC</span></span>
@@ -612,6 +612,14 @@
 <h3>
 <span class="header-section-number">3.1.6</span> 测试集评价模型<a class="anchor" aria-label="anchor" href="#%E6%B5%8B%E8%AF%95%E9%9B%86%E8%AF%84%E4%BB%B7%E6%A8%A1%E5%9E%8B"><i class="fas fa-link"></i></a>
 </h3>
+<p>从临床预测模型角度，构建模型有三度。区分度、校准度和临床实用性</p>
+<p>区分度我们通常采用的是AUROC或C-Index；</p>
+<p>校准度评价采用的是HL（hosmer lemeshow）检验以及校准曲线。</p>
+<p>Briser Score综合区分度和校准度的表现呢。</p>
+<div id="区分度" class="section level4" number="3.1.6.1">
+<h4>
+<span class="header-section-number">3.1.6.1</span> 区分度<a class="anchor" aria-label="anchor" href="#%E5%8C%BA%E5%88%86%E5%BA%A6"><i class="fas fa-link"></i></a>
+</h4>
 <ul>
 <li>获得模型测试集风险概率</li>
 </ul>
@@ -656,32 +664,77 @@
 <span><span class="va">auc_SVM</span>  <span class="co"># Area under the curve: 0.969</span></span></code></pre></div>
 <pre><code>## Area under the curve: 0.969</code></pre>
 </div>
-<div id="logistic-dca曲线" class="section level3" number="3.1.7">
-<h3>
-<span class="header-section-number">3.1.7</span> Logistic DCA曲线<a class="anchor" aria-label="anchor" href="#logistic-dca%E6%9B%B2%E7%BA%BF"><i class="fas fa-link"></i></a>
-</h3>
-<div>
+<div id="校准度" class="section level4" number="3.1.6.2">
+<h4>
+<span class="header-section-number">3.1.6.2</span> 校准度<a class="anchor" aria-label="anchor" href="#%E6%A0%A1%E5%87%86%E5%BA%A6"><i class="fas fa-link"></i></a>
+</h4>
+<ul>
+<li>校准曲线</li>
+</ul>
 <blockquote>
+<p>最理想的情况下, 校准曲线是一条对角线(预测概率等于经验概率)，表现较差的模型的校准曲线是sigmoid形的。</p>
+</blockquote>
+<p>使用rms包的calibration()函数 和ggplot2包绘制三种模型的校准曲线。</p>
+<p>能够看到，与对角线相比，两个模型的校准曲线存在一些偏差，整体上三种模型的校准曲线部分位于对角线上方（低估风险），部分位于下方（高估风险）。校准曲线置信区间宽度较大，这可能是由于样本量较小。但整体尚可。</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lattice/man/trellis.par.get.html">trellis.par.set</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/caret/man/caret-internal.html">caretTheme</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cal_obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/calibration.html">calibration</a></span><span class="op">(</span><span class="va">target</span> <span class="op">~</span> <span class="va">LR</span><span class="op">+</span><span class="va">RF</span><span class="op">+</span><span class="va">SVM</span>,</span>
+<span>                       data <span class="op">=</span> <span class="va">testset</span>, class <span class="op">=</span> <span class="st">"yes"</span>, cuts <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">CC_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cal_obj</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"三种模型测试集校准曲线"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CC_plot</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-r_example_files/figure-html/unnamed-chunk-30-1.png" width="576"></div>
+<ul>
+<li>Brier评分</li>
+</ul>
+<blockquote>
+<p>Brier Score（BS）评分用于评价模型的总体表现（overall performance），如果模型总体表现完美，那么预测值和实际值就完全一致，那么BS评分就等于零。如果BS&gt;0.25，某些文献则认为worthless。</p>
+</blockquote>
+<p>Brier评分=∑(Y-P)^2/N，其中Y为实际观测概率，P为模型预测概率，N为总样本量。Brier评分取值范围0～1，Brier评分值越小，校准度越高。</p>
+<p>能够看到，三个模型的Brier评分都比较小，没有超过0.2，其中LR模型的Brier评分最小。</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">LR_brier</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">testset</span><span class="op">$</span><span class="va">LR</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">testset</span><span class="op">$</span><span class="va">target</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">LR_brier</span>  <span class="co"># 0.0735</span></span></code></pre></div>
+<pre><code>## [1] 0.0735</code></pre>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">RF_brier</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">testset</span><span class="op">$</span><span class="va">RF</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">testset</span><span class="op">$</span><span class="va">target</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">RF_brier</span>  <span class="co"># 0.1011</span></span></code></pre></div>
+<pre><code>## [1] 0.1011</code></pre>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">SVM_brier</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">testset</span><span class="op">$</span><span class="va">SVM</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">testset</span><span class="op">$</span><span class="va">target</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">SVM_brier</span>  <span class="co"># 0.07433</span></span></code></pre></div>
+<pre><code>## [1] 0.07433</code></pre>
+</div>
+<div id="临床实用性" class="section level4" number="3.1.6.3">
+<h4>
+<span class="header-section-number">3.1.6.3</span> 临床实用性<a class="anchor" aria-label="anchor" href="#%E4%B8%B4%E5%BA%8A%E5%AE%9E%E7%94%A8%E6%80%A7"><i class="fas fa-link"></i></a>
+</h4>
+<blockquote>
+<p>DCA曲线</p>
 <p>DCA曲线横坐标是判断恶性/良性的风险阈值（0~1），纵坐标为不同阈值对应的临床净获益（net benifit）。主要比较了根据四种模型划分恶性/良性患者（针对性干预），相比于把所有患者都看作恶性实施干预（ALL曲线）和所有患者都不干预（None曲线），是否有临床净获益。</p>
 <p>006年首次介绍了DCA曲线，并提供了使用R语言绘制DCA曲线的dca()函代码下载链接：<a href="https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis" class="uri">https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis</a></p>
 </blockquote>
-</div>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testset</span><span class="op">$</span><span class="va">target</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">testset</span><span class="op">$</span><span class="va">target</span> <span class="op">==</span> <span class="st">"yes"</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="co"># write_csv(testset, file = "data/testset.csv")</span></span></code></pre></div>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"dca/dca.r"</span><span class="op">)</span></span>
 <span><span class="va">testset1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/testset.csv"</span><span class="op">)</span></span>
 <span><span class="va">DCA</span> <span class="op">&lt;-</span> <span class="fu">dca</span><span class="op">(</span>data <span class="op">=</span> <span class="va">testset1</span>, outcome <span class="op">=</span> <span class="st">"target"</span>,</span>
-<span>           predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"LR"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-r_example_files/figure-html/unnamed-chunk-30-1.png" width="576"></div>
-<p>能够看到，当风险阈值范围在0~1 时，模型的临床净获益均高于ALL曲线和None曲线，能够取得临床净获益的阈值范围还是比较大的，但应该注意的是，随着阈值增大，模型的临床净获益也在减小。</p>
+<span>           predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"LR"</span>, <span class="st">"RF"</span>, <span class="st">"SVM"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-r_example_files/figure-html/unnamed-chunk-33-1.png" width="576"></div>
+<p>能够看到，当风险阈值范围在0~1 时，三种模型的临床净获益均高于ALL曲线和None曲线，能够取得临床净获益的阈值范围还是比较大的，但应该注意的是，随着阈值增大，四种模型的临床净获益也在减小。</p>
 </div>
-<div id="logistic的nomogram绘制" class="section level3" number="3.1.8">
+</div>
+<div id="logistic的nomogram绘制" class="section level3" number="3.1.7">
 <h3>
-<span class="header-section-number">3.1.8</span> Logistic的Nomogram绘制<a class="anchor" aria-label="anchor" href="#logistic%E7%9A%84nomogram%E7%BB%98%E5%88%B6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1.7</span> Logistic的Nomogram绘制<a class="anchor" aria-label="anchor" href="#logistic%E7%9A%84nomogram%E7%BB%98%E5%88%B6"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 解决"variable 变量名 does not have limits defined by datadist"</span></span>
 <span><span class="va">dd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rms/man/datadist.html">datadist</a></span><span class="op">(</span><span class="va">testset</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>datadist<span class="op">=</span><span class="st">"dd"</span><span class="op">)</span></span>
@@ -690,7 +743,7 @@
 <span><span class="va">testset</span><span class="op">$</span><span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">testset</span><span class="op">$</span><span class="va">sex</span>,levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>,labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Female"</span>,<span class="st">"Male"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># 构建LR模型</span></span>
 <span><span class="va">f1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rms/man/lrm.html">lrm</a></span><span class="op">(</span><span class="va">target</span><span class="op">~</span> <span class="va">age</span><span class="op">+</span><span class="va">sex</span><span class="op">+</span><span class="va">chol</span><span class="op">+</span><span class="va">oldpeak</span>, data<span class="op">=</span> <span class="va">testset</span>, x <span class="op">=</span> <span class="cn">T</span>, y <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 绘制Nomogram</span></span>
 <span><span class="va">nom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rms/man/nomogram.html">nomogram</a></span><span class="op">(</span><span class="va">f1</span>,</span>
 <span>                fun<span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -703,11 +756,11 @@
 <span>                <span class="co">#lp线性预测值</span></span>
 <span>                lp<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">nom</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-r_example_files/figure-html/unnamed-chunk-32-1.png" width="576"></div>
+<div class="inline-figure"><img src="03-r_example_files/figure-html/unnamed-chunk-35-1.png" width="576"></div>
 <ul>
 <li>另外一种</li>
 </ul>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">regplot</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/regplot/man/regplot.html">regplot</a></span><span class="op">(</span><span class="va">f1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "note: points tables not constructed unless points=TRUE "</code></pre>
@@ -731,8 +784,7 @@
 <li><a class="nav-link" href="#lasso%E5%8F%98%E9%87%8F%E7%AD%9B%E9%80%89"><span class="header-section-number">3.1.4</span> lasso变量筛选</a></li>
 <li><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E9%9B%86%E5%BB%BA%E7%AB%8B%E6%A8%A1%E5%9E%8B"><span class="header-section-number">3.1.5</span> 训练集建立模型</a></li>
 <li><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E9%9B%86%E8%AF%84%E4%BB%B7%E6%A8%A1%E5%9E%8B"><span class="header-section-number">3.1.6</span> 测试集评价模型</a></li>
-<li><a class="nav-link" href="#logistic-dca%E6%9B%B2%E7%BA%BF"><span class="header-section-number">3.1.7</span> Logistic DCA曲线</a></li>
-<li><a class="nav-link" href="#logistic%E7%9A%84nomogram%E7%BB%98%E5%88%B6"><span class="header-section-number">3.1.8</span> Logistic的Nomogram绘制</a></li>
+<li><a class="nav-link" href="#logistic%E7%9A%84nomogram%E7%BB%98%E5%88%B6"><span class="header-section-number">3.1.7</span> Logistic的Nomogram绘制</a></li>
 </ul>
 </li>
 </ul>
@@ -752,7 +804,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2022-11-30.</p>
+    <p>"<strong>临床预测模型</strong>" was written by 杨 弘. It was last built on 2023-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

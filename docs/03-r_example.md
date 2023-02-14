@@ -10,7 +10,7 @@
 
 
 ```r
-# rm(list = ls())
+rm(list = ls())
 library(tidyverse) # 数据整理
 library(dlookr) # 自动化EDA
 library(plotROC) # 绘制ROC
@@ -666,6 +666,16 @@ SVM_model <- train(target~. ,
 
 ### 测试集评价模型
 
+从临床预测模型角度，构建模型有三度。区分度、校准度和临床实用性
+
+区分度我们通常采用的是AUROC或C-Index；
+
+校准度评价采用的是HL（hosmer lemeshow）检验以及校准曲线。
+
+Briser Score综合区分度和校准度的表现呢。
+
+#### 区分度
+
 -   获得模型测试集风险概率
 
 
@@ -732,15 +742,78 @@ auc_SVM  # Area under the curve: 0.969
 ## Area under the curve: 0.969
 ```
 
-### Logistic DCA曲线
+#### 校准度
 
-<div>
+-   校准曲线
 
+> 最理想的情况下, 校准曲线是一条对角线(预测概率等于经验概率)，表现较差的模型的校准曲线是sigmoid形的。
+
+使用rms包的calibration()函数 和ggplot2包绘制三种模型的校准曲线。
+
+能够看到，与对角线相比，两个模型的校准曲线存在一些偏差，整体上三种模型的校准曲线部分位于对角线上方（低估风险），部分位于下方（高估风险）。校准曲线置信区间宽度较大，这可能是由于样本量较小。但整体尚可。
+
+
+```r
+trellis.par.set(caretTheme())
+cal_obj <- calibration(target ~ LR+RF+SVM,
+                       data = testset, class = "yes", cuts = 3)
+CC_plot <- ggplot(cal_obj) + 
+    geom_line() +
+    labs(title = "三种模型测试集校准曲线") +
+     theme(plot.title = element_text(hjust = 0.5))+
+    geom_abline()
+```
+
+
+```r
+CC_plot
+```
+
+<img src="03-r_example_files/figure-html/unnamed-chunk-30-1.png" width="576" />
+
+-   Brier评分
+
+> Brier Score（BS）评分用于评价模型的总体表现（overall performance），如果模型总体表现完美，那么预测值和实际值就完全一致，那么BS评分就等于零。如果BS\>0.25，某些文献则认为worthless。
+
+Brier评分=∑(Y-P)\^2/N，其中Y为实际观测概率，P为模型预测概率，N为总样本量。Brier评分取值范围0～1，Brier评分值越小，校准度越高。
+
+能够看到，三个模型的Brier评分都比较小，没有超过0.2，其中LR模型的Brier评分最小。
+
+
+```r
+LR_brier <- mean((testset$LR - as.numeric(testset$target)+1)^2)
+LR_brier  # 0.0735
+```
+
+```
+## [1] 0.0735
+```
+
+```r
+RF_brier <- mean((testset$RF - as.numeric(testset$target)+1)^2)
+RF_brier  # 0.1011
+```
+
+```
+## [1] 0.1011
+```
+
+```r
+SVM_brier <- mean((testset$SVM - as.numeric(testset$target)+1)^2)
+SVM_brier  # 0.07433
+```
+
+```
+## [1] 0.07433
+```
+
+#### 临床实用性
+
+> DCA曲线
+>
 > DCA曲线横坐标是判断恶性/良性的风险阈值（0\~1），纵坐标为不同阈值对应的临床净获益（net benifit）。主要比较了根据四种模型划分恶性/良性患者（针对性干预），相比于把所有患者都看作恶性实施干预（ALL曲线）和所有患者都不干预（None曲线），是否有临床净获益。
 >
 > 006年首次介绍了DCA曲线，并提供了使用R语言绘制DCA曲线的dca()函代码下载链接：<https://www.mskcc.org/departments/epidemiology-biostatistics/biostatistics/decision-curve-analysis>
-
-</div>
 
 
 ```r
@@ -753,12 +826,12 @@ testset$target <- ifelse(testset$target == "yes", 1, 0)
 source("dca/dca.r")
 testset1 <- read.csv("data/testset.csv")
 DCA <- dca(data = testset1, outcome = "target",
-           predictors = c("LR"))
+           predictors = c("LR", "RF", "SVM"))
 ```
 
-<img src="03-r_example_files/figure-html/unnamed-chunk-30-1.png" width="576" />
+<img src="03-r_example_files/figure-html/unnamed-chunk-33-1.png" width="576" />
 
-能够看到，当风险阈值范围在0\~1 时，模型的临床净获益均高于ALL曲线和None曲线，能够取得临床净获益的阈值范围还是比较大的，但应该注意的是，随着阈值增大，模型的临床净获益也在减小。
+能够看到，当风险阈值范围在0\~1 时，三种模型的临床净获益均高于ALL曲线和None曲线，能够取得临床净获益的阈值范围还是比较大的，但应该注意的是，随着阈值增大，四种模型的临床净获益也在减小。
 
 ### Logistic的Nomogram绘制
 
@@ -790,7 +863,7 @@ nom <- nomogram(f1,
 plot(nom)
 ```
 
-<img src="03-r_example_files/figure-html/unnamed-chunk-32-1.png" width="576" />
+<img src="03-r_example_files/figure-html/unnamed-chunk-35-1.png" width="576" />
 
 -   另外一种
 

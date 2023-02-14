@@ -85,7 +85,8 @@ head(mydata,10)
 
 
 ```r
-dat1<- mydata %>% select(SEQN, # 序列号
+dat1<- mydata |> 
+    select(SEQN, # 序列号
                          RIAGENDR, # 性别
                          RIDAGEYR, # 年龄
                          RIDRETH3, # 种族
@@ -128,21 +129,6 @@ knitr::kable(xuetang[1:10, ] ,align = "c")
 hdata<- full_join(dat1, xuetang, by = 'SEQN', type = 'full')
 knitr::kable(hdata[1:10, ] ,align = "c")
 ```
-
-
-
-| SEQN  | RIAGENDR | RIDAGEYR | RIDRETH3 | DMDMARTL | WTINT2YR | WTMEC2YR | SDMVPSU | SDMVSTRA | WTSAF2YR | LBXGLU | LBDGLUSI |
-|:-----:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:-------:|:--------:|:--------:|:------:|:--------:|
-| 93703 |    2     |    2     |    6     |    NA    |   9246   |   8540   |    2    |   145    |    NA    |   NA   |    NA    |
-| 93704 |    1     |    2     |    3     |    NA    |  37339   |  42567   |    1    |   143    |    NA    |   NA   |    NA    |
-| 93705 |    2     |    66    |    4     |    3     |   8615   |   8338   |    2    |   145    |    NA    |   NA   |    NA    |
-| 93706 |    1     |    18    |    6     |    NA    |   8549   |   8723   |    2    |   134    |    NA    |   NA   |    NA    |
-| 93707 |    1     |    13    |    7     |    NA    |   6769   |   7065   |    1    |   138    |    NA    |   NA   |    NA    |
-| 93708 |    2     |    66    |    6     |    1     |  13329   |  14372   |    2    |   138    |  25654   |  122   |   6.77   |
-| 93709 |    2     |    75    |    4     |    2     |  12043   |  12278   |    1    |   136    |    NA    |   NA   |    NA    |
-| 93710 |    2     |    0     |    3     |    NA    |  16418   |  16848   |    1    |   134    |    NA    |   NA   |    NA    |
-| 93711 |    1     |    56    |    6     |    1     |  11178   |  12391   |    2    |   134    |  29226   |  107   |   5.94   |
-| 93712 |    1     |    18    |    1     |    NA    |  29040   |  30337   |    2    |   147    |    NA    |   NA   |    NA    |
 
 把它保存起来，今后的操作将在这个数据展开
 
@@ -191,6 +177,10 @@ NHANES是[复杂抽样](https://wwwn.cdc.gov/nchs/nhanes/tutorials/module2.aspx)
 >
 >     以4年的数据为例：由于4年样本设计，从原始抽样率计算的初始基本权重对应于4年样本。 这些初始基权值是基于抽样概率的， 为了产生与1年和2年样本的全国人口总数相一致的权重，需要调整因子。 例如，为了为2015-2016年NHANES和2017-2018年NHANES在公共使用文件中发布的数据创建两年样本权重，将4年基权重乘以2，以考虑2年的选择（设计中的年数除以样本中的年数，4除以2=2）。
 
+-   关于权重的介绍
+
+    -   [官方](https://wwwn.cdc.gov/nchs/nhanes/tutorials/module3.aspx)+[中文版](https://mp.weixin.qq.com/s/smoTeoW_KUdnvoidHnWfpg)
+
 多看官网的各种分析提供的[代码示例](https://wwwn.cdc.gov/nchs/nhanes/tutorials/module6.aspx)
 
 ### 一些技巧
@@ -218,4 +208,104 @@ nhanesTableVars(data_group = 'Exam', nh_table = 'BPX_J', namesonly = FALSE)
 
 可以看到，此表之中有27列。Seqn是受访者的序列号，可以用来连接各表。
 
+## 实战
 
+-   先确定所需变量及需要的数据位置
+
+
+```r
+# 1. 下载整理数据----
+# 安装包
+if(!require(nhanesA))install.packages('nhanesA',updata= F, ask=  F)
+if(!require(tidyverse))install.packages('tidyverse',updata= F, ask=  F)
+if(!require(plyr))install.packages('plyr',updata= F, ask=  F)
+if(!require(haven))install.packages('haven',updata= F, ask=  F)
+if(!require(survey))install.packages('survey',updata= F, ask=  F)
+```
+
+
+```r
+# data_group=DEMO/DIET/EXAM/LAB/Q, year写入一个周期中的奇数年份即可
+nhanesTables(data_group = 'DEMO', year = 2017)
+```
+
+
+```r
+# 查找表格中包含的字段
+kable(nhanesTableVars(data_group = 'DEMO', nh_table = 'DEMO_J', namesonly = FALSE))
+```
+
+
+```r
+#某个字段跳转官网查询
+browseNHANES(data_group = 'DEMO', nh_table = 'DEMO_J')
+#下载数据
+# demo <- nhanes('DEMO_J')
+```
+
+
+```r
+# 加载数据
+demo <- read_xpt(file ='data/DEMO_J.xpt')
+yesuan <- read_xpt(file ='data/FOLATE_J.xpt')
+guzhi <- read_xpt(file ='data/OSQ_J.xpt')
+```
+
+
+```r
+# 选择相应变量
+demo1 <- demo|> select(SEQN, # 序列号
+                         RIAGENDR, # 性别
+                         RIDAGEYR, # 年龄
+                         WTINT2YR,WTMEC2YR, # 权重
+                         SDMVPSU, # psu
+                         SDMVSTRA) # strata
+
+guzhi1 <- guzhi|> select(SEQN, OSQ060)
+```
+
+
+```r
+#分类资料转置
+demo_vars <- names(demo1)
+demo2 <- nhanesTranslate('DEMO_J', demo_vars, data=demo1)
+
+guzhi_var <- names(guzhi1)
+guzhi2 <- nhanesTranslate('OSQ_J', guzhi_var, data= guzhi1)
+```
+
+
+```r
+# 合并数据
+data <- join_all(list(demo2, yesuan, guzhi2), by = 'SEQN', type = 'full')
+
+data1 <- na.omit(data)
+data2 <- subset(data1, OSQ060=="Yes" | OSQ060 == "No")
+```
+
+
+```r
+# 2. 计算复杂抽样分析----
+load("data/data2.RData")
+aa <- svydesign(id      = ~SDMVPSU,
+                          strata  = ~SDMVSTRA,
+                          weights = ~WTMEC2YR,
+                          nest    = TRUE,
+                          data    = data2)
+
+
+svymean(~LBDRFOSI+ LBDRFO, aa)
+
+tt<-svyttest(LBDRFOSI~OSQ060, aa)
+tt1<-svyttest(LBDRFO~OSQ060, aa)
+
+tt
+tt1
+
+svyby(~LBDRFO+LBDRFOSI, ~OSQ060, design=aa, svymean)
+
+# save(data2, file = "data2.RData")
+
+t.test(LBDRFOSI~OSQ060,data = data2, var.equal = TRUE)
+svyttest(LBDRFOSI~OSQ060, aa)
+```

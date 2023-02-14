@@ -80,7 +80,8 @@ head(mydata,10)
 ![](images/paste-C7547CC6.png){width="100%"}
 
 ```{r}
-dat1<- mydata %>% select(SEQN, # 序列号
+dat1<- mydata |> 
+    select(SEQN, # 序列号
                          RIAGENDR, # 性别
                          RIDAGEYR, # 年龄
                          RIDRETH3, # 种族
@@ -102,7 +103,7 @@ knitr::kable(xuetang[1:10, ] ,align = "c")
 
 提取好指标后进行合并
 
-```{r}
+```{r eval=FALSE}
 hdata<- full_join(dat1, xuetang, by = 'SEQN', type = 'full')
 knitr::kable(hdata[1:10, ] ,align = "c")
 ```
@@ -153,6 +154,10 @@ NHANES是[复杂抽样](https://wwwn.cdc.gov/nchs/nhanes/tutorials/module2.aspx)
 >
 >     以4年的数据为例：由于4年样本设计，从原始抽样率计算的初始基本权重对应于4年样本。 这些初始基权值是基于抽样概率的， 为了产生与1年和2年样本的全国人口总数相一致的权重，需要调整因子。 例如，为了为2015-2016年NHANES和2017-2018年NHANES在公共使用文件中发布的数据创建两年样本权重，将4年基权重乘以2，以考虑2年的选择（设计中的年数除以样本中的年数，4除以2=2）。
 
+-   关于权重的介绍
+
+    -   [官方](https://wwwn.cdc.gov/nchs/nhanes/tutorials/module3.aspx)+[中文版](https://mp.weixin.qq.com/s/smoTeoW_KUdnvoidHnWfpg)
+
 多看官网的各种分析提供的[代码示例](https://wwwn.cdc.gov/nchs/nhanes/tutorials/module6.aspx)
 
 ### 一些技巧
@@ -178,63 +183,76 @@ nhanesTableVars(data_group = 'Exam', nh_table = 'BPX_J', namesonly = FALSE)
 
 可以看到，此表之中有27列。Seqn是受访者的序列号，可以用来连接各表。
 
-```{r eval=FALSE, include=FALSE}
-# yh的实战
+## 实战
+
+-   先确定所需变量及需要的数据位置
+
+```{r eval=FALSE}
 # 1. 下载整理数据----
 # 安装包
 if(!require(nhanesA))install.packages('nhanesA',updata= F, ask=  F)
-if(!require(knitr))install.packages('knitr',updata= F, ask=  F)
 if(!require(tidyverse))install.packages('tidyverse',updata= F, ask=  F)
 if(!require(plyr))install.packages('plyr',updata= F, ask=  F)
 if(!require(haven))install.packages('haven',updata= F, ask=  F)
+if(!require(survey))install.packages('survey',updata= F, ask=  F)
+```
 
-
+```{r eval=FALSE}
 # data_group=DEMO/DIET/EXAM/LAB/Q, year写入一个周期中的奇数年份即可
 nhanesTables(data_group = 'DEMO', year = 2017)
+```
 
+```{r eval=FALSE}
 # 查找表格中包含的字段
 kable(nhanesTableVars(data_group = 'DEMO', nh_table = 'DEMO_J', namesonly = FALSE))
+```
 
+```{r eval=FALSE}
 #某个字段跳转官网查询
 browseNHANES(data_group = 'DEMO', nh_table = 'DEMO_J')
-
 #下载数据
-
 # demo <- nhanes('DEMO_J')
+```
 
+```{r eval=FALSE}
 # 加载数据
-demo <- read_xpt(file ='DEMO_J.xpt')
-yesuan <- read_xpt(file ='FOLATE_J.xpt')
-guzhi <- read_xpt(file ='OSQ_J.xpt')
+demo <- read_xpt(file ='data/DEMO_J.xpt')
+yesuan <- read_xpt(file ='data/FOLATE_J.xpt')
+guzhi <- read_xpt(file ='data/OSQ_J.xpt')
+```
 
-kable(nhanesTableVars(data_group = 'Q', nh_table = 'OSQ_J', namesonly = FALSE))
-
+```{r eval=FALSE}
 # 选择相应变量
-demo1 <- demo %>% select(SEQN, # 序列号
+demo1 <- demo|> select(SEQN, # 序列号
                          RIAGENDR, # 性别
                          RIDAGEYR, # 年龄
                          WTINT2YR,WTMEC2YR, # 权重
                          SDMVPSU, # psu
                          SDMVSTRA) # strata
 
-guzhi1 <- guzhi %>% select(SEQN, OSQ060)
+guzhi1 <- guzhi|> select(SEQN, OSQ060)
+```
 
+```{r eval=FALSE}
 #分类资料转置
 demo_vars <- names(demo1)
 demo2 <- nhanesTranslate('DEMO_J', demo_vars, data=demo1)
 
 guzhi_var <- names(guzhi1)
 guzhi2 <- nhanesTranslate('OSQ_J', guzhi_var, data= guzhi1)
+```
 
+```{r eval=FALSE}
 # 合并数据
 data <- join_all(list(demo2, yesuan, guzhi2), by = 'SEQN', type = 'full')
 
 data1 <- na.omit(data)
 data2 <- subset(data1, OSQ060=="Yes" | OSQ060 == "No")
-# 2. 计算权重分析----
-# load("data2.RData")
-if(!require(survey))install.packages('survey',updata= F, ask=  F)
+```
 
+```{r eval=FALSE}
+# 2. 计算复杂抽样分析----
+load("data/data2.RData")
 aa <- svydesign(id      = ~SDMVPSU,
                           strata  = ~SDMVSTRA,
                           weights = ~WTMEC2YR,
